@@ -3,7 +3,7 @@
 class RegistrationController extends Controller
 {
 	public $defaultAction = 'registration';
-	
+	public $layout='//layouts/register_layout';
 	/**
 	 * Declares class-based actions.
 	 */
