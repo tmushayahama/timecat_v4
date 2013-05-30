@@ -29,7 +29,7 @@ $this->breadcrumbs=array(
 	
 	<div class="row">
 	<?php echo $form->labelEx($model,'name_title'); ?>
-	<?php echo $form->textField($model,'name_title'); ?>
+	<?php echo $form->dropDownList($model,'name_title', $model->getNameTitleOptions()); ?>
 	<?php echo $form->error($model,'name_title'); ?>
 	</div>
 	

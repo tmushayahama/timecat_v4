@@ -5,6 +5,15 @@ class User extends CActiveRecord
 	const STATUS_NOACTIVE=0;
 	const STATUS_ACTIVE=1;
 	const STATUS_BANNED=-1;
+        
+        //name title 
+        const NAME_TITLE_MR = 1;
+        const NAME_TITLE_MRS = 2;
+        const NAME_TITLE_MISS = 3;
+        const NAME_TITLE_MS = 4;
+        const NAME_TITLE_DR = 5;
+        const NAME_TITLE_PROFESSOR = 6;
+        const NAME_TITLE_OTHER = 7;
 	
 	//TODO: Delete for next version (backward compatibility)
 	const STATUS_BANED=-1;
@@ -32,7 +41,21 @@ class User extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-
+        /**
+         * retrives a list of name title
+         * return an array of available name title
+         */
+        public function getNameTitleOptions() {
+            return array (
+                self::NAME_TITLE_MR=>'Mr.',
+                self::NAME_TITLE_MRS => 'Mrs.',
+                self::NAME_TITLE_MISS => 'Miss.',
+                self::NAME_TITLE_MS => 'Ms.',
+                self::NAME_TITLE_DR => 'Dr.',
+                self::NAME_TITLE_PROFESSOR => 'Prof.',
+                self::NAME_TITLE_OTHER => 'Other',
+            );
+        }
 	/**
 	 * @return string the associated database table name
 	 */
