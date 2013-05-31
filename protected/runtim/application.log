@@ -1,0 +1,614 @@
+2013/05/28 06:17:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "user/install".' in C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('user/install')
+#1 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/timecat_v4/index.php/user/install
+---
+2013/05/28 06:18:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "users/install".' in C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('users/install')
+#1 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/timecat_v4/index.php/users/install
+---
+2013/05/28 06:18:44 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'timecat_v4.tbl_migration' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_migration`.
+2013/05/28 06:19:18 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '{users}} SET create_at = FROM_UNIXTIME(createtime), lastvisit_at = IF(lastvisit,' at line 1. The SQL statement executed was: UPDATE {{users}} SET create_at = FROM_UNIXTIME(createtime), lastvisit_at = IF(lastvisit,FROM_UNIXTIME(lastvisit),'0000-00-00 00:00:00').
+2013/05/28 06:25:36 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'timecat_v4.users' doesn't exist. The SQL statement executed was: ALTER TABLE `users` ADD `create_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP.
+2013/05/28 06:32:47 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42S02]: Base table or view not found: 1051 Unknown table 'profiles_fields'. The SQL statement executed was: DROP TABLE `profiles_fields`.
+2013/05/28 06:36:22 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'timecat_v4.users' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `users`.
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\models\User.php (33)
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\components\UserIdentity.php (27)
+in C:\xampp\htdocs\timecat_v4\protected\models\LoginForm.php (52)
+2013/05/28 06:36:22 [error] [exception.CDbException] exception 'CDbException' with message 'The table "users" for active record class "User" cannot be found in the database.' in C:\xampp\htdocs\timecat_v4\framework\db\ar\CActiveRecord.php:2310
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\db\ar\CActiveRecord.php(387): CActiveRecordMetaData->__construct(Object(User))
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\user\models\User.php(33): CActiveRecord::model('User')
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\user\components\UserIdentity.php(27): User::model()
+#3 C:\xampp\htdocs\timecat_v4\protected\models\LoginForm.php(52): UserIdentity->authenticate()
+#4 C:\xampp\htdocs\timecat_v4\framework\validators\CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 C:\xampp\htdocs\timecat_v4\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 C:\xampp\htdocs\timecat_v4\framework\base\CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 C:\xampp\htdocs\timecat_v4\protected\controllers\SiteController.php(94): CModel->validate()
+#8 C:\xampp\htdocs\timecat_v4\framework\web\actions\CInlineAction.php(49): SiteController->actionLogin()
+#9 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(282): CController->run('login')
+#13 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/timecat_v4/index.php/site/login
+HTTP_REFERER=http://localhost/timecat_v4/index.php/site/login
+---
+2013/05/28 06:48:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "user/create".' in C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('user/create')
+#1 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/timecat_v4/index.php/user/create
+---
+2013/05/28 07:02:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "test.local/rights".' in C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('test.local/righ...')
+#1 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/timecat_v4/index.php/test.local/rights
+---
+2013/05/28 07:08:09 [error] [exception.CException] exception 'CException' with message 'Application authorization manager must extend the RDbAuthManager class.' in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RInstaller.php:57
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\base\CModule.php(387): RInstaller->init()
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\rights\RightsModule.php(200): CModule->getComponent('installer')
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\rights\controllers\InstallController.php(29): RightsModule->getInstaller()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(281): InstallController->init()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('rights')
+#5 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/timecat_v4/index.php/rights
+---
+2013/05/28 07:08:27 [error] [exception.CException] exception 'CException' with message 'Application authorization manager must extend the RDbAuthManager class.' in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RInstaller.php:57
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\base\CModule.php(387): RInstaller->init()
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\rights\RightsModule.php(200): CModule->getComponent('installer')
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\rights\controllers\InstallController.php(29): RightsModule->getInstaller()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(281): InstallController->init()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('rights/install')
+#5 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/timecat_v4/index.php/rights/install
+---
+2013/05/28 07:08:58 [error] [exception.CException] exception 'CException' with message 'Application authorization manager must extend the RDbAuthManager class.' in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RInstaller.php:57
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\base\CModule.php(387): RInstaller->init()
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\rights\RightsModule.php(200): CModule->getComponent('installer')
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\rights\controllers\InstallController.php(29): RightsModule->getInstaller()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(281): InstallController->init()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('rights/install')
+#5 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/timecat_v4/index.php/rights/install
+---
+2013/05/28 07:09:04 [error] [exception.CException] exception 'CException' with message 'Application authorization manager must extend the RDbAuthManager class.' in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RInstaller.php:57
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\base\CModule.php(387): RInstaller->init()
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\rights\RightsModule.php(200): CModule->getComponent('installer')
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\rights\controllers\InstallController.php(29): RightsModule->getInstaller()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(281): InstallController->init()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('rights/install')
+#5 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/timecat_v4/index.php/rights/install
+---
+2013/05/28 07:19:11 [error] [exception.CException] exception 'CException' with message 'Application authorization manager must extend the RDbAuthManager class.' in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RInstaller.php:57
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\base\CModule.php(387): RInstaller->init()
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\rights\RightsModule.php(200): CModule->getComponent('installer')
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\rights\controllers\InstallController.php(29): RightsModule->getInstaller()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(281): InstallController->init()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('rights/install')
+#5 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/timecat_v4/index.php/rights/install
+---
+2013/05/28 07:23:15 [error] [exception.CException] exception 'CException' with message 'Application authorization manager must extend the RDbAuthManager class.' in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RInstaller.php:57
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\base\CModule.php(387): RInstaller->init()
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\rights\RightsModule.php(200): CModule->getComponent('installer')
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\rights\controllers\InstallController.php(29): RightsModule->getInstaller()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(281): InstallController->init()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('rights/install')
+#5 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/timecat_v4/index.php/rights/install
+---
+2013/05/28 07:23:43 [error] [exception.CException] exception 'CException' with message 'Application authorization manager must extend the RDbAuthManager class.' in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RInstaller.php:57
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\base\CModule.php(387): RInstaller->init()
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\rights\RightsModule.php(200): CModule->getComponent('installer')
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\rights\controllers\InstallController.php(29): RightsModule->getInstaller()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(281): InstallController->init()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('rights')
+#5 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/timecat_v4/index.php/rights
+---
+2013/05/28 07:36:42 [error] [exception.CException] exception 'CException' with message 'Application authorization manager must extend the RDbAuthManager class.' in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RInstaller.php:57
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\base\CModule.php(387): RInstaller->init()
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\rights\RightsModule.php(200): CModule->getComponent('installer')
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\rights\controllers\InstallController.php(29): RightsModule->getInstaller()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(281): InstallController->init()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('rights')
+#5 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/timecat_v4/index.php/rights
+---
+2013/05/28 07:36:53 [error] [exception.CException] exception 'CException' with message 'Application authorization manager must extend the RDbAuthManager class.' in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RInstaller.php:57
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\base\CModule.php(387): RInstaller->init()
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\rights\RightsModule.php(200): CModule->getComponent('installer')
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\rights\controllers\InstallController.php(29): RightsModule->getInstaller()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(281): InstallController->init()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('rights/install')
+#5 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/timecat_v4/index.php/rights/install
+---
+2013/05/28 07:44:42 [error] [exception.CException] exception 'CException' with message 'Application web user must extend the RWebUser class.' in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RInstaller.php:63
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\base\CModule.php(387): RInstaller->init()
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\rights\RightsModule.php(200): CModule->getComponent('installer')
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\rights\controllers\InstallController.php(29): RightsModule->getInstaller()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(281): InstallController->init()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('rights')
+#5 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/timecat_v4/index.php/rights
+---
+2013/05/28 07:44:49 [error] [exception.CException] exception 'CException' with message 'Application web user must extend the RWebUser class.' in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RInstaller.php:63
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\base\CModule.php(387): RInstaller->init()
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\rights\RightsModule.php(200): CModule->getComponent('installer')
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\rights\controllers\InstallController.php(29): RightsModule->getInstaller()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(281): InstallController->init()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('rights/install')
+#5 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/timecat_v4/index.php/rights/install
+---
+2013/05/28 07:47:13 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'timecat_v4.authitem' doesn't exist. The SQL statement executed was: SELECT COUNT(*) FROM AuthItem.
+in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RInstaller.php (180)
+in C:\xampp\htdocs\timecat_v4\protected\modules\rights\controllers\InstallController.php (43)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 07:47:26 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'timecat_v4.authassignment' doesn't exist. The SQL statement executed was: SELECT *
+FROM `AuthAssignment`
+WHERE userid=:userid.
+in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RAuthorizer.php (341)
+in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RWebUser.php (21)
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\models\UserLogin.php (57)
+2013/05/28 07:47:26 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'timecat_v4.authassignment' doesn't exist. The SQL statement executed was: SELECT *
+FROM `AuthAssignment`
+WHERE userid=:userid' in C:\xampp\htdocs\timecat_v4\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\db\CDbCommand.php(395): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\timecat_v4\framework\web\auth\CDbAuthManager.php(337): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RAuthorizer.php(341): CDbAuthManager->getAuthAssignments('1')
+#3 C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RWebUser.php(21): RAuthorizer->isSuperuser('1')
+#4 C:\xampp\htdocs\timecat_v4\framework\web\auth\CWebUser.php(238): RWebUser->afterLogin(false)
+#5 C:\xampp\htdocs\timecat_v4\protected\modules\user\models\UserLogin.php(57): CWebUser->login(Object(UserIdentity), 0)
+#6 C:\xampp\htdocs\timecat_v4\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#7 C:\xampp\htdocs\timecat_v4\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#8 C:\xampp\htdocs\timecat_v4\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#9 C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\LoginController.php(19): CModel->validate()
+#10 C:\xampp\htdocs\timecat_v4\framework\web\actions\CInlineAction.php(49): LoginController->actionLogin()
+#11 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#12 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#13 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(282): CController->run('')
+#15 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('user/login')
+#16 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#17 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/timecat_v4/index.php/user/login
+HTTP_REFERER=http://localhost/timecat_v4/index.php/user/login
+---
+2013/05/28 07:54:56 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'timecat_v4.authitem' doesn't exist. The SQL statement executed was: SELECT COUNT(*) FROM AuthItem.
+in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RInstaller.php (180)
+in C:\xampp\htdocs\timecat_v4\protected\modules\rights\controllers\InstallController.php (43)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 07:55:50 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails. The SQL statement executed was: drop table if exists AuthItem.
+in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RInstaller.php (105)
+in C:\xampp\htdocs\timecat_v4\protected\modules\rights\controllers\InstallController.php (90)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 08:12:02 [error] [exception.CException] exception 'CException' with message 'RWebUser and its behaviors do not have a method or closure named "updateSession".' in C:\xampp\htdocs\timecat_v4\framework\base\CComponent.php:265
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\ProfileController.php(49): CComponent->__call('updateSession', Array)
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\ProfileController.php(49): RWebUser->updateSession()
+#2 C:\xampp\htdocs\timecat_v4\framework\web\actions\CInlineAction.php(49): ProfileController->actionEdit()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(282): CController->run('edit')
+#7 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('user/profile/ed...')
+#8 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/timecat_v4/index.php/user/profile/edit
+HTTP_REFERER=http://localhost/timecat_v4/index.php/user/profile/edit
+---
+2013/05/28 08:50:25 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 08:50:33 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 08:50:44 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 08:50:46 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 08:51:06 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 08:51:13 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 08:51:16 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 08:51:23 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 08:51:32 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 08:51:37 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 08:51:57 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 08:52:15 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 08:52:15 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1364 Field 'name_title' doesn't have a default value. The SQL statement executed was: INSERT INTO `tc_users` (`activkey`, `lastvisit_at`, `superuser`, `status`, `username`, `password`, `email`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6).
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (49)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 08:52:15 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 1364 Field 'name_title' doesn't have a default value. The SQL statement executed was: INSERT INTO `tc_users` (`activkey`, `lastvisit_at`, `superuser`, `status`, `username`, `password`, `email`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6)' in C:\xampp\htdocs\timecat_v4\framework\db\CDbCommand.php:357
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\db\ar\CActiveRecord.php(1023): CDbCommand->execute()
+#1 C:\xampp\htdocs\timecat_v4\framework\db\ar\CActiveRecord.php(795): CActiveRecord->insert(NULL)
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php(49): CActiveRecord->save()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\actions\CInlineAction.php(49): RegistrationController->actionRegistration()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(282): CController->run('')
+#8 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('user/registrati...')
+#9 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/timecat_v4/index.php/user/registration
+HTTP_REFERER=http://localhost/timecat_v4/index.php/user/registration
+---
+2013/05/28 09:06:49 [warning] [application] Failed to set unsafe attribute "name_title" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:06:49 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:08:19 [warning] [application] Failed to set unsafe attribute "name_title" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:08:19 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:11:03 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:15:45 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:15:48 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:15:50 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:15:54 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:15:56 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:15:59 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:16:17 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:18:19 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:18:20 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1364 Field 'username' doesn't have a default value. The SQL statement executed was: INSERT INTO `tc_users` (`activkey`, `lastvisit_at`, `superuser`, `status`, `name_title`, `password`, `email`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6).
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (49)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:18:20 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 1364 Field 'username' doesn't have a default value. The SQL statement executed was: INSERT INTO `tc_users` (`activkey`, `lastvisit_at`, `superuser`, `status`, `name_title`, `password`, `email`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6)' in C:\xampp\htdocs\timecat_v4\framework\db\CDbCommand.php:357
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\db\ar\CActiveRecord.php(1023): CDbCommand->execute()
+#1 C:\xampp\htdocs\timecat_v4\framework\db\ar\CActiveRecord.php(795): CActiveRecord->insert(NULL)
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php(49): CActiveRecord->save()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\actions\CInlineAction.php(49): RegistrationController->actionRegistration()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(282): CController->run('')
+#8 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('user/registrati...')
+#9 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/timecat_v4/index.php/user/registration
+HTTP_REFERER=http://localhost/timecat_v4/index.php/user/registration
+---
+2013/05/28 09:21:41 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:21:44 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:21:46 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:21:49 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:21:51 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:21:53 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 09:22:02 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 18:00:40 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 18:00:46 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 18:00:50 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 18:01:20 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 18:01:24 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 18:01:34 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 18:01:43 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/28 18:01:58 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/29 23:12:59 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/29 23:17:21 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/29 23:17:26 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/29 23:17:29 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/29 23:17:45 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/29 23:17:48 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/29 23:17:54 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/29 23:18:08 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 01:58:42 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 01:58:48 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 01:58:58 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 01:59:08 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 01:59:09 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 01:59:10 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 01:59:39 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 02:04:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "rights/rights/assignment/view".' in C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('rights/rights/a...')
+#1 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/timecat_v4/index.php/rights/rights/assignment/view
+---
+2013/05/30 06:18:12 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:18:16 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:18:19 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:18:30 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:18:55 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:19:04 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:19:07 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:19:10 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:19:12 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:19:20 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:21:07 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:21:10 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:21:13 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:21:18 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:21:21 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:21:23 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 06:21:36 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 08:42:58 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 10:53:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "user/htt.it/300x240&text=[gggg]".' in C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('user/htt.it/300...')
+#1 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/timecat_v4/index.php/user/htt.it/300x240&text=[gggg]
+HTTP_REFERER=http://localhost/timecat_v4/index.php/user/profile
+---
+2013/05/30 15:51:36 [error] [exception.CException] exception 'CException' with message 'Property "User.first_name" is not defined.' in C:\xampp\htdocs\timecat_v4\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\db\ar\CActiveRecord.php(143): CComponent->__get('first_name')
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\user\views\profile\profile.php(14): CActiveRecord->__get('first_name')
+#2 C:\xampp\htdocs\timecat_v4\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\timecat_v4\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(782): CController->renderPartial('profile', Array, true)
+#6 C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\ProfileController.php(21): CController->render('profile', Array)
+#7 C:\xampp\htdocs\timecat_v4\framework\web\actions\CInlineAction.php(49): ProfileController->actionProfile()
+#8 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(282): CController->run('')
+#12 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('user/profile')
+#13 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/timecat_v4/index.php/user/profile
+---
+2013/05/30 15:52:01 [error] [exception.CException] exception 'CException' with message 'Property "User.firstname" is not defined.' in C:\xampp\htdocs\timecat_v4\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\db\ar\CActiveRecord.php(143): CComponent->__get('firstname')
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\user\views\profile\profile.php(14): CActiveRecord->__get('firstname')
+#2 C:\xampp\htdocs\timecat_v4\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\timecat_v4\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(782): CController->renderPartial('profile', Array, true)
+#6 C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\ProfileController.php(21): CController->render('profile', Array)
+#7 C:\xampp\htdocs\timecat_v4\framework\web\actions\CInlineAction.php(49): ProfileController->actionProfile()
+#8 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(282): CController->run('')
+#12 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('user/profile')
+#13 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/timecat_v4/index.php/user/profile
+---
+2013/05/30 19:37:21 [error] [php] Undefined variable: profileFields (C:\xampp\htdocs\timecat_v4\protected\modules\user\views\profile\profile.php:28)
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(869): ProfileController->renderFile()
+#1 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(782): ProfileController->renderPartial()
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\ProfileController.php(21): ProfileController->render()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\actions\CInlineAction.php(49): ProfileController->actionProfile()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(286): ProfileController->runAction()
+#6 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(265): ProfileController->runActionWithFilters()
+#7 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(282): ProfileController->run()
+#8 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\timecat_v4\index.php(13): CWebApplication->run()
+REQUEST_URI=/timecat_v4/index.php/user/profile
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\views\profile\profile.php (28)
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\ProfileController.php (21)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/30 20:45:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "user/edit".' in C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('user/edit')
+#1 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/timecat_v4/index.php/user/edit
+HTTP_REFERER=http://localhost/timecat_v4/index.php/user/profile
+---
+2013/05/30 20:45:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "user/edit".' in C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('user/edit')
+#1 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/timecat_v4/index.php/user/edit
+HTTP_REFERER=http://localhost/timecat_v4/index.php/user/profile
+---
+2013/05/30 21:29:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "user/register".' in C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('user/register')
+#1 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/timecat_v4/index.php/user/register
+HTTP_REFERER=http://localhost/timecat_v4/index.php/user/registration
+---
