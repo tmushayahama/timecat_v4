@@ -12,7 +12,8 @@ class ProfileField extends CActiveRecord
 	const REQUIRED_NO_SHOW_REG = 2;
 	const REQUIRED_YES_NOT_SHOW_REG = 3;
 	
-	/**
+	public $image;
+        /**
 	 * The followings are the available columns in table 'profiles_fields':
 	 * @var integer $id
 	 * @var string $varname
@@ -63,6 +64,7 @@ class ProfileField extends CActiveRecord
 			array('field_size', 'match', 'pattern' => '/^\s*[-+]?[0-9]*\,*\.?[0-9]+([eE][-+]?[0-9]+)?\s*$/'),
 			array('title, match, error_message, other_validator, default, widget', 'length', 'max'=>255),
 			array('range, widgetparams', 'length', 'max'=>5000),
+                        array('image', 'file', 'types'=>'jpg, gif, png'),
 			array('id, varname, title, field_type, field_size, field_size_min, required, match, range, error_message, other_validator, default, widget, widgetparams, position, visible', 'safe', 'on'=>'search'),
 		);
 	}

@@ -612,3 +612,27 @@ Stack trace:
 REQUEST_URI=/timecat_v4/index.php/user/register
 HTTP_REFERER=http://localhost/timecat_v4/index.php/user/registration
 ---
+2013/05/31 19:47:37 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/31 19:48:34 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/31 19:49:01 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/31 19:49:28 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/05/31 19:51:05 [warning] [application] Failed to set unsafe attribute "verifyCode" of "RegistrationForm".
+in C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\RegistrationController.php (30)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/06/02 05:40:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/app.css".' in C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('css/app.css')
+#1 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/timecat_v4/css/app.css
+HTTP_REFERER=http://localhost/timecat_v4/user/registration
+---
