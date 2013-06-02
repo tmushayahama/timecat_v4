@@ -69,7 +69,7 @@
       
       <li class="divider show-for-small"></li>
       <li class="has-form">
-        <a class="button" href="http://localhost/timecat_v4/index.php/user/registration">Sign Up</a>
+        <?php echo CHtml::link('Login', Yii::app()->controller->module->loginUrl, array('class'=>'button')) ?>
       </li>
     </ul>
   </section>
@@ -78,10 +78,8 @@
   <div class="row">
  
         <div class="row">
-            <div class="panel">
-                <div class="large-6 columns"> 
-                      <?php echo $content; ?>
-                </div>
+            <div class="large-6 columns"> 
+                  <?php echo $content; ?>
             </div>
         </div>
   </div>

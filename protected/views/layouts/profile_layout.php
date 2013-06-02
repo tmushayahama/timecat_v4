@@ -69,7 +69,7 @@
       
       <li class="divider show-for-small"></li>
       <li class="has-form">
-        <a class="button" href="http://localhost/timecat_v4/index.php/user/logout">Log Out</a>
+        <?php echo CHtml::link('Log Out', Yii::app()->controller->module->logoutUrl, array('class'=>'button alert')) ?>
       </li>
     </ul>
   </section>

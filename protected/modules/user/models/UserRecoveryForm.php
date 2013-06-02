@@ -29,7 +29,7 @@ class UserRecoveryForm extends CFormModel {
 	public function attributeLabels()
 	{
 		return array(
-			'login_or_email'=>UserModule::t("username or email"),
+			'login_or_email'=>UserModule::t("E-mail"),
 		);
 	}
 	
@@ -50,7 +50,7 @@ class UserRecoveryForm extends CFormModel {
 				if (strpos($this->login_or_email,"@")) {
 					$this->addError("login_or_email",UserModule::t("Email is incorrect."));
 				} else {
-					$this->addError("login_or_email",UserModule::t("Username is incorrect."));
+					$this->addError("login_or_email",UserModule::t("Email is incorrect."));
 				}
 		}
 	}
