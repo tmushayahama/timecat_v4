@@ -6,10 +6,10 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="initial-scale=1.0">
 	<title>TimeCaT 4</title>
-	<link rel="stylesheet" href="css/foundation.css" />
-	<link rel="stylesheet" href="css/general_foundicons.css">
-	<script src="js/vendor/custom.modernizr.js"></script>
-	<link rel="stylesheet" href="css/chelop.css" />
+	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/foundation.css" />
+	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/general_foundicons.css">
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/vendor/custom.modernizr.js"></script>
+	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/chelop.css" />
 </head>
 <body>
 <div id="wrap" class="blangradient">
@@ -23,7 +23,8 @@
 			<div class="large-3 columns hide-for-small">
 			</div>
 			<div class="large-3 columns hide-for-small text-right signupbut">
-				<a href="signup.php" class="button success radius">Sign up here</a>
+                             <?php echo CHtml::link(UserModule::t("Sign up here"),Yii::app()->getModule('user')->registrationUrl, array ('class'=>'button success radius')); ?>
+				
 			</div>
 		</div>
 	</div>
@@ -35,52 +36,15 @@
 						<h3>Log in:</h3>
 					</div>
 				</div>
-				
-					<form>
-  <div class="row">
-    <div class="large-9 large-centered columns celeste inputers">
-      <div class="row">
-        <div class="small-3 columns">
-          <label for="username" class="right">Username</label>
-        </div>
-        <div class="small-9 columns">
-          <input type="text" id="username" placeholder="username@email.com">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="large-9 large-centered columns celeste inputers">
-      <div class="row">
-        <div class="small-3 columns">
-          <label for="password" class="right">Password</label>
-        </div>
-        <div class="small-9 columns">
-          <input type="password" id="password" placeholder="Password">
-        </div>
-      </div>
-    </div>
-  </div>
-<div class="row">
-    <div class="large-9 large-centered columns">
-		<div class="row">
-			<div class="small-6 columns">
-				<p><a href="reset.php">Forgot your password?</a></p>
-			</div>
-			<div class="small-6 columns text-right">
-				<a href="load.php" class="button">Log in</a>
-			</div>
-		</div>
-		
-	</div>
-</div>
-</form>
+                                <?php echo $content; ?>
+                                
 				
 			</div>
 		</div> 
 		<div class="row">
 			<div class="large-8 large-centered columns">
-			<p><a href="signup.php" >Don't have an account? Sign up here!</a></p>
+                            <?php echo CHtml::link(UserModule::t("Don't have an account? Sign up here!"),Yii::app()->getModule('user')->registrationUrl); ?>
+			
 			</div>
 		</div>
 	</div>
@@ -107,7 +71,7 @@
   '.js><\/script>')
 </script>
   
-<script src="js/foundation.min.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/foundation.min.js"></script>
   
 <script>
 	$(document).foundation();

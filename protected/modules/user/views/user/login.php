@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1><?php echo UserModule::t("Login"); ?></h1>
+
 
 <?php if(Yii::app()->user->hasFlash('loginMessage')): ?>
 
@@ -15,39 +15,61 @@ $this->breadcrumbs=array(
 
 <?php endif; ?>
 
-<p><?php echo UserModule::t("Please fill out the following form with your login credentials:"); ?></p>
+
 
 <div class="form">
 <?php echo CHtml::beginForm(); ?>
 
-	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
 	
 	<?php echo CHtml::errorSummary($model); ?>
-	
 	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'username'); ?>
-		<?php echo CHtml::activeTextField($model,'username') ?>
-	</div>
+            <div class="large-9 large-centered columns celeste inputers">
+              <div class="row">
+                <div class="small-3 columns">
+                   <?php echo CHtml::activeLabelEx($model,'username', array('class'=>'right')); ?>
+                  
+                </div>
+                <div class="small-9 columns">
+                   <?php echo CHtml::activeTextField($model,'username', array('placeholder'=>'username@email.com')); ?>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="row">
+            <div class="large-9 large-centered columns celeste inputers">
+              <div class="row">
+                <div class="small-3 columns">
+                   <?php echo CHtml::activeLabelEx($model,'password', array('class'=>'right')); ?>
+                  
+                </div>
+                <div class="small-9 columns">
+                   <?php echo CHtml::activePasswordField($model,'password', array('placeholder'=>'password')); ?>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
 	
-	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'password'); ?>
-		<?php echo CHtml::activePasswordField($model,'password') ?>
-	</div>
+	 <div class="row">
+                <div class="large-9 large-centered columns">
+                            <div class="row">
+                                    <div class="small-6 columns">
+                                            <p><?php echo CHtml::link(UserModule::t("Forgot your password?"),Yii::app()->getModule('user')->recoveryUrl); ?></p>
+                                    </div>
+                                    <div class="small-6 columns text-right">
+                                            <?php echo CHtml::submitButton(UserModule::t("Login"), array('class'=>'button')); ?>
+                                    </div>
+                            </div>
+
+                    </div>
+            </div>
 	
-	<div class="row">
-		<p class="hint">
-                    <?php echo CHtml::link(UserModule::t("Register"),Yii::app()->getModule('user')->registrationUrl); ?> |
-                    <?php echo CHtml::link(UserModule::t("Lost Password?"),Yii::app()->getModule('user')->recoveryUrl); ?>
-		</p>
-	</div>
 	
-	<div class="row rememberMe">
-		<?php echo CHtml::activeCheckBox($model,'rememberMe'); ?>
-		<?php echo CHtml::activeLabelEx($model,'rememberMe'); ?>
-	</div>
-	<div class="row submit">
-		<?php echo CHtml::submitButton(UserModule::t("Login")); ?>
-	</div>
+	<!-- <div class="row rememberMe">
+		<?php // echo CHtml::activeCheckBox($model,'rememberMe'); ?>
+		<?php //echo CHtml::activeLabelEx($model,'rememberMe'); ?>
+	</div> -->
 	
 <?php echo CHtml::endForm(); ?>
 </div><!-- form -->

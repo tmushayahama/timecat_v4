@@ -98,7 +98,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=timecat_v4',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'masterql',
+			'password' => '',
 			'charset' => 'utf8',
                         'tablePrefix' => 'tc_',
 		),
