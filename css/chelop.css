@@ -1,0 +1,191 @@
+/*
+  TimeCaT 4.0 ~ Core CSS.
+  by Marcelo A. Lopetegui, M.D.
+  chelop.duh@gmail.com
+*/
+*{
+	margin:0;
+	padding:0;
+} 
+html, body {
+	height: 100%;
+}
+
+/*general font settings*/
+
+.eliseo{
+	 -o-text-overflow: ellipsis;   /* Opera */
+    text-overflow:    ellipsis;   /* IE, Safari (WebKit) */
+    overflow:hidden;              /* don't show excess chars */
+    white-space:nowrap;           /* force single line */
+}
+.sear{
+	font-size: 12px;
+}
+
+/* topmenu stuff*/
+.mainlogo{
+	color: #FFFFFF;
+	height: 110px;
+	border: 0px;
+	padding: 0px;
+	background-image: url('../img/gatologo.png');
+	background-position: left bottom;
+	background-repeat: no-repeat;
+}
+.mainlogo h1{
+	line-height: 40px;
+	margin: 0px;
+	padding: 25px 0px 0px 105px;
+	color: #FFF;
+	font-size: 60px;
+}
+.mainlogo p{
+	line-height: 40px;
+	margin: 0px;
+	padding: 0px 0px 0px 200px;
+	font-weight: bold;
+}
+.signupbut {
+	line-height: 110px;
+}
+#gato {
+	background-image:url('../img/gatologo2.png');
+	background-position:left bottom;
+	background-repeat:no-repeat;
+}
+#gato h1{
+	padding-left: 40px;
+}
+.top-bar{
+	margin-bottom: 0px;
+}
+/*Main block stuff*/
+.studyblock{
+	font-size: 14px;
+	margin-bottom: 20px;
+
+}
+.firstinfo{
+	border-bottom: 1px solid #F5F5F5;
+}
+.studydesc{
+	margin:0px;
+	padding: 0px 10px 0px 10px;
+}
+.studyname{
+	font-size: 16px;
+	font-weight: bold;
+	padding: 5px 10px;
+	margin-bottom: 5px;
+}
+.lastinfo{
+	background: #2f2f2f;
+	color: #FFF;
+	-webkit-border-radius: 0px 0px 0px 10px;
+    border-radius: 0px 0px 0px 10px;
+}
+.lastinfo p, .firstinfo p {
+	padding: 0px 5px;
+	margin: 0px;
+}
+.entrar {
+	margin-bottom: 6px;
+}
+.profiler p{
+	font-size: 14px;
+	margin: 0px;
+}
+.elogin{
+	border: 1px solid #F5F5F5;
+	margin-top: 40px;
+	padding-top: 20px;
+}
+.elogin h3{
+	color: #FFF;
+	margin: 0px;
+}
+.inputers{
+	padding-top: 10px;
+	margin-top: 15px;
+	margin-bottom: 5px;
+	line-height: 30px;
+	border: 2px solid #B7DDF2;
+}
+.minalto{
+	height: 130px;
+	background: #ffffff;
+	border: 1px solid #ddd;
+	outline: none;
+	padding: 5px;
+	resize: none;
+}
+/* Main Colors for the Theme */
+.celeste{
+	background: #EBF4FB;
+}
+.bluerer {
+	background: rgb(22,64,112)!important; /* Old browsers */
+	background: -moz-linear-gradient(45deg,  rgba(22,64,112,1) 0%, rgba(29,100,159,1) 34%, rgba(23,89,147,1) 70%, rgba(23,114,183,1) 100%)!important; /* FF3.6+ */
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(22,64,112,1)), color-stop(34%,rgba(29,100,159,1)), color-stop(70%,rgba(23,89,147,1)), color-stop(100%,rgba(23,114,183,1)))!important; /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(45deg,  rgba(22,64,112,1) 0%,rgba(29,100,159,1) 34%,rgba(23,89,147,1) 70%,rgba(23,114,183,1) 100%)!important; /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(45deg,  rgba(22,64,112,1) 0%,rgba(29,100,159,1) 34%,rgba(23,89,147,1) 70%,rgba(23,114,183,1) 100%)!important; /* Opera 11.10+ */
+	background: -ms-linear-gradient(45deg,  rgba(22,64,112,1) 0%,rgba(29,100,159,1) 34%,rgba(23,89,147,1) 70%,rgba(23,114,183,1) 100%)!important; /* IE10+ */
+	background: linear-gradient(45deg,  rgba(22,64,112,1) 0%,rgba(29,100,159,1) 34%,rgba(23,89,147,1) 70%,rgba(23,114,183,1) 100%)!important; /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#164070', endColorstr='#1772b7',GradientType=1 )!important; /* IE6-9 fallback on horizontal gradient */
+}
+.blangradient {
+	background: #f2f6f8; /* Old browsers */
+	background: -moz-linear-gradient(top,  #f2f6f8 0%, #d8e1e7 21%, #ffffff 88%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f6f8), color-stop(21%,#d8e1e7), color-stop(88%,#ffffff)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #f2f6f8 0%,#d8e1e7 21%,#ffffff 88%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #f2f6f8 0%,#d8e1e7 21%,#ffffff 88%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #f2f6f8 0%,#d8e1e7 21%,#ffffff 88%); /* IE10+ */
+	background: linear-gradient(top,  #f2f6f8 0%,#d8e1e7 21%,#ffffff 88%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+.grisos{
+	background: #F5F5F5;
+}
+.blanko {
+	background: #FFF;
+}
+/*Footer Stuff*/
+.wexner {
+	background: #2f2f2f url("../img/wexner.jpg") no-repeat left center; 
+	height: 80px;
+}
+.footwhite{
+	font-size: 14px;
+	text-align: right;
+	color: #FFF!important;
+}
+
+/*fixed bottom css*/
+#wrap {
+	min-height: 100%;
+}
+
+#main {
+	overflow:auto;
+	padding-bottom: 80px;
+	}
+
+#footer {
+	background: #2f2f2f;
+	position: relative;
+	margin-top: -80px;
+	height: 80px;
+	clear:both;
+} 
+.elfoot{
+	max-height: 80px;
+}
+/*Opera Fix*/
+body:before {/* thanks to Maleika (Kohoutec)*/
+	content:"";
+	height:100%;
+	float:left;
+	width:0;
+	margin-top:-32767px;/* thank you Erik J - negate effect of float*/
+}

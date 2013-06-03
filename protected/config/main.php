@@ -97,8 +97,8 @@ return array(
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=timecat_v4',
 			'emulatePrepare' => true,
-			'username' => 'timecat4',
-			'password' => 'awesome++',
+			'username' => 'root',
+			'password' => 'masterql',
 			'charset' => 'utf8',
                         'tablePrefix' => 'tc_',
 		),
