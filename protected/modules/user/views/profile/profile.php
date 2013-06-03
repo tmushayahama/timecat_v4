@@ -1,16 +1,5 @@
 <?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Profile");
-$this->breadcrumbs=array(
-	UserModule::t("Profile"),
-);
-$this->menu=array(
-	((UserModule::isAdmin())
-		?array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin'))
-		:array()),
-    array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
-    array('label'=>UserModule::t('Edit'), 'url'=>array('edit')),
-    array('label'=>UserModule::t('Change password'), 'url'=>array('changepassword')),
-    array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
-);
+
 ?>
 
 <?php if(Yii::app()->user->hasFlash('profileMessage')): ?>
@@ -18,6 +7,8 @@ $this->menu=array(
 	<?php echo Yii::app()->user->getFlash('profileMessage'); ?>
 </div>
 <?php endif; ?>
+<?php echo CHtml::link('Change Avatar', 'avatar/create') ?>
+<?php echo CHtml::link('Change Password', 'recovery/changepassword') ?>
 <table>
     <tr>
 	<th class=""><?php echo CHtml::encode($model->getAttributeLabel('email')); ?></th>

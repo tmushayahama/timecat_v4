@@ -85,8 +85,10 @@
             <a href="#"><?php echo Yii::app()->user->lastname ?></a>
             <a href="http://localhost/timecat_v4/index.php/user/profile/edit" class="tiny button  right">Edit</a>
         </h5>
-        <a href="#"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/timecat_avatar.png" /></a>
-       
+        <div class="row">
+        <?php echo CHtml::image(Yii::app()->request->baseUrl.'/images/'.$this->avatar, "avatar",array("width"=>200, 'height'=>200)); ?>  
+        
+        </div>
         <?php echo $content; ?>
           
       </div>
@@ -95,10 +97,10 @@
     <!-- Main Feed -->
     <!-- This has been source ordered to come first in the markup (and on small devices) but to be to the right of the nav on larger screens -->
     <div class="large-8 columns">
- 
       <!-- Feed Entry -->
         <div class="row">
-            <div class="large-12 columns"> 
+            <div class="large-12 columns">
+                
                  <div class="large-6 columns"><img src="http://placehold.it/240x120&text=[Create New Study]" /></div>
                  <div class="large-6 columns"><img src="http://placehold.it/240x120&text=[View Other Studies]" /></div>
             </div>

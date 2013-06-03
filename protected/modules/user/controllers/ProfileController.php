@@ -4,7 +4,7 @@ class ProfileController extends Controller
 {
 	public $defaultAction = 'profile';
 	public $layout='//layouts/profile_layout';
-
+        public $avatar;
 	/**
 	 * @var CActiveRecord the currently loaded data model instance.
 	 */
@@ -15,9 +15,14 @@ class ProfileController extends Controller
 	public function actionProfile()
 	{
 		$model = $this->loadUser();
+                $this->avatar=$model->profile->avatar_url;
+                if ($this->avatar==null) {
+                     $this->avatar="timecat_avatar.png";
+                }
+                
 	    $this->render('profile',array(
 	    	'model'=>$model,
-			'profile'=>$model->profile,
+                'profile'=>$model->profile,
 	    ));
 	}
 
@@ -57,7 +62,7 @@ class ProfileController extends Controller
 			'profile'=>$profile,
 		));
 	}
-	
+       
 	/**
 	 * Change password
 	 */
