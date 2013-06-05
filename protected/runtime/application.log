@@ -3703,3 +3703,12 @@ Stack trace:
 REQUEST_URI=/timecat_v4/css/app.css
 HTTP_REFERER=http://localhost/timecat_v4/user/recovery
 ---
+2013/06/03 22:43:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/app.css".' in C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('css/app.css')
+#1 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/timecat_v4/css/app.css
+HTTP_REFERER=http://localhost/timecat_v4/user/profile
+---
