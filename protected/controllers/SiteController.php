@@ -2,6 +2,8 @@
 
 class SiteController extends Controller
 {
+	private $_model;
+	public $avatar;
 	/**
 	 * Declares class-based actions.
 	 */
@@ -27,9 +29,19 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$model = $this->loadUser();
+		$this->avatar = $model->profile->avatar_url;
+		if ($this->avatar == null) {
+			$this->avatar = "timecat_avatar.gif";
+		}
+
+		$this->render('home', array(
+				'model' => $model,
+				'profile' => $model->profile,
+		));
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render($this->redirect(Yii::app()->user->loginUrl));
+		//$this->render($this->redirect(Yii::app()->user->loginUrl));
 	}
 
 	/**
@@ -105,5 +117,15 @@ class SiteController extends Controller
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
+	}
+	public function loadUser() {
+		if ($this->_model === null) {
+			if (Yii::app()->user->id)
+				//$this->_model = new User;//Yii::app()->controller->module->user();
+				$this->_model = Yii::app()->getModule('user')->user();
+			if ($this->_model === null)
+				$this->redirect(Yii::app()->controller->module->loginUrl);
+		}
+		return $this->_model;
 	}
 }

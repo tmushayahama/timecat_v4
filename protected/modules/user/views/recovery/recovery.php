@@ -1,33 +1,41 @@
-<?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Restore");
-$this->breadcrumbs=array(
-	UserModule::t("Login") => array('/user/login'),
-	UserModule::t("Restore"),
+<?php
+$this->pageTitle = Yii::app()->name . ' - ' . UserModule::t("Restore");
+$this->breadcrumbs = array(
+		UserModule::t("Login") => array('/user/login'),
+		UserModule::t("Restore"),
 );
 ?>
 
-<h1><?php echo UserModule::t("Restore"); ?></h1>
-
-<?php if(Yii::app()->user->hasFlash('recoveryMessage')): ?>
-<div class="success">
-<?php echo Yii::app()->user->getFlash('recoveryMessage'); ?>
-</div>
+<?php if (Yii::app()->user->hasFlash('recoveryMessage')): ?>
+	<div class="success">
+		<?php echo Yii::app()->user->getFlash('recoveryMessage'); ?>
+	</div>
 <?php else: ?>
 
-<div class="form">
-<?php echo CHtml::beginForm(); ?>
+	<div class="form">
+		<?php echo CHtml::beginForm(); ?>
 
-	<?php echo CHtml::errorSummary($form); ?>
-	
-	<div class="row">
-		<?php echo CHtml::activeLabel($form,'login_or_email'); ?>
-		<?php echo CHtml::activeTextField($form,'login_or_email') ?>
-		<p class="hint"><?php echo UserModule::t("Please enter your login or email addres."); ?></p>
-	</div>
-	
-	<div class="row submit">
-		<?php echo CHtml::submitButton(UserModule::t("Restore")); ?>
-	</div>
+		<?php echo CHtml::errorSummary($form); ?>
+		<div class="row">
+			<div class="large-9 large-centered columns celeste inputers">
+				<div class="row">
+					<div class="small-3 columns">
+						<?php echo CHtml::activeLabel($form, 'login_or_email', array('class' => 'right')); ?>
 
-<?php echo CHtml::endForm(); ?>
-</div><!-- form -->
+					</div>
+					<div class="small-9 columns">
+						<?php echo CHtml::activeTextField($form, 'login_or_email', array('placeholder' => 'username@email.com')); ?>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-9 large-centered columns text-right">
+				<?php echo CHtml::submitButton(UserModule::t("Restore"), array('class' => 'button')); ?>
+			</div>
+		</div>
+
+		<?php echo CHtml::endForm(); ?>
+	</div><!-- form -->
 <?php endif; ?>
