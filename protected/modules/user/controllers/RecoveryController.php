@@ -3,7 +3,7 @@
 class RecoveryController extends Controller
 {
 	public $defaultAction = 'recovery';
-	public $layout='//layouts/login_layout';
+	public $layout='//login_layouts/reset';
 	/**
 	 * Recovery password
 	 */

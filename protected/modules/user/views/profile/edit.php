@@ -1,3 +1,5 @@
+<?php /* @var $this Controller */ ?>
+<?php $this->beginContent('//home_layouts/profile'); ?>
 <?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Profile");
 $this->breadcrumbs=array(
 	UserModule::t("Profile")=>array('profile'),
@@ -53,11 +55,7 @@ $this->menu=array(
 			}
 		}
 ?>
-	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username',array('size'=>20,'maxlength'=>20)); ?>
-		<?php echo $form->error($model,'username'); ?>
-	</div>
+	
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'email'); ?>
@@ -72,3 +70,4 @@ $this->menu=array(
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<?php $this->endContent() ?>
