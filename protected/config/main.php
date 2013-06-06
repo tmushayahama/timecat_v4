@@ -92,6 +92,7 @@ return array(
 				'rights' => array(
 						'install' => true,
 				),
+				'study',
 				'gii' => array(
 						'class' => 'system.gii.GiiModule',
 						'password' => 'awesome++',
