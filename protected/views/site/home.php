@@ -106,7 +106,7 @@
 		<h3>New Study</h3>
 	</div>
 	<div class="row">
-		<a href="#" class="button expand"><i class="foundicon-plus sear" ></i> Create New Study</a>
+		<?php echo CHtml::link('<i class="foundicon-plus sear" >Create New Study</i>', 'study/study/create', array('class' => 'button expand')); ?>
 	</div>	
 	<div class="row">
 		<h3>Profile</h3>
@@ -127,7 +127,7 @@
 	</div>
 	<div class="row">
 		<div class="large-12 columns grisos profiler">
-			<?php echo CHtml::link('<i class="foundicon-tools sear" >Edit Profile</i>', Yii::app()->getModule('user')->profileUrl, array('class'=>'small button secondary radius right entrar')); ?>
+			<?php echo CHtml::link('<i class="foundicon-tools sear" >Edit Profile</i>', Yii::app()->getModule('user')->profileUrl, array('class' => 'small button secondary radius right entrar')); ?>
 		</div>
 	</div>
 </div>
