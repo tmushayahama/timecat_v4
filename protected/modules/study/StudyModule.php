@@ -25,4 +25,7 @@ class StudyModule extends CWebModule
 		else
 			return false;
 	}
+	/*public function user_studies($id) {
+		return 
+	}*/
 }

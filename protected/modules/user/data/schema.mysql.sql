@@ -2,7 +2,6 @@ CREATE TABLE `tc_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `password` varchar(128) NOT NULL,
-  `name_title` int not null,
   `email` varchar(128) NOT NULL,
   `activkey` varchar(128) NOT NULL DEFAULT '',
   `create_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -20,6 +19,8 @@ CREATE TABLE `tc_profiles` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `lastname` varchar(50) NOT NULL DEFAULT '',
   `firstname` varchar(50) NOT NULL DEFAULT '',
+	`avatar_url` varchar(50) NOT NULL DEFAULT '',
+	`institution` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
@@ -48,9 +49,9 @@ CREATE TABLE `tc_profiles_fields` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 
-INSERT INTO `tc_users` (`id`, `username`, `password`, `name_title`, `email`, `activkey`, `superuser`, `status`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 1, 'webmaster@example.com', '9a24eff8c15a6a141ece27eb6947da0f', 1, 1),
-(2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 1, 'demo@example.com', '099f825543f7850cc038b90aaff39fac', 0, 1);
+INSERT INTO `tc_users` (`id`, `username`, `password`, `email`, `activkey`, `superuser`, `status`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a24eff8c15a6a141ece27eb6947da0f', 1, 1),
+(2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', '099f825543f7850cc038b90aaff39fac', 0, 1);
 
 INSERT INTO `tc_profiles` (`user_id`, `lastname`, `firstname`) VALUES
 (1, 'Admin', 'Administrator'),
@@ -59,3 +60,4 @@ INSERT INTO `tc_profiles` (`user_id`, `lastname`, `firstname`) VALUES
 INSERT INTO `tc_profiles_fields` (`id`, `varname`, `title`, `field_type`, `field_size`, `field_size_min`, `required`, `match`, `range`, `error_message`, `other_validator`, `default`, `widget`, `widgetparams`, `position`, `visible`) VALUES
 (1, 'lastname', 'Last Name', 'VARCHAR', 50, 3, 1, '', '', 'Incorrect Last Name (length between 3 and 50 characters).', '', '', '', '', 1, 3),
 (2, 'firstname', 'First Name', 'VARCHAR', 50, 3, 1, '', '', 'Incorrect First Name (length between 3 and 50 characters).', '', '', '', '', 0, 3);
+(2, 'institution', 'First Name', 'VARCHAR', 50, 3, 1, '', '', 'Incorrect Institution (length between 3 and 50 characters).', '', '', '', '', 0, 3);

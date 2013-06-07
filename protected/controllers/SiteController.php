@@ -31,10 +31,13 @@ class SiteController extends Controller
 	{
 		$model = $this->loadUser();
 		$this->avatar = $model->profile->avatar_url;
+		
+		$studies = Yii::app()->getModule('study');
 		if ($this->avatar == null) {
 			$this->avatar = "timecat_avatar.gif";
 		}
-
+		
+		
 		$this->render('home', array(
 				'model' => $model,
 				'profile' => $model->profile,

@@ -18,6 +18,8 @@ return array(
 				'application.modules.user.components.*',
 				'application.modules.rights.*',
 				'application.modules.rights.components.*',
+				'application.modules.study.*',
+				'application.modules.study.components.*',
 		),
 		'modules' => array(
 				// uncomment the following to enable the Gii tool
