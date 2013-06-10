@@ -46,6 +46,7 @@ class StudyController extends Controller {
 	 * 
 	 */
 	public function actionDashboard() {
+		$model = new Study;
 		$this->render('dashboard', array(
 				'model' => '$this->loadModel($id)',
 		));
