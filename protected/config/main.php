@@ -18,7 +18,7 @@ return array(
 				'application.modules.user.components.*',
 				'application.modules.rights.*',
 				'application.modules.rights.components.*',
-				'application.modules.study.*',
+				'application.modules.study.models.*',
 				'application.modules.study.components.*',
 		),
 		'modules' => array(

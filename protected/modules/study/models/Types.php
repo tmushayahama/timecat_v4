@@ -1,26 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "{{user_studies}}".
+ * This is the model class for table "{{types}}".
  *
- * The followings are the available columns in table '{{user_studies}}':
+ * The followings are the available columns in table '{{types}}':
  * @property integer $id
- * @property integer $user_id
- * @property integer $study_id
- * @property integer $role_id
+ * @property string $category
+ * @property string $type_entry
+ * @property string $description
  *
  * The followings are the available model relations:
- * @property Types $role
- * @property Studies $study
- * @property Users $user
+ * @property Studies[] $studies
+ * @property UserStudies[] $userStudies
  */
-
-class UserStudies extends CActiveRecord
+class Types extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return UserStudies the static model class
+	 * @return Types the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -32,7 +30,7 @@ class UserStudies extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{user_studies}}';
+		return '{{types}}';
 	}
 
 	/**
@@ -43,11 +41,12 @@ class UserStudies extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, study_id, role_id', 'required'),
-			array('user_id, study_id, role_id', 'numerical', 'integerOnly'=>true),
+			array('category, type_entry', 'required'),
+			array('category, type_entry', 'length', 'max'=>50),
+			array('description', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, user_id, study_id, role_id', 'safe', 'on'=>'search'),
+			array('id, category, type_entry, description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,10 +58,8 @@ class UserStudies extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'role' => array(self::BELONGS_TO, 'Types', 'role_id'),
-			'study' => array(self::BELONGS_TO, 'Study', 'study_id'),
-			//'user' => array(self::BELONGS_TO, 'User', 'user_id'),
-			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+			'studies' => array(self::HAS_MANY, 'Studies', 'type_id'),
+			'userStudies' => array(self::HAS_MANY, 'UserStudies', 'role_id'),
 		);
 	}
 
@@ -73,9 +70,9 @@ class UserStudies extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'user_id' => 'User',
-			'study_id' => 'Study',
-			'role_id' => 'Role',
+			'category' => 'Category',
+			'type_entry' => 'Type Entry',
+			'description' => 'Description',
 		);
 	}
 
@@ -91,9 +88,9 @@ class UserStudies extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('user_id',$this->user_id);
-		$criteria->compare('study_id',$this->study_id);
-		$criteria->compare('role_id',$this->role_id);
+		$criteria->compare('category',$this->category,true);
+		$criteria->compare('type_entry',$this->type_entry,true);
+		$criteria->compare('description',$this->description,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

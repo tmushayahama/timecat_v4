@@ -2,12 +2,14 @@ CREATE TABLE `tc_studies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) not null,
   `type_id` int(11) not null,
+	`created` datetime not null,
   `description` varchar(255) DEFAULT '',
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 ALTER TABLE `tc_studies`
   ADD CONSTRAINT `studies_type_id` FOREIGN KEY (`type_id`) REFERENCES `tc_types` (`id`) ON DELETE CASCADE;
+
 
 CREATE TABLE `tc_user_studies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

@@ -51,11 +51,17 @@
 			<h3>Select the Type of Study:</h3>
 		</div>
 	</div>
-	<div class="row">
-		<?php echo $form->labelEx($model, 'type_id'); ?>
-		<?php echo $form->textField($model, 'type_id'); ?>
-		<?php echo $form->error($model, 'type_id'); ?>
-	</div>
+	<?php foreach ($roles as $role): ?>
+		<div class="row">
+			<div class="small-3 columns">
+				<?php echo $role->type_entry ?>
+			</div>
+			<div class="small-9 columns">
+				<?php echo $form->radioButton($model, 'type_id', array('value' => $role->id, 'uncheckValue' => null)); ?>
+				<?php echo $role->description ?>
+			</div>
+		</div>
+	<?php endforeach; ?>
 	<div class="row">
 		<div class="large-9 large-centered columns">
 			<div class="small-12 columns text-right">

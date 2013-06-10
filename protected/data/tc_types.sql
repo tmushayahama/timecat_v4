@@ -30,3 +30,9 @@ insert into `tc_types` (`category`, `type_entry`) values
 ('observation type','IORA'),
 ('observation type','formal'),
 ('observation type','trash');
+
+
+UPDATE `timecat_v4`.`tc_types` SET `description`='Each observer focuses in one dimension of the subject\'s workflow, capturing sequential tasks as they occur.' WHERE `id`='8';
+UPDATE `timecat_v4`.`tc_types` SET `description`='Each observer focuses in three dimensions of the subject\'s workflow, capturing detailed data: Communication, Action and Location.' WHERE `id`='9';
+UPDATE `timecat_v4`.`tc_types` SET `description`='Each observer focuses in a narrow set of tasks of multiple subject\'s workflow, capturing sequential task for each of them.' WHERE `id`='10';
+UPDATE `timecat_v4`.`tc_types` SET `description`='Each observer is strategically located to track/follow patients\' flow.' WHERE `id`='11';

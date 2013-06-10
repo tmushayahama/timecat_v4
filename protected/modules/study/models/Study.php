@@ -44,7 +44,7 @@ class Study extends CActiveRecord {
 				array('description', 'length', 'max' => 255),
 				// The following rule is used by search().
 				// Please remove those attributes that should not be searched.
-				array('id, name, type_id, description', 'safe', 'on' => 'search'),
+				array('id, name, type_id, description, created', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -68,6 +68,7 @@ class Study extends CActiveRecord {
 				'id' => 'ID',
 				'name' => 'Name',
 				'type_id' => 'Type',
+				'created' => 'Create Date',
 				'description' => 'Description',
 		);
 	}
@@ -85,8 +86,8 @@ class Study extends CActiveRecord {
 		$criteria->compare('id', $this->id);
 		$criteria->compare('name', $this->name, true);
 		$criteria->compare('type_id', $this->type_id);
+		$criteria->compare('created', $this->created, true);
 		$criteria->compare('description', $this->description, true);
-
 		return new CActiveDataProvider($this, array(
 				'criteria' => $criteria,
 		));
