@@ -50,14 +50,21 @@ $this->breadcrumbs = array(
 		</div>
 	</div>
 
+	
+
+
 	<div class="row">
 		<div class="large-9 large-centered columns">
 			<div class="row">
 				<div class="small-6 columns">
-					<p><?php echo CHtml::link(UserModule::t("Forgot your password?"), Yii::app()->getModule('user')->recoveryUrl); ?></p>
+					<div class="row rememberMe">
+					<?php echo CHtml::activeCheckBox($model, 'rememberMe'); ?>
+						<?php echo CHtml::activeLabelEx($model, 'rememberMe'); ?>
+					
+				</div>
 				</div>
 				<div class="small-6 columns text-right">
-					<?php echo CHtml::submitButton(UserModule::t("Login"), array('class' => 'button')); ?>
+					<?php echo CHtml::submitButton(UserModule::t("Log In"), array('class' => 'button')); ?>
 				</div>
 			</div>
 

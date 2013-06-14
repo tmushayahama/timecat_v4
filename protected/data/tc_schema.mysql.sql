@@ -1,3 +1,4 @@
+DROP USER 'timecat4'@'localhost';
 CREATE USER 'timecat4'@'localhost' IDENTIFIED BY 'awesome++';
 CREATE DATABASE timecat_v4 DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
 GRANT ALL PRIVILEGES ON timecat_v4.* to 'timecat4'@'localhost' WITH GRANT OPTION;
@@ -99,8 +100,7 @@ create table Rights
 -- ---------------------TIMEZONES-----------------------
 create table tc_timezone (
   `id` int not null primary key auto_increment,
-  `location` varchar(50) not null unique,  
-  `gmt_time_offset` int not null,
+  `location` varchar(50) not null unique,
   `description` varchar(128)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -179,22 +179,24 @@ ALTER TABLE `tc_tasks`
 -- -------------subject-------------
 CREATE TABLE `tc_subjects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+	`study_id` int not null,
   `description` varchar(255) DEFAULT '',
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+ALTER TABLE `tc_subjects`
+  ADD CONSTRAINT `subjects_study_id` FOREIGN KEY (`study_id`) REFERENCES `tc_studies` (`id`) ON DELETE CASCADE;
 
 -- --------------observation---------------
 CREATE TABLE `tc_observations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `start_time` int(11) unsigned not null default 0,
-	`end_time` int(11) unsigned not null default 0,
 	`duration` int(11) unsigned not null default 0,
   `user_id` int not null,
 	`subject_id` int not null,
 	`site_id` int not null,
-	`type_id` int not null,
-	`valid` int not null,
-  `description` varchar(255) DEFAULT '',
+	`type_id` int,
+	`valid` int not null default 0,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
@@ -210,26 +212,13 @@ ALTER TABLE `tc_observations`
 ALTER TABLE `tc_observations`
   ADD CONSTRAINT `type_observation_id` FOREIGN KEY (`type_id`) REFERENCES `tc_types` (`id`) ON DELETE CASCADE;
 
-CREATE TABLE `tc_notes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-	`observation_id` int,
-	`task_id` int,
-  `notes` varchar(255) DEFAULT '',
-   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
-
-ALTER TABLE `tc_notes`
-  ADD CONSTRAINT `observation_notes_id` FOREIGN KEY (`observation_id`) REFERENCES `tc_observations` (`id`) ON DELETE CASCADE;
-
-ALTER TABLE `tc_notes`
-  ADD CONSTRAINT `task_notes_id` FOREIGN KEY (`task_id`) REFERENCES `tc_tasks` (`id`) ON DELETE CASCADE;
 
 CREATE TABLE `tc_observation_tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
 	`observation_id` int,
 	`task_id` int,
+	`order_id` int,
 	`start_time` int(11) unsigned not null default 0,
-	`end_time` int(11) unsigned not null default 0,
 	`duration` int(11) unsigned not null default 0,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
@@ -241,3 +230,16 @@ ALTER TABLE `tc_observation_tasks`
   ADD CONSTRAINT `observation_tasks_task_id` FOREIGN KEY (`task_id`) REFERENCES `tc_tasks` (`id`) ON DELETE CASCADE;
 
 
+CREATE TABLE `tc_notes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+	`observation_id` int not null,
+	`observation_task_id` int,
+  `notes` varchar(255) DEFAULT '',
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+ALTER TABLE `tc_notes`
+  ADD CONSTRAINT `observation_notes_id` FOREIGN KEY (`observation_id`) REFERENCES `tc_observations` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `tc_notes`
+  ADD CONSTRAINT `observation_tasks_notes_id` FOREIGN KEY (`observation_task_id`) REFERENCES `tc_observation_tasks`(`id`) ON DELETE CASCADE;

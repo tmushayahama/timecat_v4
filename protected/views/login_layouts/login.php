@@ -13,7 +13,14 @@
 </div> 
 <div class="row">
 	<div class="large-8 large-centered columns">
-		<?php echo CHtml::link(UserModule::t("Don't have an account? Sign up here!"), Yii::app()->getModule('user')->registrationUrl); ?>
+		<div class="row">
+			<div class="large-6 columns">
+				<p><?php echo CHtml::link(UserModule::t("Don't have an account?"), Yii::app()->getModule('user')->registrationUrl); ?></p>
+			</div>
+			<div class="large-6 columns text-right">
+				<p><?php echo CHtml::link(UserModule::t("Forgot your password?"), Yii::app()->getModule('user')->recoveryUrl);  ?></p>
+			</div>
+		</div>
 	</div>
 </div>
 <?php $this->endContent(); ?>

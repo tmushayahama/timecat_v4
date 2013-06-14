@@ -33,7 +33,7 @@ class UserLogin extends CFormModel {
 	 */
 	public function attributeLabels() {
 		return array(
-				'rememberMe' => UserModule::t("Remember me next time"),
+				'rememberMe' => UserModule::t("Remember me"),
 				'email' => UserModule::t("email"),
 				'password' => UserModule::t("password"),
 		);

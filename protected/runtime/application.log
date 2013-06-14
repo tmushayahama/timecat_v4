@@ -2496,3 +2496,27 @@ Stack trace:
 REQUEST_URI=/timecat_v4/user/login
 HTTP_REFERER=http://localhost/timecat_v4/user/login
 ---
+2013/06/14 16:55:31 [error] [php] Undefined property: CWebApplication::$user (C:\xampp\htdocs\timecat_v4\protected\modules\rights\RightsModule.php:128)
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\base\CModule.php(282): createComponent()
+#1 C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\Rights.php(271): CWebApplication->getModule()
+#2 C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\Rights.php(254): findModule()
+#3 C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\Rights.php(287): module()
+#4 C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\RWebUser.php(21): getAuthorizer()
+#5 C:\xampp\htdocs\timecat_v4\framework\web\auth\CWebUser.php(465): RWebUser->afterLogin()
+#6 C:\xampp\htdocs\timecat_v4\framework\web\auth\CWebUser.php(195): RWebUser->restoreFromCookie()
+#7 C:\xampp\htdocs\timecat_v4\framework\base\CModule.php(387): RWebUser->init()
+#8 C:\xampp\htdocs\timecat_v4\framework\base\CModule.php(103): CWebApplication->getComponent()
+#9 C:\xampp\htdocs\timecat_v4\protected\modules\user\controllers\LoginController.php(12): CWebApplication->__get()
+#10 C:\xampp\htdocs\timecat_v4\framework\web\actions\CInlineAction.php(49): LoginController->actionLogin()
+#11 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(308): CInlineAction->runWithParams()
+#12 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(286): LoginController->runAction()
+#13 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(265): LoginController->runActionWithFilters()
+#14 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(282): LoginController->run()
+#15 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#17 C:\xampp\htdocs\timecat_v4\index.php(13): CWebApplication->run()
+REQUEST_URI=/timecat_v4/index.php
+in C:\xampp\htdocs\timecat_v4\protected\modules\rights\RightsModule.php (128)
+in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\Rights.php (271)
+in C:\xampp\htdocs\timecat_v4\protected\modules\rights\components\Rights.php (254)
