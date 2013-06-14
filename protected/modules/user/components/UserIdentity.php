@@ -13,7 +13,7 @@ class UserIdentity extends CUserIdentity
 	const ERROR_STATUS_BAN=5;
 	/**
 	 * Authenticates a user.
-	 * The example implementation makes sure if the username and password
+	 * The example implementation makes sure if the email and password
 	 * are both 'demo'.
 	 * In practical applications, this should be changed to authenticate
 	 * against some persistent user identity storage (e.g. database).
@@ -24,7 +24,7 @@ class UserIdentity extends CUserIdentity
 		if (strpos($this->username,"@")) {
 			$user=User::model()->notsafe()->findByAttributes(array('email'=>$this->username));
 		} else {
-			$user=User::model()->notsafe()->findByAttributes(array('username'=>$this->username));
+			$user=User::model()->notsafe()->findByAttributes(array('email'=>$this->username));
 		}
 		if($user===null)
 			if (strpos($this->username,"@")) {
@@ -40,7 +40,7 @@ class UserIdentity extends CUserIdentity
 			$this->errorCode=self::ERROR_STATUS_BAN;
 		else {
 			$this->_id=$user->id;
-			$this->username=$user->username;
+			$this->username=$user->email;
 			$this->errorCode=self::ERROR_NONE;
 		}
 		return !$this->errorCode;

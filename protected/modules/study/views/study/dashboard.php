@@ -12,9 +12,7 @@
 	</section>
 	<section>
 		<p class="title" data-section-title><a href="#panel3">Observers</a></p>
-		<div class="content" data-section-content>
-			<p>Content of section 2.</p>
-		</div>
+		
 	</section>
 	<section>
 		<p class="title" data-section-title><a href="#panel3">Reports</a></p>

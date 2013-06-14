@@ -14,7 +14,6 @@ class User extends CActiveRecord {
 	/**
 	 * The followings are the available columns in table 'users':
 	 * @var integer $id
-	 * @var string $username
 	 * @var string $password
 	 * @var string $email
 	 * @var string $activkey
@@ -57,7 +56,7 @@ class User extends CActiveRecord {
 								array('lastvisit_at', 'default', 'value' => '0000-00-00 00:00:00', 'setOnEmpty' => true, 'on' => 'insert'),
 								array('email, superuser, status', 'required'),
 								array('superuser, status', 'numerical', 'integerOnly' => true),
-								array('id, username, password, email, activkey, create_at, lastvisit_at, superuser, status', 'safe', 'on' => 'search'),
+								array('id, password, email, activkey, create_at, lastvisit_at, superuser, status', 'safe', 'on' => 'search'),
 										) : ((Yii::app()->user->id == $this->id) ? array(
 												//array('username, email', 'required'),
 												//	array('username', 'length', 'max'=>20, 'min' => 3,'message' => UserModule::t("Incorrect username (length between 3 and 20 characters).")),
@@ -112,7 +111,7 @@ class User extends CActiveRecord {
 						'condition' => 'superuser=1',
 				),
 				'notsafe' => array(
-						'select' => 'id, username, password, email, activkey, create_at, lastvisit_at, superuser, status',
+						'select' => 'id, password, email, activkey, create_at, lastvisit_at, superuser, status',
 				),
 		);
 	}
@@ -120,7 +119,7 @@ class User extends CActiveRecord {
 	public function defaultScope() {
 		return CMap::mergeArray(Yii::app()->getModule('user')->defaultScope, array(
 								'alias' => 'user',
-								'select' => 'user.id, user.username, user.email, user.create_at, user.lastvisit_at, user.superuser, user.status',
+								'select' => 'user.id, user.email, user.create_at, user.lastvisit_at, user.superuser, user.status',
 		));
 	}
 
@@ -153,7 +152,7 @@ class User extends CActiveRecord {
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id);
-		$criteria->compare('username', $this->username, true);
+		//$criteria->compare('username', $this->username, true);
 		$criteria->compare('password', $this->password);
 		$criteria->compare('email', $this->email, true);
 		$criteria->compare('activkey', $this->activkey);

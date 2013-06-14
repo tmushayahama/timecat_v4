@@ -26,12 +26,11 @@ $this->breadcrumbs = array(
 		<div class="large-9 large-centered columns celeste inputers">
 			<div class="row">
 				<div class="small-3 columns">
-					<?php echo CHtml::activeLabelEx($model, 'username', array('class' => 'right')); ?>
+					<?php echo CHtml::activeLabelEx($model, 'email', array('class' => 'right')); ?>
 
 				</div>
 				<div class="small-9 columns">
-					<?php echo CHtml::activeTextField($model, 'username', array('placeholder' => 'username@email.com')); ?>
-
+					<?php echo CHtml::activeTextField($model, 'email', array('placeholder' => 'username@email.com')); ?>
 				</div>
 			</div>
 		</div>
@@ -78,7 +77,7 @@ $this->breadcrumbs = array(
 <?php
 $form = new CForm(array(
 		'elements' => array(
-				'username' => array(
+				'email' => array(
 						'type' => 'text',
 						'maxlength' => 32,
 				),

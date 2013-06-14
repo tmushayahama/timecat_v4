@@ -12,7 +12,7 @@ class RegistrationForm extends User {
 
 	protected function afterValidate() {
 		parent::afterValidate();
-		$this->username = $this->email;
+		//$this->username = $this->email;
 	}
 
 	public function rules() {

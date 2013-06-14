@@ -37,10 +37,12 @@ class SiteController extends Controller {
 		$this->avatar = $model->profile->avatar_url;
 
 		$userStudiesCriteria = new CDbCriteria();
+		$userStudiesCriteria->condition="t1.user_id=".Yii::app()->user->id;
 		$userStudiesCriteria->with = array(
 				"role" => array('select' => 'type_entry'),
 				"study" => array('select' => array('name', 'created')),
 				"user.profile" => array('select' => 'firstname'));
+		$userStudiesCriteria->alias='t1';
 
 		if ($this->avatar == null) {
 			$this->avatar = "timecat_avatar.gif";

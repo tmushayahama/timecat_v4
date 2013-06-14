@@ -4,7 +4,7 @@ class RegistrationController extends Controller
 {
 	public $defaultAction = 'registration';
 	public $layout='//login_layouts/signup';
-	public $is_registration=true;
+	public $display_login=true;
 	/**
 	 * Declares class-based actions.
 	 */
@@ -56,7 +56,7 @@ class RegistrationController extends Controller
 							}
 							
 							if ((Yii::app()->controller->module->loginNotActiv||(Yii::app()->controller->module->activeAfterRegister&&Yii::app()->controller->module->sendActivationMail==false))&&Yii::app()->controller->module->autoLogin) {
-									$identity=new UserIdentity($model->username,$soucePassword);
+									$identity=new UserIdentity($model->email,$soucePassword);
 									$identity->authenticate();
 									Yii::app()->user->login($identity,0);
 									$this->redirect(Yii::app()->controller->module->returnUrl);

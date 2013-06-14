@@ -37,7 +37,7 @@ class WebUser extends CWebUser
         $user = Yii::app()->getModule('user')->user($this->id);
         $userAttributes = CMap::mergeArray(array(
                                                 'email'=>$user->email,
-                                                'username'=>$user->username,
+                                               // 'username'=>$user->username,
                                                 'create_at'=>$user->create_at,
                                                 'lastvisit_at'=>$user->lastvisit_at,
                                            ),$user->profile->getAttributes());
