@@ -45,10 +45,10 @@ class StudyController extends Controller {
 	/**This is the main of the study
 	 * 
 	 */
-	public function actionDashboard() {
+	public function actionDashboard($id) {
 		$model = new Study;
 		$this->render('dashboard', array(
-				'model' => '$this->loadModel($id)',
+				'model' => $this->loadModel($id),
 		));
 	}
 	/**
@@ -73,13 +73,13 @@ class StudyController extends Controller {
 
 		if (isset($_POST['Study'])) {
 			$model->attributes = $_POST['Study'];
-			$model->created = date('Y-m-d H:i:s');
+			$model->created = date('Y-m-d');
 			if ($model->save()) {
 				$user_studies->user_id = Yii::app()->user->id;
 				$user_studies->study_id = $model->id;
 				$user_studies->role_id = 5; //temp value for the creator
 				$user_studies->save();
-				$this->redirect(array('view', 'id' => $model->id));
+				$this->redirect(array('dashboard', 'id' => $model->id));
 			}
 		}
 		$studyTypesCriteria = new CDbCriteria();

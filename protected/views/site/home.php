@@ -35,7 +35,7 @@
 						</div>
 						<div class="row blanko">
 							<div class="small-12 columns">
-								<?php echo CHtml::link('Access Study', 'study/study/dashboard', array('class' => 'button success radius right entrar')); ?>
+								<?php echo CHtml::link('Access Study', "study/study/dashboard/id/".$study->study_id, array('class' => 'button success radius right entrar')); ?>
 							</div>
 						</div>
 						<div class="row lastinfo">
