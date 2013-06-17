@@ -1,4 +1,4 @@
-<?php $this->beginContent('//home_layouts/study_layouts/study_main'); ?>
+<?php $this->beginContent('//home_layouts/study_layouts/study_main_2'); ?>
 
 <div class="large-2 columns">
 	<div class="row">
@@ -7,7 +7,7 @@
 </div>
 <div class="large-2 columns">
 	<div class="row">
-		<?php echo CHtml::link('<i class="foundicon-plus sear" >Tasks</i>', 'study/study/create', array('class' => 'button expand')); ?>	
+		<?php echo CHtml::link('<i class="foundicon-plus sear" >Tasks</i>', '/timecat_v4/study/tasks/dashboard/studyid/'.$model->id, array('class' => 'button expand')); ?>	
 	</div>
 </div>
 <div class="large-2 columns">

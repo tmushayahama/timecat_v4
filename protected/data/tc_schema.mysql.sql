@@ -162,19 +162,33 @@ ALTER TABLE `tc_sites`
 ALTER TABLE `tc_sites`
 	ADD CONSTRAINT `site_timezone_id` FOREIGN KEY (`timezone_id`) REFERENCES `tc_timezone` (`id`) ON DELETE CASCADE;
 
--- ------------tasks-------------------
 CREATE TABLE `tc_tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(50) not null,
-  `category_id` int not null,
-  `definition` varchar(255) not null,
-	`description` varchar(255) not null,
-	`status` int not null default 0,
+	`category_id` int not null,
+	`definition` varchar(255) not null default "",
+	`description` varchar(255) not null default "",
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 ALTER TABLE `tc_tasks`
   ADD CONSTRAINT `tasks_category_id` FOREIGN KEY (`category_id`) REFERENCES `tc_types` (`id`) ON DELETE CASCADE;
+
+-- ------------tasks-------------------
+CREATE TABLE `tc_study_tasks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `study_id` int not null,
+  `task_id` int not null,
+	`status` int not null default 0,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+
+ALTER TABLE `tc_study_tasks`
+  ADD CONSTRAINT `study_tasks_study_id` FOREIGN KEY (`study_id`) REFERENCES `tc_studies` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `tc_study_tasks`
+  ADD CONSTRAINT `study_tasks_task_id` FOREIGN KEY (`task_id`) REFERENCES `tc_tasks` (`id`) ON DELETE CASCADE;
 
 -- -------------subject-------------
 CREATE TABLE `tc_subjects` (
@@ -216,7 +230,7 @@ ALTER TABLE `tc_observations`
 CREATE TABLE `tc_observation_tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
 	`observation_id` int,
-	`task_id` int,
+	`study_task_id` int,
 	`order_id` int,
 	`start_time` int(11) unsigned not null default 0,
 	`duration` int(11) unsigned not null default 0,
@@ -227,7 +241,7 @@ ALTER TABLE `tc_observation_tasks`
   ADD CONSTRAINT `observation_tasks_observation_id` FOREIGN KEY (`observation_id`) REFERENCES `tc_observations` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `tc_observation_tasks`
-  ADD CONSTRAINT `observation_tasks_task_id` FOREIGN KEY (`task_id`) REFERENCES `tc_tasks` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `observation_tasks_study_task_id` FOREIGN KEY (`study_task_id`) REFERENCES `tc_study_tasks` (`id`) ON DELETE CASCADE;
 
 
 CREATE TABLE `tc_notes` (
