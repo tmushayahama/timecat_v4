@@ -17,9 +17,7 @@
 	<?php echo CHtml::encode($data->type_id); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
-	<?php echo CHtml::encode($data->description); ?>
-	<br />
+
 
 
 </div>

@@ -16,7 +16,7 @@
 	</nav>
 	<div id="main">
 		<div class="row">
-			<div class="large-12 large-centered columns blanko elogin">
+			<div class="tc_modal large-12 large-centered columns blanko elogin">
 				<?php echo $content; ?>
 			</div>
 		</div>

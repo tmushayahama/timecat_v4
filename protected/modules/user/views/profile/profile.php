@@ -39,4 +39,95 @@
 		</div>
 	</div>			
 </div>
+<div id="myModal" class="reveal-modal medium">
+  <h2>Change Password.</h2>
+			<div class="row">
+				<div class="large-9 large-centered columns celeste inputers">
+				  <div class="row">
+					<div class="large-3 columns">
+					  <label for="oldpass" >Old</label>
+					</div>
+					<div class="large-9 columns">
+					  <input type="password" id="oldpass" placeholder="Old Password">
+					</div>
+				  </div>
+				</div>
+			  </div>
+			<div class="row">
+				<div class="large-9 large-centered columns celeste inputers">
+				  <div class="row">
+					<div class="large-3 columns">
+					  <label for="password" >New</label>
+					</div>
+					<div class="large-9 columns">
+					  <input type="password" id="password" placeholder="New Password">
+					</div>
+				  </div>
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="large-9 large-centered columns celeste inputers">
+				  <div class="row">
+					<div class="large-3 columns">
+					  <label for="password2" >Confirm</label>
+					</div>
+					<div class="large-9 columns">
+					  <input type="password" id="password2" placeholder="Repeat New Password">
+					</div>
+				  </div>
+				</div>
+			  </div>
+			  <div class="row">
+			  <div class="small-12 columns text-right">
+								<a href="#" class="button ">Change Password</a>
+							</div>
+			  </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+<div id="myModal2" class="reveal-modal medium">
+  <h2>Edit details.</h2>
+			<div class="row">
+				<div class="large-9 large-centered columns celeste inputers">
+				  <div class="row">
+					<div class="large-3 columns">
+					  <label for="firstname" >First Name</label>
+					</div>
+					<div class="large-9 columns">
+					  <input type="text" id="firstname" value="Josie">
+					</div>
+				  </div>
+				</div>
+			  </div>
+				 <div class="row">
+				<div class="large-9 large-centered columns celeste inputers">
+				  <div class="row">
+					<div class="large-3 columns">
+					  <label for="lastname" >Last Name</label>
+					</div>
+					<div class="large-9 columns">
+					  <input type="text" id="lastname" value="Fine">
+					</div>
+				  </div>
+				</div>
+			  </div>
+				<div class="row">
+				<div class="large-9 large-centered columns celeste inputers">
+				  <div class="row">
+					<div class="large-3 columns">
+					  <label for="institution" >Institution</label>
+					</div>
+					<div class="large-9 columns">
+					  <input type="text" id="institution" value="The Ohio State University">
+					</div>
+				  </div>
+				</div>
+			  </div>
+			
+			  <div class="row">
+			  <div class="small-12 columns text-right">
+								<a href="#" class="button ">Save changes</a>
+							</div>
+			  </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
 <?php $this->endContent() ?>

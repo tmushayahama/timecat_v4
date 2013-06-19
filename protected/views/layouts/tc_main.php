@@ -35,7 +35,7 @@
 		</script>
 
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/foundation.min.js"></script>
-
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/tasks.js"></script>
 		<script>
 			$(document).foundation();
 		</script>

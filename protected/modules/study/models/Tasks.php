@@ -8,7 +8,6 @@
  * @property string $name
  * @property integer $category_id
  * @property string $definition
- * @property string $description
  *
  * The followings are the available model relations:
  * @property ObservationTasks[] $observationTasks
@@ -42,13 +41,13 @@ class Tasks extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, category_id, definition, description', 'required'),
+			array('name, category_id, definition', 'required'),
 			array('category_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>50),
-			array('definition, description', 'length', 'max'=>255),
+			array('definition', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, category_id, definition, description', 'safe', 'on'=>'search'),
+			array('id, name, category_id, definition', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,7 +74,6 @@ class Tasks extends CActiveRecord
 			'name' => 'Name',
 			'category_id' => 'Category',
 			'definition' => 'Definition',
-			'description' => 'Description',
 		);
 	}
 
@@ -94,7 +92,6 @@ class Tasks extends CActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('category_id',$this->category_id);
 		$criteria->compare('definition',$this->definition,true);
-		$criteria->compare('description',$this->description,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

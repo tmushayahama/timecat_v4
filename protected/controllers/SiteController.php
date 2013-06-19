@@ -35,7 +35,6 @@ class SiteController extends Controller {
 	public function actionIndex() {
 		$model = $this->loadUser();
 		$this->avatar = $model->profile->avatar_url;
-
 		$userStudiesCriteria = new CDbCriteria();
 		$userStudiesCriteria->condition="t1.user_id=".Yii::app()->user->id;
 		$userStudiesCriteria->with = array(

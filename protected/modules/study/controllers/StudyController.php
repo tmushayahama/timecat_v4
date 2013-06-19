@@ -51,6 +51,15 @@ class StudyController extends Controller {
 				'model' => $this->loadModel($id),
 		));
 	}
+	/**This is the main of the study
+	 * 
+	 */
+	public function actionObservers($id) {
+		$model = new ObserverForm;
+		$this->render('observers', array(
+				'model' => $this->loadModel($id),
+		));
+	}
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed

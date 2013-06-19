@@ -57,32 +57,31 @@ class TasksController extends Controller {
 		$taskTypesCriteria = new CDbCriteria();
 		$taskTypesCriteria->condition = "category='task categories'";
 
-		$model = new Tasks;
-
+		$tasksModel = new Tasks;
+		$studyTasksModel = new StudyTasks;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['Tasks'])) {
-			$model->attributes = $_POST['Tasks'];
-
-			if ($model->save()) {
-				$studyTasks = new StudyTasks;
-				$studyTasks->study_id = $studyid;
-				$studyTasks->task_id = $model->id;
-				$studyTasks->status = 1;
-				$studyTasks->save();
+		if (isset($_POST['update'])) {
+			$tasksModel = $this->loadModel(2);
+		}
+						
+		if (isset($_POST['Tasks'], $_POST['StudyTasks'])) {
+			$tasksModel->attributes = $_POST['Tasks'];
+			$studyTasksModel->attributes = $_POST['StudyTasks'];
+			if ($tasksModel->save()) {
+				$studyTasksModel->study_id = $studyid;
+				$studyTasksModel->task_id = $tasksModel->id;
+				$studyTasksModel->save();
 				//$this->redirect(array('view', 'id' => $model->id));
 			}
 		}
 		$taskTypes = Types::Model()->findAll($taskTypesCriteria);
-		$types[] = array();
-		foreach ($taskTypes as $taskType) {
-			$types[] = array($taskType->id => $taskType->type_entry);
-		}
 		$this->render('dashboard', array(
-				'task_model' => $model,
+				'task_model' => $tasksModel,
+				'study_task_model'=>$studyTasksModel,
 				'study_tasks' => StudyTasks::model()->findAll($tasksCriteria),
-				'task_types' => $types,
+				'task_types' => $taskTypes,
 		));
 	}
 
@@ -121,7 +120,7 @@ class TasksController extends Controller {
 		if (isset($_POST['Tasks'])) {
 			$model->attributes = $_POST['Tasks'];
 			if ($model->save())
-				$this->redirect(array('view', 'id' => $model->id));
+				$this->actionDashboard ($id);
 		}
 
 		$this->render('update', array(

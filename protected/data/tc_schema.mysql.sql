@@ -134,6 +134,7 @@ CREATE TABLE `tc_user_studies` (
   `user_id` int(11) not null,
   `study_id` int(11) not null,
 	`role_id` int(11) not null,
+	`pending_request` int(2) not null default 0,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
@@ -167,7 +168,6 @@ CREATE TABLE `tc_tasks` (
 	`name` varchar(50) not null,
 	`category_id` int not null,
 	`definition` varchar(255) not null default "",
-	`description` varchar(255) not null default "",
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
@@ -257,3 +257,52 @@ ALTER TABLE `tc_notes`
 
 ALTER TABLE `tc_notes`
   ADD CONSTRAINT `observation_tasks_notes_id` FOREIGN KEY (`observation_task_id`) REFERENCES `tc_observation_tasks`(`id`) ON DELETE CASCADE;
+
+CREATE TABLE `tc_messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+	`subject` varchar(255) DEFAULT '',
+  `body` varchar(1028) not null DEFAULT '',
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE `tc_user_messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+	`message_id`  int not null,
+	`sender_id` int not null,
+	`recepient_id` int not null,
+	`study_id`  int not null,
+	`send_date` datetime not null,
+  `received` int not null default 0,
+	`deleted` int not null default 0,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+ALTER TABLE `tc_user_messages`
+  ADD CONSTRAINT `user_message_message_id` FOREIGN KEY (`message_id`) REFERENCES `tc_messages` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `tc_user_messages`
+  ADD CONSTRAINT `user_message_sender_id` FOREIGN KEY (`sender_id`) REFERENCES `tc_users` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `tc_user_messages`
+  ADD CONSTRAINT `user_message_receipient_id` FOREIGN KEY (`receipient_id`) REFERENCES `tc_users` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `tc_user_messages`
+  ADD CONSTRAINT `user_message_study_id` FOREIGN KEY (`study_id`) REFERENCES `tc_studies` (`id`) ON DELETE CASCADE;
+
+CREATE TABLE `tc_task_hierarchy` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+	`taskee_id`  int not null,
+	`task_relationship_id` int not null,
+	`tasker_id` int not null,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+ALTER TABLE `tc_task_hierarchy`
+  ADD CONSTRAINT `task_hierarchy_taskee_id` FOREIGN KEY (`taskee_id`) REFERENCES `tc_tasks` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `tc_task_hierarchy`
+  ADD CONSTRAINT `task_hierarchy_tasker_id` FOREIGN KEY (`tasker_id`) REFERENCES `tc_tasks` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `tc_task_hierarchy`
+  ADD CONSTRAINT `task_hierarchy_task_relationship_id` FOREIGN KEY (`task_relationship_id`) REFERENCES `tc_types` (`id`) ON DELETE CASCADE;
+

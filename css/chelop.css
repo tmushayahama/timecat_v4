@@ -189,3 +189,8 @@ body:before {/* thanks to Maleika (Kohoutec)*/
 	width:0;
 	margin-top:-32767px;/* thank you Erik J - negate effect of float*/
 }
+
+/*Chelo I put this for temporary use */
+.tc_kkmodal {
+	min-height:500px;
+}

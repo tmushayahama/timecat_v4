@@ -7,9 +7,9 @@
  */
 class StudyTaskForm extends CFormModel {
 
-	public $email;
-	public $password;
-	public $rememberMe;
+	public $name;
+	public $category;
+	public $definition;
 
 	/**
 	 * Declares the validation rules.
