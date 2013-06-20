@@ -71,10 +71,16 @@ class User extends CActiveRecord {
 	 * @return array relational rules.
 	 */
 	public function relations() {
-		$relations = Yii::app()->getModule('user')->relations;
-		if (!isset($relations['profile']))
-			$relations['profile'] = array(self::HAS_ONE, 'Profile', 'user_id');
-		return $relations;
+		return array('observations' => array(self::HAS_MANY, 'Observations', 'user_id'),
+				'profile' => array(self::HAS_ONE, 'Profile', 'user_id'),
+				'userMessages' => array(self::HAS_MANY, 'UserMessages', 'receipient_id'),
+				'userMessages1' => array(self::HAS_MANY, 'UserMessages', 'sender_id'),
+				'userStudies' => array(self::HAS_MANY, 'UserStudies', 'user_id'),
+		);
+		/* $relations = Yii::app()->getModule('user')->relations;
+		  if (!isset($relations['profile']))
+		  $relations['profile'] = array(self::HAS_ONE, 'Profile', 'user_id');
+		  return $relations; */
 	}
 
 	/**

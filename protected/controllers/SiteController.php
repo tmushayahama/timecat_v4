@@ -56,6 +56,17 @@ class SiteController extends Controller {
 		//$this->render($this->redirect(Yii::app()->user->loginUrl));
 	}
 
+	public function actionDeleteStudy($studyid) {
+		$userStudiesCriteria = new CDbCriteria();
+		$userId=Yii::app()->user->id;
+		$userStudiesCriteria->condition = "user_id=$userId AND study_id=$studyid";
+		$userStudies = UserStudies::Model()->find($userStudiesCriteria);
+		$userStudies->delete();
+		$this->actionIndex();
+		//$this->render('view', array(
+		//		'model' => $this->loadModel($id),
+		//));
+	}
 	/**
 	 * This is the action to handle external exceptions.
 	 */

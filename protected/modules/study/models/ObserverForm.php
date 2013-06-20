@@ -30,5 +30,8 @@ class ObserverForm extends CFormModel {
 				'email' => "email",
 		);
 	}
+	public function sendRequest() {
+		
+	}
 }
 

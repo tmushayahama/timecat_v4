@@ -1,11 +1,12 @@
 <?php
 
 class StudyController extends Controller {
+
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='home_layouts/study_layouts/study_main_2';
+	public $layout = 'home_layouts/study_layouts/study_main_2';
 
 	/**
 	 * @return array action filters
@@ -29,7 +30,7 @@ class StudyController extends Controller {
 						'users' => array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'actions' => array('create', 'dashboard', 'update'),
+						'actions' => array('create', 'dashboard', 'observers', 'update', 'join'),
 						'users' => array('@'),
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -42,24 +43,52 @@ class StudyController extends Controller {
 		);
 	}
 
-	/**This is the main of the study
+	/*	 * This is the main of the study
 	 * 
 	 */
-	public function actionDashboard($id) {
-		$model = new Study;
+
+	public function actionDashboard($studyid) {
+		//$model = new Study;
 		$this->render('dashboard', array(
-				'model' => $this->loadModel($id),
+				'model' => $this->loadModel($studyid),
 		));
 	}
-	/**This is the main of the study
+
+	/*	 * This is the main of the study
 	 * 
 	 */
-	public function actionObservers($id) {
-		$model = new ObserverForm;
+
+	public function actionObservers($studyid) {
+		$observer = new ObserverForm;
+		if (isset($_POST['ObserverForm'])) {
+			$observer->attributes = $_POST['ObserverForm'];
+			//$model->sendRequest();
+			/* $userCriteria = new CDbCriteria();
+			  $userCriteria->alias = 't1';
+			  $userCriteria->condition = "t1.email=".$observer->email;
+			  $userCriteria->with = array(
+			  "userStudies" => array('select' => 'type_entry'),
+			  "study" => array('select' => array('name', 'created')),
+			  "user.profile" => array('select' => 'firstname'));
+			 */
+			$user = User::Model()->find("email='" . $observer->email . "'");
+			if ($user !== null) {
+				//$taskCriteria = new CDbCriteria();
+				// $taskCriteria->condition = "category='roles' AND type_entry='".$observer->email;
+				$userStudies = new UserStudies;
+				$userStudies->user_id = $user->id;
+				$userStudies->study_id = $studyid;
+				$userStudies->role_id = Types::Model()->findByPk(6)->id;
+				$userStudies->pending_request = 1;
+				$userStudies->save();
+			}
+		}
 		$this->render('observers', array(
-				'model' => $this->loadModel($id),
+				'observer' => $observer,
+						//'model' => $this->loadModel($id),
 		));
 	}
+
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
@@ -68,6 +97,16 @@ class StudyController extends Controller {
 		$this->render('view', array(
 				'model' => $this->loadModel($id),
 		));
+	}
+
+	public function actionJoin($studyid) {
+		$userStudiesCriteria = new CDbCriteria();
+		$userId=Yii::app()->user->id;
+		$userStudiesCriteria->condition = "user_id=$userId AND study_id=$studyid";
+		$userStudies = UserStudies::Model()->find($userStudiesCriteria);
+		$userStudies->pending_request=0;
+		$userStudies->save();
+		$this->actionDashboard($studyid);
 	}
 
 	/**
@@ -92,8 +131,8 @@ class StudyController extends Controller {
 			}
 		}
 		$studyTypesCriteria = new CDbCriteria();
-		$studyTypesCriteria->condition ="category='study types'";
-				
+		$studyTypesCriteria->condition = "category='study types'";
+
 		$this->render('create', array(
 				'model' => $model,
 				'roles' => Types::Model()->findAll($studyTypesCriteria),
@@ -150,7 +189,7 @@ class StudyController extends Controller {
 	 */
 	public function actionAdmin() {
 		$model = new Study('search');
-		$model->unsetAttributes();	// clear any default values
+		$model->unsetAttributes(); // clear any default values
 		if (isset($_GET['Study']))
 			$model->attributes = $_GET['Study'];
 

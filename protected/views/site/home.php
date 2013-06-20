@@ -34,9 +34,17 @@
 									<i class="foundicon-clock"></i> 40h 02m 27s</p></div>
 						</div>
 						<div class="row blanko">
-							<div class="small-12 columns">
-								<?php echo CHtml::link('Access Study', "study/study/dashboard/id/".$study->study_id, array('class' => 'button success radius right entrar')); ?>
-							</div>
+							<?php if ($study->pending_request == 1): ?>
+								<div class="small-12 columns">
+									<?php echo CHtml::link('Decline Invite', "site/deletestudy/studyid/" . $study->study_id, array('class' => 'button alert radius right entrar')); ?>
+										<?php echo CHtml::link('Join Study', "study/study/join/studyid/" . $study->study_id, array('class' => 'button radius right entrar')); ?>
+									
+								</div>
+							<?php else: ?>
+								<div class="small-12 columns">
+									<?php echo CHtml::link('Access Study', "study/study/dashboard/studyid/" . $study->study_id, array('class' => 'button success radius right entrar')); ?>
+								</div>
+							<?php endif; ?>
 						</div>
 						<div class="row lastinfo">
 							<div class="small-6 columns"><p>By <strong><?php echo $study->user->profile->firstname; ?></strong></p></div>

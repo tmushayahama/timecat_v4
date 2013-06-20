@@ -12,7 +12,7 @@
 </div>
 <div class="large-2 columns">
 	<div class="row">
-		<?php echo CHtml::link('<i class="foundicon-plus sear" >Observers</i>', 'study/study/create', array('class' => 'button expand')); ?>	
+		<?php echo CHtml::link('<i class="foundicon-plus sear" >Observers</i>', '/timecat_v4/study/study/observers/studyid/'.$model->id, array('class' => 'button expand')); ?>	
 	</div>
 </div>
 <div class="large-2 columns">

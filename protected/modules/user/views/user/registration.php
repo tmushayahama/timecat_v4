@@ -4,10 +4,10 @@ $this->breadcrumbs = array(
 		UserModule::t("Registration"),
 );
 ?>
-
 <?php if (Yii::app()->user->hasFlash('registration')): ?>
 	<div class="success">
-		<?php echo Yii::app()->user->getFlash('registration'); ?>
+		<?php echo Yii::app()->user->getFlash('registration');
+		echo $temp; ?>
 	</div>
 <?php else: ?>
 	<div class="form">
