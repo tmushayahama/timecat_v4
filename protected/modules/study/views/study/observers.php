@@ -2,8 +2,8 @@
 
 			<?php
 			$form = $this->beginWidget('CActiveForm', array(
-					'id' => 'tasks-form',
-					'enableAjaxValidation' => false,
+					'id' => 'observers-form',
+					'enableAjaxValidation' => true,
 			));
 			?>
 			

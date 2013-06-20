@@ -127,7 +127,7 @@ class StudyController extends Controller {
 				$user_studies->study_id = $model->id;
 				$user_studies->role_id = 5; //temp value for the creator
 				$user_studies->save();
-				$this->redirect(array('dashboard', 'id' => $model->id));
+				$this->redirect(array('dashboard', 'studyid' => $model->id));
 			}
 		}
 		$studyTypesCriteria = new CDbCriteria();

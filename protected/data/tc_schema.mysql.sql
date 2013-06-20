@@ -284,7 +284,7 @@ ALTER TABLE `tc_user_messages`
   ADD CONSTRAINT `user_message_sender_id` FOREIGN KEY (`sender_id`) REFERENCES `tc_users` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `tc_user_messages`
-  ADD CONSTRAINT `user_message_receipient_id` FOREIGN KEY (`receipient_id`) REFERENCES `tc_users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `user_message_receipient_id` FOREIGN KEY (`recepient_id`) REFERENCES `tc_users` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `tc_user_messages`
   ADD CONSTRAINT `user_message_study_id` FOREIGN KEY (`study_id`) REFERENCES `tc_studies` (`id`) ON DELETE CASCADE;

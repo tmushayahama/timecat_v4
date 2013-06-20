@@ -72,7 +72,7 @@ class RegistrationController extends Controller {
 								Yii::app()->user->setFlash('registration', UserModule::t("Thank you for your registration. Please check your email."));
 	
 							}
-							$this->refresh();
+							//$this->refresh();
 						}
 					}
 				}
