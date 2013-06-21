@@ -30,7 +30,7 @@ class StudyController extends Controller {
 						'users' => array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'actions' => array('create', 'dashboard', 'observers', 'update', 'join'),
+						'actions' => array('create', 'dashboard', 'observers', 'update', 'join', 'site'),
 						'users' => array('@'),
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions

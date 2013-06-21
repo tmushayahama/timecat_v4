@@ -13,7 +13,7 @@ $(document).ready(function() {
 });
 
 function addEventHandlers() {
-	$('.task-edit').click(function(e) {
+	$('.task-edit .site-edit').click(function(e) {
 		for (var i = 0; i < EDIT_TASK_MAP.length; i++) {
 			$(EDIT_TASK_MAP[i][0]).val($.trim($(EDIT_TASK_MAP[i][1] + $(this).attr('update-target-id')).text()));
 		}

@@ -27,4 +27,5 @@ insert into `tc_types` (`category`, `type_entry`, `description`) values
 ('observation type','formal', ''),
 ('observation type','trash', ''),
 ('task relationship type','parent', ''),
+('task relationship type','next', ''),
 ('task relationship type','siblings', '');

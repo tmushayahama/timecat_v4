@@ -1,3 +1,4 @@
+DROP SCHEMA if exists timecat_v4;
 DROP USER 'timecat4'@'localhost';
 CREATE USER 'timecat4'@'localhost' IDENTIFIED BY 'awesome++';
 CREATE DATABASE timecat_v4 DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
@@ -97,13 +98,6 @@ create table Rights
 	foreign key (itemname) references AuthItem (name) on delete cascade on update cascade
 );
 
--- ---------------------TIMEZONES-----------------------
-create table tc_timezone (
-  `id` int not null primary key auto_increment,
-  `location` varchar(50) not null unique,
-  `description` varchar(128)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 -- ---------------------TYPES------------------------
 CREATE TABLE `tc_types` (
 		`id` int(11) NOT NULL AUTO_INCREMENT,
@@ -152,7 +146,7 @@ CREATE TABLE `tc_sites` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) not null,
   `study_id` int not null,
-	`timezone_id` int not null,
+	`timezone` varchar(50) not null default '',
   `description` varchar(255) DEFAULT '',
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
@@ -160,13 +154,13 @@ CREATE TABLE `tc_sites` (
 ALTER TABLE `tc_sites`
   ADD CONSTRAINT `site_study_id` FOREIGN KEY (`study_id`) REFERENCES `tc_studies` (`id`) ON DELETE CASCADE;
 
-ALTER TABLE `tc_sites`
-	ADD CONSTRAINT `site_timezone_id` FOREIGN KEY (`timezone_id`) REFERENCES `tc_timezone` (`id`) ON DELETE CASCADE;
-
 CREATE TABLE `tc_tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(50) not null,
 	`category_id` int not null,
+	`start_action` varchar(255) not null default "",
+	`end_action` varchar(255) not null default "",
+	`expected_duration` int not null default 0,
 	`definition` varchar(255) not null default "",
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
@@ -206,7 +200,8 @@ CREATE TABLE `tc_observations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `start_time` int(11) unsigned not null default 0,
 	`duration` int(11) unsigned not null default 0,
-  `user_id` int not null,
+	`user_id` int not null,
+  `study_id` int not null,
 	`subject_id` int not null,
 	`site_id` int not null,
 	`type_id` int,
@@ -216,6 +211,9 @@ CREATE TABLE `tc_observations` (
 
 ALTER TABLE `tc_observations`
   ADD CONSTRAINT `user_observation_id` FOREIGN KEY (`user_id`) REFERENCES `tc_users` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `tc_observations`
+  ADD CONSTRAINT `observations_study_id` FOREIGN KEY (`study_id`) REFERENCES `tc_studies` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `tc_observations`
   ADD CONSTRAINT `subject_observation_id` FOREIGN KEY (`subject_id`) REFERENCES `tc_subjects` (`id`) ON DELETE CASCADE;
