@@ -1,25 +1,204 @@
-<?php $this->beginContent('//home_layouts/study_layouts/study_main_2'); ?>
+<?php $this->beginContent('//study_layouts/study_nav'); ?>
+<div class="row">
+	<br/>
+	<div class="small-12 columns">
+		<a href="onsestudy.html" class="button tiny">Study Home</a>
+	</div>
+</div>
+<div class="row ">
+	<div class="large-6 columns">
+		<div class="row">
+			<div class="small-6 columns marabajo">
+				<a href="/timecat_v4/study/observations/dashboard/studyid/<?php echo $model->id ?>" >
+					<div class="small-11 small-centered columns clptabs bazul1">
+						<br/>
+						<div class="row elicon">
+							<div class="small-10 small-centered columns">
+								<?php echo CHtml::image(Yii::app()->request->baseUrl . '/img/b_plus.png', "new observations"); ?>
+							</div>
+						</div>
+						<div class="row">
+							<div class="small-11 small-centered columns">
+								<p class="eliseo subtile">New Observation</p>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="small-6 columns marabajo">
+				<a href="#">
+					<div class="small-11 small-centered columns clptabs brojo">
+						<br/>
+						<div class="row elicon">
+							<div class="small-10 small-centered columns">
+								<?php echo CHtml::image(Yii::app()->request->baseUrl . '/img/b_viewer.png', "workflow viewer"); ?>
+							</div>
+						</div>
+						<div class="row">
+							<div class="small-11 small-centered columns">
+								<p class="eliseo subtile">Workflow Viewer</p>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="large-6 columns">
+		<div class="row">
+			<div class="small-6 columns marabajo">
+				<a href="#">
+					<div class="small-11 small-centered columns clptabs bverde">
+						<br/>
+						<div class="row elicon">
+							<div class="small-10 small-centered columns">
+								<?php echo CHtml::image(Yii::app()->request->baseUrl . '/img/b_reports.png', "reports"); ?>
+							</div>
+						</div>
+						<div class="row">
+							<div class="small-11 small-centered columns">
+								<p class="eliseo subtile">Reports</p>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="small-6 columns marabajo">
+				<a href="#">
+					<div class="small-11 small-centered columns clptabs bnaranjo">
+						<br/>
+						<div class="row elicon">
+							<div class="small-10 small-centered columns">
+								<?php echo CHtml::image(Yii::app()->request->baseUrl . '/img/b_mail.png', "messages"); ?>
+							</div>
+						</div>
+						<div class="row">
+							<div class="small-11 small-centered columns">
+								<p class="eliseo subtile">Messages</p>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
 
-<div class="large-2 columns">
-	<div class="row">
-		<?php echo CHtml::link('<i class="foundicon-plus sear" >Begin New Obversation</i>', '/timecat_v4/study/observations/dashboard/studyid/'.$model->id, array('class' => 'button expand')); ?>	
+
+<div class="row">
+	<div class="large-6 columns">
+		<div class="row">
+			<div class="small-6 columns marabajo">
+				<a href="/timecat_v4/study/study/observers/studyid/<?php echo $model->id ?>" >
+					<div class="small-11 small-centered columns clptabs bmorado">
+						<br/>
+						<div class="row elicon">
+							<div class="small-10 small-centered columns">
+								<?php echo CHtml::image(Yii::app()->request->baseUrl . '/img/b_users.png', "observers"); ?>
+							</div>
+						</div>
+						<div class="row">
+							<div class="small-11 small-centered columns">
+								<p class="eliseo subtile">Observers</p>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="small-6 columns marabajo">
+				<a href="/timecat_v4/study/tasks/dashboard/studyid/<?php echo $model->id ?>" >
+					<div class="small-11 small-centered columns clptabs bnaranjo2">
+						<br/>
+						<div class="row elicon">
+							<div class="small-10 small-centered columns">
+								<?php echo CHtml::image(Yii::app()->request->baseUrl . '/img/b_tlist.png', "task list"); ?>
+							</div>
+						</div>
+						<div class="row">
+							<div class="small-11 small-centered columns">
+								<p class="eliseo subtile">Task List</p>
+							</div>
+						</div>
+
+					</div>
+				</a>
+			</div>
+		</div>
 	</div>
-</div>
-<div class="large-2 columns">
-	<div class="row">
-		<?php echo CHtml::link('<i class="foundicon-plus sear" >Tasks</i>', '/timecat_v4/study/tasks/dashboard/studyid/'.$model->id, array('class' => 'button expand')); ?>	
-	</div>
-</div>
-<div class="large-2 columns">
-	<div class="row">
-		<?php echo CHtml::link('<i class="foundicon-plus sear" >Observers</i>', '/timecat_v4/study/study/observers/studyid/'.$model->id, array('class' => 'button expand')); ?>	
-	</div>
-</div>
-<div class="large-2 columns">
-	<div class="row">
-		
-		<?php echo CHtml::link('<i class="foundicon-plus sear" >Sites</i>', '/timecat_v4/study/sites/dashboard/studyid/'.$model->id, array('class' => 'button expand')); ?>	
+	<div class="large-6 columns">
+		<div class="row">
+			<div class="small-6 columns marabajo">
+				<a href="/timecat_v4/study/sites/dashboard/studyid/<?php echo $model->id ?>" >
+					<div class="small-11 small-centered columns clptabs bceleste">
+						<br/>
+						<div class="row elicon">
+							<div class="small-10 small-centered columns">
+								<?php echo CHtml::image(Yii::app()->request->baseUrl . '/img/b_sites.png', "sites"); ?>
+							</div>
+						</div>
+						<div class="row">
+							<div class="small-11 small-centered columns">
+								<p class="eliseo subtile">Sites</p>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="small-6 columns marabajo">
+				<a href="#">
+					<div class="small-11 small-centered columns clptabs bburdeo">
+						<br/>
+						<div class="row elicon">
+							<div class="small-10 small-centered columns">
+								<?php echo CHtml::image(Yii::app()->request->baseUrl . '/img/b_calendar.png', "calendar"); ?>
+							</div>
+						</div>
+						<div class="row">
+							<div class="small-11 small-centered columns">
+								<p class="eliseo subtile">Calendar</p>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
 	</div>
 </div>
 
+<div class="row">
+	<div class="large-6 columns">
+		<div class="row">
+			<div class="small-6 columns marabajo">
+				<a href="#">
+					<div class="small-11 small-centered columns clptabs bverdon">
+						<br/>
+						<div class="row elicon">
+							<div class="small-10 small-centered columns">
+								<?php echo CHtml::image(Yii::app()->request->baseUrl . '/img/b_export.png', "data export"); ?>
+							</div>
+						</div>
+						<div class="row">
+							<div class="small-11 small-centered columns">
+								<p class="eliseo subtile">Data Export</p>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="small-6 columns marabajo">
+
+			</div>
+		</div>
+	</div>
+	<div class="large-6 columns">
+		<div class="row">
+			<div class="small-6 columns marabajo">
+
+			</div>
+			<div class="small-6 columns marabajo">
+
+			</div>
+		</div>
+	</div>
+</div>
 <?php $this->endContent(); ?>

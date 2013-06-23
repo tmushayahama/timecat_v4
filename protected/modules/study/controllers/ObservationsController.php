@@ -50,7 +50,6 @@ class ObservationsController extends Controller
 		$sitesCriteria->alias = 't1';
 		$sitesCriteria->condition = "t1.study_id=".$studyid;
 		
-		
 		$observationsCriteria = new CDbCriteria();
 		$observationsCriteria->alias = 't1';
 		$observationsCriteria->condition = "t1.study_id=" . $studyid;
@@ -65,8 +64,14 @@ class ObservationsController extends Controller
 
 					
 		if (isset($_POST['Observations'])) {
+			$subjectModel = new Subjects;
 			$observationsModel->attributes = $_POST['Observations'];
+			$subjectModel->study_id = $studyid;
+			$subjectModel->description = $observationsModel->subjectDescription;
+			$subjectModel->save();
 			$observationsModel->study_id = $studyid;
+			$observationsModel->user_id = Yii::app()->user->id;
+			$observationsModel->subject_id = $subjectModel->id;//Subjects::model()->find("description='".$subjectModel->description."'");
 			if ($observationsModel->save()) {
 				//$this->redirect(array('view', 'id' => $model->id));
 			}

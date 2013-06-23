@@ -23,10 +23,10 @@
 					<?php echo $observations->user_id ?>
 				</td>
 				<td id="<?php echo 'observations-site' . $observations->id ?>">
-					<?php echo $observations->sites->name ?>
+					<?php echo $observations->site->name ?>
 				</td>
 				<td id="<?php echo 'observations-status' . $observations->id ?>">
-					<?php echo $observations->start ?>
+					<?php echo $observations->start_time ?>
 				</td>
 				<td>
 					<ul class="button-group even two-up">
@@ -46,10 +46,11 @@
   <h2>Edit Task.</h2>
 	<?php
 	$form = $this->beginWidget('CActiveForm', array(
-			'id' => 'observationss-form',
+			'id' => 'observations-form',
 			'enableAjaxValidation' => false,
 	));
 	?>
+	<?php echo CHtml::errorSummary($observations_model); ?>
 	<div class="row">
 		<div class="large-9 large-centered columns celeste inputers">
 			<div class="row">
@@ -80,11 +81,11 @@
 		<div class="large-9 large-centered columns celeste inputers">
 			<div class="row">
 				<div class="large-3 columns">
-					<?php echo $form->labelEx($observations_model, 'subject_id'); ?>
+					<?php echo $form->labelEx($observations_model, 'subjectDescription'); ?>
 				</div>
 				<div class="large-9 columns">
-					<?php echo $form->textArea($observations_model, 'subject_id', array('id' => 'edit-observationsdefinition-field', 'maxlength' => 255)); ?>
-					<?php echo $form->error($observations_model, 'subject_id'); ?>
+					<?php echo $form->textArea($observations_model, 'subjectDescription', array('id' => 'edit-observationsdefinition-field', 'maxlength' => 255)); ?>
+					<?php echo $form->error($observations_model, 'subjectDescription'); ?>
 				</div>
 			</div>
 		</div>
@@ -92,7 +93,7 @@
 	<div class="row">
 		<div class="small-12 columns text-right">
 			<?php
-			echo CHtml::tag('button', array('name' => 'update', 'class' => 'small button radius entrar'), '<i class="foundicon-plus"></i> Save Changes');
+			echo CHtml::tag('button', array('class' => 'small button radius entrar'), '<i class="foundicon-plus"></i> Save Changes');
 			?>
 		</div>
 	</div>

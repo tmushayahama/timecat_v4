@@ -1,5 +1,5 @@
 <?php /* @var $this Controller */ ?>
-<?php $this->beginContent('//home_layouts/home_main'); ?>
+<?php $this->beginContent('//home_layouts/home_nav'); ?>
 <?php //$this->pageTitle = Yii::app()->name . ' - ' . UserModule::t("Profile");
 ?>
 

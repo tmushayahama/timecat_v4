@@ -1,5 +1,5 @@
 <?php /* @var $this Controller */ ?>
-<?php $this->beginContent('//home_layouts/home_main'); ?>
+<?php $this->beginContent('//home_layouts/home_nav'); ?>
 <div class="row">
 	<h3>Profile<small> TimeCaT member</small></h3>
 </div>	

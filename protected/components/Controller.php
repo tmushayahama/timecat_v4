@@ -5,6 +5,17 @@
  */
 class Controller extends RController
 {
+	public $study_name = "";
+	public $role = "";
+	
+	public function Avatar() {
+		$profile = Profile::model()->find('user_id='.Yii::app()->user->id);
+		if ($profile->avatar_url == null) {
+			return "timecat_avatar.gif";
+		} else {
+			return $profile->avatar_url;
+		}
+	}
 	/**
 	 * @var string the default layout for the controller view. Defaults to '//layouts/column1',
 	 * meaning using a single column layout. See 'protected/views/layouts/column1.php'.

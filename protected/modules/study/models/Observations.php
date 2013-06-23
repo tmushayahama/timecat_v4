@@ -28,6 +28,7 @@ class Observations extends CActiveRecord {
 	 * @param string $className active record class name.
 	 * @return Observations the static model class
 	 */
+	public $subjectDescription;
 	public static function model($className = __CLASS__) {
 		return parent::model($className);
 	}
@@ -46,8 +47,8 @@ class Observations extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-				array('user_id, subject_id, site_id', 'required'),
-				array('user_id, subject_id, site_id, type_id, valid', 'numerical', 'integerOnly' => true),
+				array('user_id, subjectDescription, site_id', 'required'),
+				array('user_id, site_id, type_id, valid', 'numerical', 'integerOnly' => true),
 				array('start_time, duration', 'length', 'max' => 11),
 				// The following rule is used by search().
 				// Please remove those attributes that should not be searched.
@@ -81,7 +82,7 @@ class Observations extends CActiveRecord {
 				'start_time' => 'Start Time',
 				'duration' => 'Duration',
 				'user_id' => 'User',
-				'subject_id' => 'Subject',
+				'subjectDescription' => 'Subject',
 				'site_id' => 'Site',
 				'type_id' => 'Type',
 				'valid' => 'Valid',

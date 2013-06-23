@@ -6,8 +6,9 @@ class StudyController extends Controller {
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout = 'home_layouts/study_layouts/study_main_2';
-
+	public $layout = 'home_layouts/study_layouts/study_nav';
+	//public $avatar = "";
+	
 	/**
 	 * @return array action filters
 	 */
@@ -49,6 +50,7 @@ class StudyController extends Controller {
 
 	public function actionDashboard($studyid) {
 		//$model = new Study;
+		$this->study_name = $this->loadModel($studyid)->name;
 		$this->render('dashboard', array(
 				'model' => $this->loadModel($studyid),
 		));
