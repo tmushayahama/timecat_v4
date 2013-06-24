@@ -5,14 +5,20 @@
  *
  * The followings are the available columns in table '{{study_tasks}}':
  * @property integer $id
+ * @property string $name
  * @property integer $study_id
- * @property integer $task_id
+ * @property integer $category_id
+ * @property string $start_action
+ * @property string $end_action
+ * @property string $definition
  * @property integer $status
  *
  * The followings are the available model relations:
  * @property ObservationTasks[] $observationTasks
- * @property Tasks $task
  * @property Studies $study
+ * @property Types $category
+ * @property TaskHierarchy[] $taskHierarchies
+ * @property TaskHierarchy[] $taskHierarchies1
  */
 class StudyTasks extends CActiveRecord
 {
@@ -42,11 +48,13 @@ class StudyTasks extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('study_id, task_id', 'required'),
-			array('study_id, task_id, status', 'numerical', 'integerOnly'=>true),
+			array('name, study_id, category_id', 'required'),
+			array('study_id, category_id, status', 'numerical', 'integerOnly'=>true),
+			array('name', 'length', 'max'=>50),
+			array('start_action, end_action, definition', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, study_id, task_id, status', 'safe', 'on'=>'search'),
+			array('id, name, study_id, category_id, start_action, end_action, definition, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,8 +67,10 @@ class StudyTasks extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'observationTasks' => array(self::HAS_MANY, 'ObservationTasks', 'study_task_id'),
-			'task' => array(self::BELONGS_TO, 'Tasks', 'task_id'),
 			'study' => array(self::BELONGS_TO, 'Studies', 'study_id'),
+			'category' => array(self::BELONGS_TO, 'Types', 'category_id'),
+			'taskHierarchies' => array(self::HAS_MANY, 'TaskHierarchy', 'taskee_id'),
+			'taskHierarchies1' => array(self::HAS_MANY, 'TaskHierarchy', 'tasker_id'),
 		);
 	}
 
@@ -71,8 +81,12 @@ class StudyTasks extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+			'name' => 'Name',
 			'study_id' => 'Study',
-			'task_id' => 'Task',
+			'category_id' => 'Category',
+			'start_action' => 'Start Action',
+			'end_action' => 'End Action',
+			'definition' => 'Definition',
 			'status' => 'Status',
 		);
 	}
@@ -89,8 +103,12 @@ class StudyTasks extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
+		$criteria->compare('name',$this->name,true);
 		$criteria->compare('study_id',$this->study_id);
-		$criteria->compare('task_id',$this->task_id);
+		$criteria->compare('category_id',$this->category_id);
+		$criteria->compare('start_action',$this->start_action,true);
+		$criteria->compare('end_action',$this->end_action,true);
+		$criteria->compare('definition',$this->definition,true);
 		$criteria->compare('status',$this->status);
 
 		return new CActiveDataProvider($this, array(

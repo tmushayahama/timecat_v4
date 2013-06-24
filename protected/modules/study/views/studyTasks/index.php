@@ -1,18 +1,18 @@
 <?php
-/* @var $this TasksController */
+/* @var $this StudyTasksController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Tasks',
+	'Study Tasks',
 );
 
 $this->menu=array(
-	array('label'=>'Create Tasks', 'url'=>array('create')),
-	array('label'=>'Manage Tasks', 'url'=>array('admin')),
+	array('label'=>'Create StudyTasks', 'url'=>array('create')),
+	array('label'=>'Manage StudyTasks', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Tasks</h1>
+<h1>Study Tasks</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

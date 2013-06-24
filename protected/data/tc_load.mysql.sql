@@ -1,3 +1,4 @@
+
 INSERT INTO `tc_profiles_fields` (`id`, `varname`, `title`, `field_type`, `placeholder`,`field_size`, `field_size_min`, `required`, `match`, `range`, `error_message`, `other_validator`, `default`, `widget`, `widgetparams`, `position`, `visible`) VALUES
 (1, 'lastname', 'Last Name', 'VARCHAR', 'Last Name', 50, 3, 1, '', '', 'Incorrect Last Name (length between 3 and 50 characters).', '', '', '', '', 1, 3),
 (2, 'firstname', 'First Name', 'VARCHAR', 'First Name', 50, 3, 1, '', '', 'Incorrect First Name (length between 3 and 50 characters).', '', '', '', '', 0, 3),

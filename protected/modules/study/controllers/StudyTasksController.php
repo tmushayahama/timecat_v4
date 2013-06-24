@@ -1,6 +1,6 @@
 <?php
 
-class SitesController extends Controller
+class StudyTasksController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -32,7 +32,7 @@ class SitesController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','dashboard'),
+				'actions'=>array('create','update', 'dashboard'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -45,31 +45,40 @@ class SitesController extends Controller
 		);
 	}
 
+	/**
+	 * Displays a particular model.
+	 * @param integer $id the ID of the model to be displayed
+	 */
 	public function actionDashboard($studyid) {
-		$sitesCriteria = new CDbCriteria();
-		$sitesCriteria->alias = 't1';
-		$sitesCriteria->condition = "t1.study_id=" . $studyid;
+		$tasksCriteria = new CDbCriteria();
+		$tasksCriteria->alias = 't1';
+		$tasksCriteria->condition = "t1.study_id=" . $studyid;
+		$tasksCriteria->with = array(
+				'category' => array('select' => array('type_entry')));
 
+		$taskTypesCriteria = new CDbCriteria();
+		$taskTypesCriteria->condition = "category='task categories'";
 
-		$sitesModel = new Sites;
+		$studyTasksModel = new StudyTasks;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['update'])) {
-			$sitesModel = $this->loadModel(2);
-		}
+		//if (isset($_POST['update'])) {
+		//	$tasksModel = $this->loadModel(2);
+		//}
 						
-		if (isset($_POST['Sites'])) {
-			$sitesModel->attributes = $_POST['Sites'];
-			$sitesModel->study_id = $studyid;
-			if ($sitesModel->save()) {
-				//$this->redirect(array('view', 'id' => $model->id));
-			}
+		if (isset($_POST['StudyTasks'])) {//, $_POST['StudyTasks'])) {
+			$studyTasksModel->attributes = $_POST['StudyTasks'];
+			$studyTasksModel->study_id=$studyid;
+			$studyTasksModel->status=0;
+			$studyTasksModel->category_id=4;
+			$studyTasksModel->save();
 		}
-		$this->render('sites_dashboard', array(
-				'sites_model' => $sitesModel,
-				'study_sites' => Sites::Model()->findAll($sitesCriteria),
-				'sites_timezones' => $sitesModel->getTimezones(),
+		$taskTypes = Types::Model()->findAll($taskTypesCriteria);
+		$this->render('tasks_dashboard', array(
+				'task_model'=>$studyTasksModel,
+				'study_tasks' => StudyTasks::model()->findAll($tasksCriteria),
+				'task_types' => $taskTypes,
 		));
 	}
 	/**
@@ -89,14 +98,14 @@ class SitesController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Sites;
+		$model=new StudyTasks;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Sites']))
+		if(isset($_POST['StudyTasks']))
 		{
-			$model->attributes=$_POST['Sites'];
+			$model->attributes=$_POST['StudyTasks'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -118,9 +127,9 @@ class SitesController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Sites']))
+		if(isset($_POST['StudyTasks']))
 		{
-			$model->attributes=$_POST['Sites'];
+			$model->attributes=$_POST['StudyTasks'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -149,7 +158,7 @@ class SitesController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Sites');
+		$dataProvider=new CActiveDataProvider('StudyTasks');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -160,10 +169,10 @@ class SitesController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Sites('search');
+		$model=new StudyTasks('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Sites']))
-			$model->attributes=$_GET['Sites'];
+		if(isset($_GET['StudyTasks']))
+			$model->attributes=$_GET['StudyTasks'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -174,12 +183,12 @@ class SitesController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Sites the loaded model
+	 * @return StudyTasks the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Sites::model()->findByPk($id);
+		$model=StudyTasks::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -187,11 +196,11 @@ class SitesController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Sites $model the model to be validated
+	 * @param StudyTasks $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='sites-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='study-tasks-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

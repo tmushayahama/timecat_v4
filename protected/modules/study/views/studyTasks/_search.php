@@ -1,6 +1,6 @@
 <?php
-/* @var $this TasksController */
-/* @var $model Tasks */
+/* @var $this StudyTasksController */
+/* @var $model StudyTasks */
 /* @var $form CActiveForm */
 ?>
 
@@ -22,16 +22,29 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->label($model,'study_id'); ?>
+		<?php echo $form->textField($model,'study_id'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model,'category_id'); ?>
 		<?php echo $form->textField($model,'category_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'start_action'); ?>
+		<?php echo $form->textField($model,'start_action',array('size'=>60,'maxlength'=>255)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'end_action'); ?>
+		<?php echo $form->textField($model,'end_action',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'definition'); ?>
 		<?php echo $form->textField($model,'definition',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
-
-	
 
 	<div class="row">
 		<?php echo $form->label($model,'status'); ?>
