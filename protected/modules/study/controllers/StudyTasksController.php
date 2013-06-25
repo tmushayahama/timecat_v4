@@ -76,7 +76,7 @@ class StudyTasksController extends Controller
 		}
 		$taskTypes = Types::Model()->findAll($taskTypesCriteria);
 		$this->render('tasks_dashboard', array(
-				'task_model'=>$studyTasksModel,
+				'tasks_model'=>$studyTasksModel,
 				'study_tasks' => StudyTasks::model()->findAll($tasksCriteria),
 				'task_types' => $taskTypes,
 		));
