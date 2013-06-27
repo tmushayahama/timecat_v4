@@ -15,8 +15,10 @@
 			var newNum	= num + 1;		
 			var newElem = $('#siter' + num ).clone().attr('id', 'siter' + newNum);
 			newElem.find('.labela').attr('for', 'site' + newNum ).text('Site ' + newNum );
+			newElem.find('.labela2').attr('for', 'timezone' + newNum ).text('Timezone ' + newNum );
 			newElem.find('#site' + num ).attr('id','site' + newNum );
-			$('#siter' + num).after(newElem);
+			newElem.find('#timezone' + num ).attr('id','timezone' + newNum );
+			$(newElem).insertAfter('#siter' + num).hide().slideDown();
 
 			 if (newNum == 6) {
              $('#addsites').addClass('disabled');
@@ -33,7 +35,10 @@
         var num = $( '.clonedInput' ).length;	
         
         // remove the last element	
-        $('#siter' + num ).remove();
+        $('#siter' + num ).slideUp('400', function(){
+		$('#siter' + num ).remove();
+		});
+		
         
         // enable the "add" button, since we've removed one				
         $('#addsites').removeAttr('disabled');	
