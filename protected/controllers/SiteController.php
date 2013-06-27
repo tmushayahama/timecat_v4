@@ -5,6 +5,19 @@ class SiteController extends Controller {
 	private $_model;
 	public $avatar;
 
+	public function studySitesCount($studyid) {
+		return Sites::model()->count("study_id =".$studyid);
+	}
+	public function studyObserversCount($studyid) {
+		return Observations::model()->count("study_id =".$studyid);
+	}
+	public function studyTasksCount($studyid) {
+		return StudyTasks::model()->count("study_id =".$studyid);
+	}
+	public function studyObservationsCount($studyid) {
+		return Observations::model()->count("study_id =".$studyid);
+	}
+	
 	/**
 	 * Declares class-based actions.
 	 */

@@ -13,8 +13,7 @@
 			<h3>Studies <small> TimeCaT Projects</small></h3>
 		</div>
 		<div id="study-row" class="row">
-			<?php
-			foreach ($studies as $study):?>
+			<?php foreach ($studies as $study):?>
 				<div class="large-6 columns">
 					<div class="large-11 large-centered columns studyblock">
 						<div class="row firstinfo grisos">
@@ -26,11 +25,11 @@
 						</div>
 						<div class="row blanko">
 							<div class="small-12 columns"><p class="studydesc">
-									<i class="foundicon-location"></i> 2 sites<br/>
-									<i class="foundicon-address-book"></i> 9 observers<br/>
-									<i class="foundicon-website"></i> 16 tasks
+									<i class="foundicon-location"></i> <?php echo $this->studySitesCount($study->id); ?> sites<br/>
+									<i class="foundicon-address-book"></i> <?php echo $this->studyObserversCount($study->id); ?> observers<br/>
+									<i class="foundicon-website"></i> <?php echo $this->studyTasksCount($study->id); ?> tasks
 									<br/>
-									<i class="foundicon-inbox"></i> 55 observations<br/>
+									<i class="foundicon-inbox"></i> <?php echo $this->studyObservationsCount($study->id); ?> observations<br/>
 									<i class="foundicon-clock"></i> 40h 02m 27s</p></div>
 						</div>
 						<div class="row blanko">
@@ -77,7 +76,7 @@
 					<?php echo Yii::app()->user->firstname . " " . Yii::app()->user->lastname ?> 
 				</p>
 				<p><strong>User:</strong></p><p class="eliseo"><?php echo CHtml::encode($model->email); ?></p>
-				<p><strong>Institution:</strong></p><p class="eliseo">The Ohio State University</p>
+				<p><strong>Institution:</strong></p><p class="eliseo"><?php echo CHtml::encode($model->profile->institution); ?></p>
 			</div>
 		</div>
 		<div class="row">
