@@ -83,7 +83,7 @@ $this->breadcrumbs = array(
 						<?php echo $form->labelEx($profile, 'firstname', array('class' => 'right')); ?>
 					</div>
 					<div class="small-9 columns">
-						<?php echo $form->textField($profile, 'firstname', array('placeholder' => 'username@email.com')); ?>
+						<?php echo $form->textField($profile, 'firstname', array('placeholder' => 'Your First Name')); ?>
 						<?php echo $form->error($profile, 'firstname'); ?>
 					</div>
 				</div>
@@ -96,7 +96,7 @@ $this->breadcrumbs = array(
 						<?php echo $form->labelEx($profile, 'lastname', array('class' => 'right')); ?>
 					</div>
 					<div class="small-9 columns">
-						<?php echo $form->textField($profile, 'lastname', array('placeholder' => 'username@email.com')); ?>
+						<?php echo $form->textField($profile, 'lastname', array('placeholder' => 'Your Last Name')); ?>
 						<?php echo $form->error($profile, 'lastname'); ?>
 					</div>
 				</div>
@@ -109,7 +109,7 @@ $this->breadcrumbs = array(
 						<?php echo $form->labelEx($profile, 'institution', array('class' => 'right')); ?>
 					</div>
 					<div class="small-9 columns">
-						<?php echo $form->textField($profile, 'institution', array('placeholder' => 'username@email.com')); ?>
+						<?php echo $form->textField($profile, 'institution', array('placeholder' => 'The Ohio State University')); ?>
 						<?php echo $form->error($profile, 'institution'); ?>
 					</div>
 				</div>

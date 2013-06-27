@@ -2,7 +2,6 @@
 <?php $this->beginContent('//home_layouts/home_nav'); ?>
 <?php //$this->pageTitle = Yii::app()->name . ' - ' . UserModule::t("Profile");
 ?>
-
 <?php if (Yii::app()->user->hasFlash('profileMessage')): ?>
 	<div class="success">
 		<?php echo Yii::app()->user->getFlash('profileMessage'); ?>
@@ -13,8 +12,9 @@
 		<div class="row">
 			<h3>Studies <small> TimeCaT Projects</small></h3>
 		</div>
-		<div class="row">
-			<?php foreach ($studies as $study): ?>
+		<div id="study-row" class="row">
+			<?php
+			foreach ($studies as $study):?>
 				<div class="large-6 columns">
 					<div class="large-11 large-centered columns studyblock">
 						<div class="row firstinfo grisos">
@@ -37,8 +37,8 @@
 							<?php if ($study->pending_request == 1): ?>
 								<div class="small-12 columns">
 									<?php echo CHtml::link('Decline Invite', "site/deletestudy/studyid/" . $study->study_id, array('class' => 'button alert radius right entrar')); ?>
-										<?php echo CHtml::link('Join Study', "study/study/join/studyid/" . $study->study_id, array('class' => 'button radius right entrar')); ?>
-									
+									<?php echo CHtml::link('Join Study', "study/study/join/studyid/" . $study->study_id, array('class' => 'button radius right entrar')); ?>
+
 								</div>
 							<?php else: ?>
 								<div class="small-12 columns">
