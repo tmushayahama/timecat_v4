@@ -27,7 +27,7 @@ class StudyController extends Controller {
 	public function accessRules() {
 		return array(
 				array('allow', // allow all users to perform 'index' and 'view' actions
-						'actions' => array('index', 'view'),
+						'actions' => array('index'),
 						'users' => array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -61,9 +61,9 @@ class StudyController extends Controller {
 	 */
 
 	public function actionObservers($studyid) {
-		$observer = new ObserverForm;
-		if (isset($_POST['ObserverForm'])) {
-			$observer->attributes = $_POST['ObserverForm'];
+		$observer = new UserStudies;
+		if (isset($_POST['UserStudies'])) {
+			$observer->attributes = $_POST['UserStudies'];
 			//$model->sendRequest();
 			/* $userCriteria = new CDbCriteria();
 			  $userCriteria->alias = 't1';
@@ -117,7 +117,7 @@ class StudyController extends Controller {
 	 */
 	public function actionCreate() {
 		$model = new Study;
-		$user_studies = new UserStudies;
+		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -125,6 +125,9 @@ class StudyController extends Controller {
 			$model->attributes = $_POST['Study'];
 			$model->created = date('Y-m-d');
 			if ($model->save()) {
+				$user_studies = new UserStudies;
+				$sites = new Sites;
+				$sites->createSitesTimezone($_POST['sitelist'], $_POST['timezonelist'], $model->id);
 				$user_studies->user_id = Yii::app()->user->id;
 				$user_studies->study_id = $model->id;
 				$user_studies->role_id = 5; //temp value for the creator
@@ -137,7 +140,7 @@ class StudyController extends Controller {
 
 		$this->render('create', array(
 				'model' => $model,
-				'roles' => Types::Model()->findAll($studyTypesCriteria),
+				'study_types' => Types::Model()->findAll($studyTypesCriteria),
 		));
 	}
 

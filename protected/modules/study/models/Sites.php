@@ -108,5 +108,13 @@ class Sites extends CActiveRecord {
 		}
 		return $timezones;
 	}
-
+	public function createSitesTimezone($sitelist, $timezonelist, $studyid) {
+		for ($i = 0; $i < count($sitelist); $i++) {
+			$site = new Sites;
+			$site->name = $sitelist[$i];
+			$site->timezone = $timezonelist[$i];
+			$site->study_id = $studyid;
+			$site->save();
+		}
+	}
 }

@@ -89,7 +89,7 @@
 	<div class="large-6 columns">
 		<div class="row">
 			<div class="small-6 columns marabajo">
-				<a href="/timecat_v4/study/study/observers/studyid/<?php echo $model->id ?>" >
+				<a href="/timecat_v4/study/userstudies/dashboard/studyid/<?php echo $model->id ?>" >
 					<div class="small-11 small-centered columns clptabs bmorado">
 						<br/>
 						<div class="row elicon">

@@ -35,13 +35,13 @@
 						<div class="row blanko">
 							<?php if ($study->pending_request == 1): ?>
 								<div class="small-12 columns">
-									<?php echo CHtml::link('Decline Invite', "site/deletestudy/studyid/" . $study->study_id, array('class' => 'button alert radius right entrar')); ?>
-									<?php echo CHtml::link('Join Study', "study/study/join/studyid/" . $study->study_id, array('class' => 'button radius right entrar')); ?>
+									<?php echo CHtml::link('Decline Invite', "/timecat_v4/site/deletestudy/studyid/" . $study->study_id, array('class' => 'button alert radius right entrar')); ?>
+									<?php echo CHtml::link('Join Study', "/timecat_v4/study/study/join/studyid/" . $study->study_id, array('class' => 'button radius right entrar')); ?>
 
 								</div>
 							<?php else: ?>
 								<div class="small-12 columns">
-									<?php echo CHtml::link('Access Study', "study/study/dashboard/studyid/" . $study->study_id, array('class' => 'button success radius right entrar')); ?>
+									<?php echo CHtml::link('Access Study', "/timecat_v4/study/study/dashboard/studyid/" . $study->study_id, array('class' => 'button success radius right entrar')); ?>
 								</div>
 							<?php endif; ?>
 						</div>
@@ -60,7 +60,7 @@
 			<h3>New Study</h3>
 		</div>
 		<div class="row">
-			<?php echo CHtml::link('<i class="foundicon-plus sear" >Create New Study</i>', 'study/study/create', array('class' => 'button expand')); ?>
+			<?php echo CHtml::link('<i class="foundicon-plus sear" >Create New Study</i>', '/timecat_v4/study/study/create', array('class' => 'button expand')); ?>
 		</div>	
 		<div class="row">
 			<h3>Profile</h3>

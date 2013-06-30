@@ -17,9 +17,9 @@ class ObserverForm extends CFormModel {
 	public function rules() {
 		return array(
 				// email and password are required
-				array('email', 'required'),
-				array('email', 'email'),
 				
+				array('email', 'email'),
+				array('email', 'required'),
 		);
 	}
 
@@ -30,9 +30,6 @@ class ObserverForm extends CFormModel {
 		return array(
 				'email' => "Email",
 		);
-	}
-	public function sendRequest() {
-		
 	}
 }
 

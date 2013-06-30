@@ -10,4 +10,7 @@
 .logout { 
 	margin-top:8px;
 }
+.tc-hide {
+	visibility:hidden;
+}
 

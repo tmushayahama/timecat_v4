@@ -29,15 +29,12 @@
 		</div>
 		<!-- End Footer -->
 
-		<script>
-			document.write('<script src=' +
-							('__proto__' in {} ? '<?php echo Yii::app()->request->baseUrl; ?>/js/vendor/zepto' : '<?php echo Yii::app()->request->baseUrl; ?>/js/vendor/jquery') +
-							'.js><\/script>');
-		</script>
-
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/vendor/jquery.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/foundation.min.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/clpnewstudy.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/tasks.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/tre_dashboard.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/tre_createstudy.js"></script>
 		<script>
 			$(document).foundation();
 		</script>

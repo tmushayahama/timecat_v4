@@ -6,7 +6,7 @@
 			$(this).addClass('success');
 			$(this).text('Selected');
 			$(this).closest(".celeste").toggleClass('regordo');
-			console.log("yeah!");
+			console.log("loading clpnewstudy ..");
 		});
 		
 		$("#addsites").on('click',function(){
@@ -27,9 +27,6 @@
         }   
 		});
 		
-		
-		
- 
     $( '#remsites' ).click( function() {
         // how many "duplicatable" input fields we currently have           
         var num = $( '.clonedInput' ).length;	

@@ -17,6 +17,8 @@
 
 class UserStudies extends CActiveRecord
 {
+	public $email;
+	public $admin;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -43,8 +45,8 @@ class UserStudies extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, study_id, role_id', 'required'),
-			array('user_id, study_id, role_id', 'numerical', 'integerOnly'=>true),
+			array('admin, email', 'required'),
+			//array('user_id, study_id, role_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, user_id, study_id, role_id', 'safe', 'on'=>'search'),
@@ -61,7 +63,6 @@ class UserStudies extends CActiveRecord
 		return array(
 			'role' => array(self::BELONGS_TO, 'Types', 'role_id'),
 			'study' => array(self::BELONGS_TO, 'Study', 'study_id'),
-			//'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}

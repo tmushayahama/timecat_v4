@@ -7,7 +7,7 @@
 				<h4>Study details:</h4>
 			</div>
 		</div>
-		<?php echo $this->renderPartial('_form', array('model' => $model, 'roles' => $roles)); ?>
+		<?php echo $this->renderPartial('_form', array('model' => $model, 'study_types' => $study_types)); ?>
 	</div>
 </div>
 <?php $this->endContent() ?>

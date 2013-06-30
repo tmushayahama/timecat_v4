@@ -20,6 +20,7 @@ class Study extends CActiveRecord {
 	 * @param string $className active record class name.
 	 * @return Study the static model class
 	 */
+	//public $studySites;
 	public static function model($className = __CLASS__) {
 		return parent::model($className);
 	}
@@ -38,7 +39,7 @@ class Study extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-				array('name, type_id', 'required'),
+				array('name, type_id, description', 'required'),
 				array('type_id', 'numerical', 'integerOnly' => true),
 				array('name', 'length', 'max' => 50),
 				array('description', 'length', 'max' => 255),
