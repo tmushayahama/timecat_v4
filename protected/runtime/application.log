@@ -10025,3 +10025,39 @@ Stack trace:
 #30 {main}
 REQUEST_URI=/timecat_v4/study/studytasks/dashboard/studyid/8
 ---
+2013/07/01 09:42:55 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\timecat_v4\protected\modules\study\controllers\StudyTasksController.php:49)
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\xampp\htdocs\timecat_v4\framework\web\filters\CFilterChain.php(133): StudyTasksController->runAction()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#5 C:\xampp\htdocs\timecat_v4\framework\web\filters\CInlineFilter.php(58): StudyTasksController->filterAccessControl()
+#6 C:\xampp\htdocs\timecat_v4\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#7 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(265): StudyTasksController->runActionWithFilters()
+#9 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(282): StudyTasksController->run()
+#10 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#12 C:\xampp\htdocs\timecat_v4\index.php(13): CWebApplication->run()
+REQUEST_URI=/timecat_v4/study/studytasks/dashboard/studyid/tasks.html
+in C:\xampp\htdocs\timecat_v4\protected\modules\study\controllers\StudyTasksController.php (49)
+in C:\xampp\htdocs\timecat_v4\index.php (13)
+2013/07/01 09:44:59 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\timecat_v4\protected\modules\study\controllers\UserStudiesController.php:61)
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\xampp\htdocs\timecat_v4\framework\web\filters\CFilterChain.php(133): UserStudiesController->runAction()
+#3 C:\xampp\htdocs\timecat_v4\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#5 C:\xampp\htdocs\timecat_v4\framework\web\filters\CInlineFilter.php(58): UserStudiesController->filterAccessControl()
+#6 C:\xampp\htdocs\timecat_v4\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#7 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(265): UserStudiesController->runActionWithFilters()
+#9 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(282): UserStudiesController->run()
+#10 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#12 C:\xampp\htdocs\timecat_v4\index.php(13): CWebApplication->run()
+REQUEST_URI=/timecat_v4/study/userstudies/dashboard/studyid/onsestudy.html
+in C:\xampp\htdocs\timecat_v4\protected\modules\study\controllers\UserStudiesController.php (61)
+in C:\xampp\htdocs\timecat_v4\index.php (13)

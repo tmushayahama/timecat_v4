@@ -10,7 +10,7 @@
 				<span class="utitler"><?php echo Yii::app()->user->email?> - <em><?php //echo $this->role ?></em></span></p>
 		</div>
 		<div id="quiter" class="right">
-			<?php echo CHtml::link('<span class="hide-for-small">Close Study</span><i class="foundicon-right-arrow alinm"></i>', Yii::app()->getModule('user')->returnUrl, array('class' => 'button secondary close-study small')); ?>
+			<?php echo CHtml::link('<span class="hide-for-small">Close Study</span><span class="show-for-small"><i class="foundicon-right-arrow "></i></span>', Yii::app()->getModule('user')->returnUrl, array('class' => 'button secondary close-study small')); ?>
 		</div>		
 	</div>
 	<div id="main">

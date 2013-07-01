@@ -25,11 +25,11 @@
 						</div>
 						<div class="row blanko">
 							<div class="small-12 columns"><p class="studydesc">
-									<i class="foundicon-location"></i> <?php echo $this->studySitesCount($study->id); ?> sites<br/>
-									<i class="foundicon-address-book"></i> <?php echo $this->studyObserversCount($study->id); ?> observers<br/>
-									<i class="foundicon-website"></i> <?php echo $this->studyTasksCount($study->id); ?> tasks
+									<i class="foundicon-location"></i> <?php echo $this->studySitesCount($study->study_id); ?> sites<br/>
+									<i class="foundicon-address-book"></i> <?php echo $this->studyObserversCount($study->study_id); ?> observers<br/>
+									<i class="foundicon-website"></i> <?php echo $this->studyTasksCount($study->study_id); ?> tasks
 									<br/>
-									<i class="foundicon-inbox"></i> <?php echo $this->studyObservationsCount($study->id); ?> observations<br/>
+									<i class="foundicon-inbox"></i> <?php echo $this->studyObservationsCount($study->study_id); ?> observations<br/>
 									<i class="foundicon-clock"></i> 40h 02m 27s</p></div>
 						</div>
 						<div class="row blanko">

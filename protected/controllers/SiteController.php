@@ -9,7 +9,7 @@ class SiteController extends Controller {
 		return Sites::model()->count("study_id =".$studyid);
 	}
 	public function studyObserversCount($studyid) {
-		return Observations::model()->count("study_id =".$studyid);
+		return UserStudies::model()->count("study_id =".$studyid);
 	}
 	public function studyTasksCount($studyid) {
 		return StudyTasks::model()->count("study_id =".$studyid);
