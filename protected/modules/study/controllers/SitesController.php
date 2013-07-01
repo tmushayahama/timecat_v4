@@ -66,7 +66,7 @@ class SitesController extends Controller
 				//$this->redirect(array('view', 'id' => $model->id));
 			}
 		}
-		$this->render('sites_dashboard', array(
+		$this->render('dashboard', array(
 				'sites_model' => $sitesModel,
 				'study_sites' => Sites::Model()->findAll($sitesCriteria),
 				'sites_timezones' => $sitesModel->getTimezones(),
