@@ -30,3 +30,19 @@ insert into `tc_types` (`category`, `type_entry`, `description`) values
 ('task relationship type','parent', ''),
 ('task relationship type','next', ''),
 ('task relationship type','siblings', '');
+
+INSERT INTO `tc_users` (`id`, `password`, `email`, `activkey`, `superuser`, `status`) VALUES
+(1, '827ccb0eea8a706c4c34a16891f84e7b', 'test1@example.com', '9a24eff8c15a6a141ece27eb6947da0f', 0, 1),
+(2, '827ccb0eea8a706c4c34a16891f84e7b', 'test2@example.com', '9a24eff8c15a6a141ece27eb6947da0f', 0, 1),
+(3, '827ccb0eea8a706c4c34a16891f84e7b', 'test3@example.com', '9a24eff8c15a6a141ece27eb6947da0f', 0, 1),
+(4, '827ccb0eea8a706c4c34a16891f84e7b', 'test4@example.com', '9a24eff8c15a6a141ece27eb6947da0f', 0, 1),
+(5, '827ccb0eea8a706c4c34a16891f84e7b', 'test5@example.com', '9a24eff8c15a6a141ece27eb6947da0f', 0, 1),
+(6, '827ccb0eea8a706c4c34a16891f84e7b', 'test6@example.com', '9a24eff8c15a6a141ece27eb6947da0f', 0, 1);
+
+INSERT INTO `tc_profiles` (`user_id`, `lastname`, `firstname`, `avatar_url`, `institution`) VALUES
+(1, 'Test1', 'One', 'timecat_avatar.gif', 'OSU 1'),
+(2, 'Test2', 'Two', 'timecat_avatar.gif', 'OSU 2'),
+(3, 'Test3', 'Three', 'timecat_avatar.gif', 'OSU 3'),
+(4, 'Test4', 'Four', 'timecat_avatar.gif', 'OSU 4'),
+(5, 'Test5', 'Five', 'timecat_avatar.gif', 'OSU 5'),
+(6, 'Test6', 'Six', 'timecat_avatar.gif', 'OSU 6');

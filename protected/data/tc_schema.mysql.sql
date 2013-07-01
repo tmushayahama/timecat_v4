@@ -128,7 +128,7 @@ CREATE TABLE `tc_user_studies` (
   `user_id` int(11) not null,
   `study_id` int(11) not null,
 	`role_id` int(11) not null,
-	`pending_request` int(2) not null default 0,
+	`status` int(2) not null default 0,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 

@@ -13,4 +13,14 @@
 .tc-hide {
 	visibility:hidden;
 }
+.observer-pending-border {
+	border: 2px solid #FFCC66;
+}
+.observer-pending-bottom {
+	background:#FFFF99;
+}
+.observer-pending-status-name{
+	background-color: #FFCC66;
+	color:#000;
+}
 

@@ -7,8 +7,9 @@ class StudyController extends Controller {
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout = 'home_layouts/study_layouts/study_nav';
+
 	//public $avatar = "";
-	
+
 	/**
 	 * @return array action filters
 	 */
@@ -103,11 +104,11 @@ class StudyController extends Controller {
 
 	public function actionJoin($studyid) {
 		$userStudiesCriteria = new CDbCriteria();
-		$userId=Yii::app()->user->id;
+		$userId = Yii::app()->user->id;
 		$userStudiesCriteria->condition = "user_id=$userId AND study_id=$studyid";
 		$userStudies = UserStudies::Model()->find($userStudiesCriteria);
-		$userStudies->pending_request=0;
-		$userStudies->save();
+		$userStudies->status = 0;
+		$userStudies->save(false);
 		$this->actionDashboard($studyid);
 	}
 
@@ -117,7 +118,7 @@ class StudyController extends Controller {
 	 */
 	public function actionCreate() {
 		$model = new Study;
-		
+		$user_studies = new UserStudies;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -125,14 +126,14 @@ class StudyController extends Controller {
 			$model->attributes = $_POST['Study'];
 			$model->created = date('Y-m-d');
 			if ($model->save()) {
-				$user_studies = new UserStudies;
 				$sites = new Sites;
 				$sites->createSitesTimezone($_POST['sitelist'], $_POST['timezonelist'], $model->id);
 				$user_studies->user_id = Yii::app()->user->id;
 				$user_studies->study_id = $model->id;
 				$user_studies->role_id = 5; //temp value for the creator
-				$user_studies->save();
-				$this->redirect(array('dashboard', 'studyid' => $model->id));
+				if ($user_studies->save(false)) {
+					$this->redirect(array('dashboard', 'studyid' => $model->id));
+				}
 			}
 		}
 		$studyTypesCriteria = new CDbCriteria();

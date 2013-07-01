@@ -33,7 +33,7 @@
 									<i class="foundicon-clock"></i> 40h 02m 27s</p></div>
 						</div>
 						<div class="row blanko">
-							<?php if ($study->pending_request == 1): ?>
+							<?php if ($study->status == 1): ?>
 								<div class="small-12 columns">
 									<?php echo CHtml::link('Decline Invite', "/timecat_v4/site/deletestudy/studyid/" . $study->study_id, array('class' => 'button alert radius right entrar')); ?>
 									<?php echo CHtml::link('Join Study', "/timecat_v4/study/study/join/studyid/" . $study->study_id, array('class' => 'button radius right entrar')); ?>
