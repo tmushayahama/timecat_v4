@@ -46,6 +46,7 @@ class SitesController extends Controller
 	}
 
 	public function actionDashboard($studyid) {
+		$this->study_name = Study::model()->findByPk($studyid)->name;
 		$sitesCriteria = new CDbCriteria();
 		$sitesCriteria->alias = 't1';
 		$sitesCriteria->condition = "t1.study_id=" . $studyid;

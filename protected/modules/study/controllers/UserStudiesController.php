@@ -58,6 +58,7 @@ class UserStudiesController extends Controller {
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionDashboard($studyid) {
+		$this->study_name = Study::model()->findByPk($studyid)->name;
 		$userStudies = new UserStudies;
 
 		// Uncomment the following line if AJAX validation is needed

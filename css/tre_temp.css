@@ -7,7 +7,8 @@
 						be merged into the chelop.css'.
 */
 
-.logout { 
+.logout,
+.close-study{ 
 	margin-top:8px;
 }
 .tc-hide {

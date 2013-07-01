@@ -1,7 +1,6 @@
 <?php
 
-class ObservationsController extends Controller
-{
+class ObservationsController extends Controller {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -11,11 +10,10 @@ class ObservationsController extends Controller
 	/**
 	 * @return array action filters
 	 */
-	public function filters()
-	{
+	public function filters() {
 		return array(
-			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+				'accessControl', // perform access control for CRUD operations
+				'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -24,32 +22,32 @@ class ObservationsController extends Controller
 	 * This method is used by the 'accessControl' filter.
 	 * @return array access control rules
 	 */
-	public function accessRules()
-	{
+	public function accessRules() {
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'dashboard'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
+				array('allow', // allow all users to perform 'index' and 'view' actions
+						'actions' => array('index', 'view'),
+						'users' => array('*'),
+				),
+				array('allow', // allow authenticated user to perform 'create' and 'update' actions
+						'actions' => array('create', 'update', 'dashboard'),
+						'users' => array('@'),
+				),
+				array('allow', // allow admin user to perform 'admin' and 'delete' actions
+						'actions' => array('admin', 'delete'),
+						'users' => array('admin'),
+				),
+				array('deny', // deny all users
+						'users' => array('*'),
+				),
 		);
 	}
 
 	public function actionDashboard($studyid) {
+		$this->study_name = Study::model()->findByPk($studyid)->name;
 		$sitesCriteria = new CDbCriteria();
 		$sitesCriteria->alias = 't1';
-		$sitesCriteria->condition = "t1.study_id=".$studyid;
-		
+		$sitesCriteria->condition = "t1.study_id=" . $studyid;
+
 		$observationsCriteria = new CDbCriteria();
 		$observationsCriteria->alias = 't1';
 		$observationsCriteria->condition = "t1.study_id=" . $studyid;
@@ -62,7 +60,7 @@ class ObservationsController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-					
+
 		if (isset($_POST['Observations'])) {
 			$subjectModel = new Subjects;
 			$observationsModel->attributes = $_POST['Observations'];
@@ -71,7 +69,7 @@ class ObservationsController extends Controller
 			$subjectModel->save();
 			$observationsModel->study_id = $studyid;
 			$observationsModel->user_id = Yii::app()->user->id;
-			$observationsModel->subject_id = $subjectModel->id;//Subjects::model()->find("description='".$subjectModel->description."'");
+			$observationsModel->subject_id = $subjectModel->id; //Subjects::model()->find("description='".$subjectModel->description."'");
 			if ($observationsModel->save()) {
 				//$this->redirect(array('view', 'id' => $model->id));
 			}
@@ -82,14 +80,14 @@ class ObservationsController extends Controller
 				'observations_sites' => Sites::Model()->findAll($sitesCriteria),
 		));
 	}
+
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
-	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+	public function actionView($id) {
+		$this->render('view', array(
+				'model' => $this->loadModel($id),
 		));
 	}
 
@@ -97,22 +95,20 @@ class ObservationsController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
-	{
-		$model=new Observations;
+	public function actionCreate() {
+		$model = new Observations;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Observations']))
-		{
-			$model->attributes=$_POST['Observations'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+		if (isset($_POST['Observations'])) {
+			$model->attributes = $_POST['Observations'];
+			if ($model->save())
+				$this->redirect(array('view', 'id' => $model->id));
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
+		$this->render('create', array(
+				'model' => $model,
 		));
 	}
 
@@ -121,22 +117,20 @@ class ObservationsController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
-	{
-		$model=$this->loadModel($id);
+	public function actionUpdate($id) {
+		$model = $this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Observations']))
-		{
-			$model->attributes=$_POST['Observations'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+		if (isset($_POST['Observations'])) {
+			$model->attributes = $_POST['Observations'];
+			if ($model->save())
+				$this->redirect(array('view', 'id' => $model->id));
 		}
 
-		$this->render('update',array(
-			'model'=>$model,
+		$this->render('update', array(
+				'model' => $model,
 		));
 	}
 
@@ -145,38 +139,35 @@ class ObservationsController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
-	{
+	public function actionDelete($id) {
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
+		if (!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('Observations');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+	public function actionIndex() {
+		$dataProvider = new CActiveDataProvider('Observations');
+		$this->render('index', array(
+				'dataProvider' => $dataProvider,
 		));
 	}
 
 	/**
 	 * Manages all models.
 	 */
-	public function actionAdmin()
-	{
-		$model=new Observations('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Observations']))
-			$model->attributes=$_GET['Observations'];
+	public function actionAdmin() {
+		$model = new Observations('search');
+		$model->unsetAttributes(); // clear any default values
+		if (isset($_GET['Observations']))
+			$model->attributes = $_GET['Observations'];
 
-		$this->render('admin',array(
-			'model'=>$model,
+		$this->render('admin', array(
+				'model' => $model,
 		));
 	}
 
@@ -187,11 +178,10 @@ class ObservationsController extends Controller
 	 * @return Observations the loaded model
 	 * @throws CHttpException
 	 */
-	public function loadModel($id)
-	{
-		$model=Observations::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+	public function loadModel($id) {
+		$model = Observations::model()->findByPk($id);
+		if ($model === null)
+			throw new CHttpException(404, 'The requested page does not exist.');
 		return $model;
 	}
 
@@ -199,12 +189,12 @@ class ObservationsController extends Controller
 	 * Performs the AJAX validation.
 	 * @param Observations $model the model to be validated
 	 */
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='observations-form')
-		{
+	protected function performAjaxValidation($model) {
+		if (isset($_POST['ajax']) && $_POST['ajax'] === 'observations-form') {
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
+
 }
+

@@ -62,6 +62,7 @@ class StudyController extends Controller {
 	 */
 
 	public function actionObservers($studyid) {
+		$this->study_name = $this->loadModel($studyid)->name;
 		$observer = new UserStudies;
 		if (isset($_POST['UserStudies'])) {
 			$observer->attributes = $_POST['UserStudies'];
