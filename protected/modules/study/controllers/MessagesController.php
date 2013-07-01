@@ -112,7 +112,7 @@ class MessagesController extends Controller {
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex() {
+	public function actionIndex($messageId) {
 		$messageModel = new Messages;
 		
 		// Uncomment the following line if AJAX validation is needed
@@ -126,6 +126,7 @@ class MessagesController extends Controller {
 		$this->render('dashboard', array(
 				'message_model' => $messageModel,
 				'messages' => Messages::Model()->findAll(),
+				'selected_message'=>  $this->loadModel($messageId),
 		));
 	}
 

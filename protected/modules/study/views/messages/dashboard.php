@@ -21,7 +21,7 @@
 					</div>
 					<div class="row celeste">
 						<div class="small-12 columns">
-						<?php echo CHtml::link('View', Yii::app()->baseUrl . '/study/messages/', array('class' => 'button small ')); ?>
+						<?php echo CHtml::link('View', Yii::app()->baseUrl . '/study/messages/index/messageId/'.$message->id, array('class' => 'button small ')); ?>
 					</div>
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 	<?php endforeach; ?>
 </div>
 <div class="large-7 columns">
-	gdfgfd
+	<?php echo $selected_message->body ?>
 </div>
 </div>
 <div id="create-message-modal" class="reveal-modal medium">
