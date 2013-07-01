@@ -64,7 +64,7 @@
 				</a>
 			</div>
 			<div class="small-6 columns marabajo">
-				<a href="#">
+				<a href="<?php echo  Yii::app()->request->baseUrl.'/study/messages/'; ?>" >
 					<div class="small-11 small-centered columns clptabs bnaranjo">
 						<br/>
 						<div class="row elicon">
