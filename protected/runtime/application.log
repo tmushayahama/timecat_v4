@@ -10025,3 +10025,52 @@ Stack trace:
 #30 {main}
 REQUEST_URI=/timecat_v4/study/studytasks/dashboard/studyid/8
 ---
+2013/07/01 17:49:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "phpmyadmin".' in C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('phpmyadmin')
+#1 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/timecat_v4/phpmyadmin
+---
+2013/07/01 18:00:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\xampp\htdocs\timecat_v4\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('study/study/img...')
+#3 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/timecat_v4/study/study/img/gatologo2.png
+HTTP_REFERER=http://localhost:8080/timecat_v4/study/study/create
+---
+2013/07/01 18:11:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "messages".' in C:\xampp\htdocs\timecat_v4\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(270): CController->missingAction('messages')
+#1 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(282): CController->run('messages')
+#2 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('study/study/mes...')
+#3 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/timecat_v4/study/study/messages/
+---
+2013/07/01 18:11:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "messages".' in C:\xampp\htdocs\timecat_v4\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(270): CController->missingAction('messages')
+#1 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(282): CController->run('messages')
+#2 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('study/study/mes...')
+#3 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/timecat_v4/study/study/messages/
+---
+2013/07/01 18:11:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "messages".' in C:\xampp\htdocs\timecat_v4\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\timecat_v4\framework\web\CController.php(270): CController->missingAction('messages')
+#1 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(282): CController->run('messages')
+#2 C:\xampp\htdocs\timecat_v4\framework\web\CWebApplication.php(141): CWebApplication->runController('study/study/mes...')
+#3 C:\xampp\htdocs\timecat_v4\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\timecat_v4\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/timecat_v4/study/study/messages/create
+---
