@@ -7,7 +7,7 @@
 				<div class="large-11 large-centered columns regordoon blanko sear">
 					<div class="row minpad">
 						<div class="large-12 columns tkid" data-tkid="3">
-							<span class="vnam"><?php echo $message->subject ?></span>
+							<span class="vnam"><?php echo $message->message->subject ?></span>
 							<span class="round label brojo right">unread</span>
 						</div>
 					</div>
@@ -16,7 +16,7 @@
 						<div class="large-1 columns">
 						</div>
 						<div class="large-11 columns vdef">
-							<?php echo $message->body ?>
+							<?php echo $message->message->body ?>
 						</div>
 					</div>
 					<div class="row celeste">

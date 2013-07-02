@@ -112,21 +112,28 @@ class MessagesController extends Controller {
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex($messageId) {
+	public function actionIndex($studyId, $messageId) {
 		$messageModel = new Messages;
-		
+
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if (isset($_POST['Messages'])) {
+			
 			$messageModel->attributes = $_POST['Messages'];
 			$messageModel->save();
+			$userMessageModel = new UserMessages;
+			$userMessageModel->message_id = $messageModel->id;
+			$userMessageModel->sender_id = Yii::app()->user->id;
+			$userMessageModel->recepient_id = Yii::app()->user->id;
+			$userMessageModel->study_id = $studyId;
+			$userMessageModel->save(false);
 		}
 
 		$this->render('dashboard', array(
 				'message_model' => $messageModel,
-				'messages' => Messages::Model()->findAll(),
-				'selected_message'=>  $this->loadModel($messageId),
+				'messages' => UserMessages::Model()->findAll($studyId = 'study_id'),
+				'selected_message' => $this->loadModel($messageId),
 		));
 	}
 
