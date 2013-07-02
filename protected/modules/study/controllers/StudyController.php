@@ -50,56 +50,11 @@ class StudyController extends Controller {
 	 */
 
 	public function actionDashboard($studyid) {
+		$this->populateStudyNav($studyid);
 		//$model = new Study;
 		$this->study_name = $this->loadModel($studyid)->name;
 		$this->render('dashboard', array(
 				'model' => $this->loadModel($studyid),
-		));
-	}
-
-	/*	 * This is the main of the study
-	 * 
-	 */
-
-	public function actionObservers($studyid) {
-		$this->study_name = $this->loadModel($studyid)->name;
-		$observer = new UserStudies;
-		if (isset($_POST['UserStudies'])) {
-			$observer->attributes = $_POST['UserStudies'];
-			//$model->sendRequest();
-			/* $userCriteria = new CDbCriteria();
-			  $userCriteria->alias = 't1';
-			  $userCriteria->condition = "t1.email=".$observer->email;
-			  $userCriteria->with = array(
-			  "userStudies" => array('select' => 'type_entry'),
-			  "study" => array('select' => array('name', 'created')),
-			  "user.profile" => array('select' => 'firstname'));
-			 */
-			$user = User::Model()->find("email='" . $observer->email . "'");
-			if ($user !== null) {
-				//$taskCriteria = new CDbCriteria();
-				// $taskCriteria->condition = "category='roles' AND type_entry='".$observer->email;
-				$userStudies = new UserStudies;
-				$userStudies->user_id = $user->id;
-				$userStudies->study_id = $studyid;
-				$userStudies->role_id = Types::Model()->findByPk(6)->id;
-				$userStudies->pending_request = 1;
-				$userStudies->save();
-			}
-		}
-		$this->render('observers', array(
-				'observer' => $observer,
-						//'model' => $this->loadModel($id),
-		));
-	}
-
-	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
-	 */
-	public function actionView($id) {
-		$this->render('view', array(
-				'model' => $this->loadModel($id),
 		));
 	}
 
@@ -143,28 +98,6 @@ class StudyController extends Controller {
 		$this->render('create', array(
 				'model' => $model,
 				'study_types' => Types::Model()->findAll($studyTypesCriteria),
-		));
-	}
-
-	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
-	 */
-	public function actionUpdate($id) {
-		$model = $this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if (isset($_POST['Study'])) {
-			$model->attributes = $_POST['Study'];
-			if ($model->save())
-				$this->redirect(array('view', 'id' => $model->id));
-		}
-
-		$this->render('update', array(
-				'model' => $model,
 		));
 	}
 
