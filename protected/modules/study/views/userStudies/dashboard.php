@@ -9,7 +9,7 @@
 			<div class="row margibotom">
 				<div class="large-11 large-centered columns regordoon blanko sear observer-border" observer-status =<?php echo $observer->status ?>>
 					<div class="row">
-						<div class="small-2 columns nopadd">
+						<div class="small-2 columns topad">
 							<img class="left" src="<?php echo Yii::app()->request->baseUrl . '/images/' . $observer->user->profile->avatar_url ?>" alt="avatar" />
 						</div>
 						<div class="small-10 columns">
@@ -18,15 +18,26 @@
 									<span class="vnam"><?php echo $observer->user->profile->firstname . " " . $observer->user->profile->lastname ?> </span>
 									<span class="round success label right observer-status-name" observer-status =<?php echo $observer->status ?>>active</span>
 								</div>
-								<div class="large-12 columns">
-									<?php echo $observer->user->email ?><br/>
+								<div class="large-6 columns">
+									<p class="studydesc">
+										<em><?php echo $observer->role->type_entry; ?></em><br/>
+										<i class="foundicon-idea"></i> 37 trainings <em>(35h15m22s)</em><br/>
+										<i class="foundicon-checkmark"></i> 2 sessions of I.O.R.A.
+									</p>
+								</div>
+								<div class="large-6 columns">
+									<p class="studydesc">
+										<br/>
+										<i class="foundicon-flag"></i> 14 real obs <em>(22h08m14s)</em><br/>
+										<i class="foundicon-location"></i> Sites: Hospital 1, Hopsital B
+									</p>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="row observer-bottom celeste" observer-status =<?php echo $observer->status ?>>
+					<div class="row celeste observer-bottom" observer-status =<?php echo $observer->status ?>>
 						<div class="small-12 columns">
-							<a href="#" class="button small secondary nomarg">View details</a>
+							<a href="obs_detail.html" class="button small secondary nomarg">View details</a>
 						</div>
 					</div>
 				</div>

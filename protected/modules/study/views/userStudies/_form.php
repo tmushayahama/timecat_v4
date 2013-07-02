@@ -26,38 +26,35 @@ $form = $this->beginWidget('CActiveForm', array(
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="large-10 large-centered columns studydesc">
-				<p>Observers can:<br/>
-					<span class="studydesc right limpia"><i class="foundicon-checkmark"></i>Create observations</span>
-					<span class="studydesc right limpia"><i class="foundicon-checkmark"></i>Visualize own data</span>
-					<span class="studydesc right limpia"><i class="foundicon-checkmark"></i>Send messages</span>
-					<span class="studydesc right limpia"><i class="foundicon-checkmark"></i>Read task list</span>
-					<span class="studydesc right limpia"><i class="foundicon-checkmark"></i>Update calendar</span>
-					<span class="studydesc right limpia"><i class="foundicon-checkmark"></i>Export own data</span>
+		<div class="row font13">
+			<div class="small-6 columns studydesc">
+				<p><strong>Observers can:</strong><br/>
+					<span class="studydesc left limpia"><i class="foundicon-checkmark"></i>Create observations</span>
+					<span class="studydesc left limpia"><i class="foundicon-checkmark"></i>Visualize own data</span>
+					<span class="studydesc left limpia"><i class="foundicon-checkmark"></i>Send messages</span>
+					<span class="studydesc left limpia"><i class="foundicon-checkmark"></i>Read task list</span>
+					<span class="studydesc left limpia"><i class="foundicon-checkmark"></i>Update calendar</span>
+					<span class="studydesc left limpia"><i class="foundicon-checkmark"></i>Export own data</span>
 				</p>
 			</div>
-		</div>
-		<div class="row">
-			<div id="adminprivileges" class="large-10 large-centered columns studydesc">
-				<p>Admins also can:<br/>
-					<span class="studydesc right limpia"><i class="foundicon-checkmark"></i>Visualize all data</span>
-					<span class="studydesc right limpia"><i class="foundicon-checkmark"></i>Access global reports</span>
-					<span class="studydesc right limpia"><i class="foundicon-checkmark"></i>Invite new observers</span>
-					<span class="studydesc right limpia"><i class="foundicon-checkmark"></i>Add/edit task list</span>
-					<span class="studydesc right limpia"><i class="foundicon-checkmark"></i>Add/edit sites</span>
-					<span class="studydesc right limpia"><i class="foundicon-checkmark"></i>Export all data</span>
+
+			<div id="adminprivileges" class="small-6 columns studydesc">
+				<p><strong>Admins also can:</strong><br/>
+					<span class="studydesc left limpia"><i class="foundicon-checkmark"></i>Visualize all data</span>
+					<span class="studydesc left limpia"><i class="foundicon-checkmark"></i>Access global reports</span>
+					<span class="studydesc left limpia"><i class="foundicon-checkmark"></i>Invite new observers</span>
+					<span class="studydesc left limpia"><i class="foundicon-checkmark"></i>Add/edit task list</span>
+					<span class="studydesc left limpia"><i class="foundicon-checkmark"></i>Add/edit sites</span>
+					<span class="studydesc left limpia"><i class="foundicon-checkmark"></i>Export all data</span>
 				</p>
 			</div>
 		</div>
 	</div>
-
-
 	<div class="row">
 		<div class="large-10 large-centered columns celeste inputers">
 			<div class="row">
 				<div class="large-12 columns text-right">
-					<?php echo CHtml::activeCheckBox($observer, 'admin', array('value' => 1, 'uncheckValue' => 0)); ?> Grant Admin Privileges
+					<?php echo CHtml::activeCheckBox($observer, 'admin', array('id'=>'adminpriv', 'value' => 1, 'uncheckValue' => 0)); ?> Grant Admin Privileges
 				</div>
 			</div>
 		</div>

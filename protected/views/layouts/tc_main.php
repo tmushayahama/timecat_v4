@@ -32,6 +32,7 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/vendor/jquery.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/foundation.min.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/clpnewstudy.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/clpobservers.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/tasks.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/tre_dashboard.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/tre_createstudy.js"></script>
