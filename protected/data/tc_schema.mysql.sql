@@ -257,7 +257,7 @@ CREATE TABLE `tc_user_messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
 	`message_id`  int not null,
 	`sender_id` int not null,
-	`recepient_id` int not null,
+	`recipient_id` int not null,
 	`study_id`  int not null,
 	`send_date` datetime not null,
   `received` int not null default 0,
@@ -272,7 +272,7 @@ ALTER TABLE `tc_user_messages`
   ADD CONSTRAINT `user_message_sender_id` FOREIGN KEY (`sender_id`) REFERENCES `tc_users` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `tc_user_messages`
-  ADD CONSTRAINT `user_message_receipient_id` FOREIGN KEY (`recepient_id`) REFERENCES `tc_users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `user_message_recipient_id` FOREIGN KEY (`recipient_id`) REFERENCES `tc_users` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `tc_user_messages`
   ADD CONSTRAINT `user_message_study_id` FOREIGN KEY (`study_id`) REFERENCES `tc_studies` (`id`) ON DELETE CASCADE;
