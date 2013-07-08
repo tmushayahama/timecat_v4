@@ -7,7 +7,7 @@
  * @property integer $id
  * @property integer $message_id
  * @property integer $sender_id
- * @property integer $recepient_id
+ * @property integer $recipient_id
  * @property integer $study_id
  * @property string $send_date
  * @property integer $received
@@ -16,11 +16,14 @@
  * The followings are the available model relations:
  * @property Studies $study
  * @property Messages $message
- * @property Users $recepient
+ * @property Users $recipient
  * @property Users $sender
  */
 class UserMessages extends CActiveRecord
 {
+    
+    public $email;
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -47,11 +50,11 @@ class UserMessages extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('message_id, sender_id, recepient_id, study_id, send_date', 'required'),
-			array('message_id, sender_id, recepient_id, study_id, received, deleted', 'numerical', 'integerOnly'=>true),
+			array('message_id, sender_id, recipient_id, study_id, send_date, email', 'required'),
+			array('message_id, sender_id, recipient_id, study_id, received, deleted', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, message_id, sender_id, recepient_id, study_id, send_date, received, deleted', 'safe', 'on'=>'search'),
+			array('id, message_id, sender_id, recipient_id, study_id, send_date, received, deleted, email', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,7 +68,7 @@ class UserMessages extends CActiveRecord
 		return array(
 			'study' => array(self::BELONGS_TO, 'Studies', 'study_id'),
 			'message' => array(self::BELONGS_TO, 'Messages', 'message_id'),
-			'recepient' => array(self::BELONGS_TO, 'Users', 'recepient_id'),
+			'recipient' => array(self::BELONGS_TO, 'Users', 'recipient_id'),
 			'sender' => array(self::BELONGS_TO, 'Users', 'sender_id'),
 		);
 	}
@@ -79,11 +82,12 @@ class UserMessages extends CActiveRecord
 			'id' => 'ID',
 			'message_id' => 'Message',
 			'sender_id' => 'Sender',
-			'recepient_id' => 'Recepient',
+			'recipient_id' => 'Recipient',
 			'study_id' => 'Study',
 			'send_date' => 'Send Date',
 			'received' => 'Received',
 			'deleted' => 'Deleted',
+                        'email' => 'Email',
 		);
 	}
 
@@ -101,11 +105,12 @@ class UserMessages extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('message_id',$this->message_id);
 		$criteria->compare('sender_id',$this->sender_id);
-		$criteria->compare('recepient_id',$this->recepient_id);
+		$criteria->compare('recipient_id',$this->recipient_id);
 		$criteria->compare('study_id',$this->study_id);
 		$criteria->compare('send_date',$this->send_date,true);
 		$criteria->compare('received',$this->received);
 		$criteria->compare('deleted',$this->deleted);
+                $criteria->compare('email',$this->email);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
