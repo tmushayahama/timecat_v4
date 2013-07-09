@@ -66,7 +66,7 @@ class UserMessages extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'study' => array(self::BELONGS_TO, 'Studies', 'study_id'),
+			'study' => array(self::BELONGS_TO, 'Study', 'study_id'),
 			'message' => array(self::BELONGS_TO, 'Messages', 'message_id'),
 			'recipient' => array(self::BELONGS_TO, 'Users', 'recipient_id'),
 			'sender' => array(self::BELONGS_TO, 'Users', 'sender_id'),

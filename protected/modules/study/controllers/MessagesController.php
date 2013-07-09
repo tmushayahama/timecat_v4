@@ -118,13 +118,14 @@ class MessagesController extends Controller {
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        $messageCriteria = new CDbCriteria;
-        $messageCriteria->condition = "email='test4'";
         if (isset($_POST['Messages'])) {
-
             $messageModel->attributes = $_POST['Messages'];
             //$userMessageModel->attributes = $_POST['UserMessages'];
             $messageModel->save();
+
+            $messageCriteria = new CDbCriteria;
+            $messageCriteria->condition = "email='" . $this->escapeArroba($messageModel->email) . "'";
+
             $userMessageModel = new UserMessages;
             $userMessageModel->message_id = $messageModel->id;
             $userMessageModel->sender_id = Yii::app()->user->id;
@@ -137,6 +138,7 @@ class MessagesController extends Controller {
             $this->render('dashboard', array(
                 'message_model' => $messageModel,
                 'messages' => UserMessages::Model()->findAll($studyId = 'study_id'),
+                'selected_message' => false,
             ));
         } else {
             $this->render('dashboard', array(
@@ -145,6 +147,12 @@ class MessagesController extends Controller {
                 'selected_message' => $this->loadModel($messageId),
             ));
         }
+    }
+
+    public function escapeArroba($email) {
+        /* @var $email string */
+        $escaped = substr($email, 0, strpos($email, '@')) . "\@" . substr($email, strpos($email, '@') + 1);
+        return $escaped;
     }
 
     /**

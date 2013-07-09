@@ -7,8 +7,18 @@
                 <div class="large-11 large-centered columns regordoon blanko sear">
                     <div class="row minpad">
                         <div class="large-12 columns tkid" data-tkid="3">
-                            <span class="vnam"><?php echo $message->message->subject ?></span>
+                            <span class="vnam"><?php echo 'To: ' . User::Model()->findByPk($message->recipient_id)->email ?></span>
                             <span class="round label brojo right">unread</span>
+                        </div>
+                        <div class="large-1 columns">
+                        </div>
+                        <div class="large-12 columns tkid" data-tkid="3">
+                            <span class="vnam"><?php echo 'From: ' . User::Model()->findByPk($message->sender_id)->email ?></span>
+                        </div>
+                        <div class="large-1 columns">
+                        </div>
+                        <div class="large-12 columns tkid" data-tkid="3">
+                            <span class="vnam"><?php echo $message->message->subject ?></span>
                         </div>
                     </div>
 
@@ -21,7 +31,7 @@
                     </div>
                     <div class="row celeste">
                         <div class="small-12 columns">
-                            <?php echo CHtml::link('View', Yii::app()->baseUrl . '/study/messages/index/messageId/' . $message->id, array('class' => 'button small ')); ?>
+                            <?php echo CHtml::link('View', Yii::app()->baseUrl . '/study/messages/index/studyId/' . $message->study_id . '/messageId/' . $message->message->id, array('class' => 'button small ')); ?>
                         </div>
                     </div>
                 </div>
@@ -29,7 +39,7 @@
         <?php endforeach; ?>
     </div>
     <div class="large-7 columns">
-        <?php //echo $selected_message->body ?>
+        <?php if($selected_message != false) echo $selected_message->body; ?>
     </div>
 </div>
 <div id="create-message-modal" class="reveal-modal medium">
