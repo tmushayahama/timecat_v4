@@ -131,14 +131,14 @@ class MessagesController extends Controller {
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Messages'])) {
+        if (isset($_POST['Messages']) && isset($_POST['UserMessages'])) {
             $messagesModel->attributes = $_POST['Messages'];
             $messagesModel->save();            
             //$userMessagesModel->attributes = $_POST['UserMessages'];
             //echo $messagesModel->subject;
 //            echo User::Model()->find("email='".$userMessagesModel->email."'");
-            //$recipient = User::Model()->find($userMessageModel->email = 'email');
-            $recipient = User::Model()->find("email='".$userMessagesModel->email."'");
+            $recipient = User::Model()->find($userMessageModel->email = 'email');
+            //$recipient = User::Model()->find("email='".$userMessagesModel->email."'");
             $userMessagesModel->attributes['recipient_id'] = $recipient->attributes['id'];
             $userMessagesModel->attributes['message_id'] = $messagesModel->id;
             $userMessagesModel->attributes['study_id'] = $studyId;

@@ -37,13 +37,13 @@
         <?php echo $selected_message->body; 
         echo "\n Line Break \n";
         //echo $_POST['User']['email'];
-        //echo $usersModel->find($_POST['User']['email'] = 'email');
+        echo $usersModel->find($_POST['User']['email'] = 'email');
         echo "\n Line Break \n";
         ?>
     </div>
 </div>
 <div id="create-message-modal" class="reveal-modal medium">
-    <?php echo $this->renderPartial('_form', array('messagesModel' => $messagesModel, 'userMessagesModel' => $userMessagesModel, )); ?>
+    <?php echo $this->renderPartial('_form', array('messagesModel' => $messagesModel, 'userMessagesModel' => $userMessagesModel, 'usersModel' => $usersModel,)); ?>
     <a class="close-reveal-modal">&#215;</a>
 </div>
 <?php $this->endContent(); ?>
