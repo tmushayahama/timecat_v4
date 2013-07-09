@@ -9,6 +9,17 @@
             <?php
             $tabs = array();
             $tabCount = 1;
+            $categorized_tasks = array();
+            foreach ($task_types as $task_type){
+                $categorized_tasks[$task_type->category->type_entry] = array();
+            }
+            foreach($study_tasks as $task){
+                $category = $task->category->type_entry;
+//                if(!array_key_exists($category, $categorized_tasks)){
+//                    $categorized_tasks[$category] = array();
+//                }
+                array_push($categorized_tasks[$category], $task);
+            }
             foreach ($task_types as $task_type):
                 ?>
                 <?php
@@ -19,7 +30,7 @@
                         <p class="title" style="left: 0px;"><a href="<?php echo '#panel' . $tabCount ?>"><?php echo $task_type->category->type_entry ?></a></p>
                         <div class="content" data-slug="<?php echo 'panel' . $tabCount ?>" style="">
                             <?php
-                            foreach ($study_tasks as $task):
+                            foreach ($categorized_tasks[$task_type->category->type_entry] as $task):
                                 if ($task->category->type_entry == $task_type->category->type_entry):
                                     ?>
                                     <div class="row task-block margibotom" >

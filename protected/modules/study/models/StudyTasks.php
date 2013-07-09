@@ -20,99 +20,94 @@
  * @property TaskHierarchy[] $taskHierarchies
  * @property TaskHierarchy[] $taskHierarchies1
  */
-class StudyTasks extends CActiveRecord
-{
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return StudyTasks the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
+class StudyTasks extends CActiveRecord {
 
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return '{{study_tasks}}';
-	}
+    /**
+     * Returns the static model of the specified AR class.
+     * @param string $className active record class name.
+     * @return StudyTasks the static model class
+     */
+    public static function model($className = __CLASS__) {
+        return parent::model($className);
+    }
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('name, definition, category_id', 'required'),
-			array('study_id, category_id, status', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>50),
-			array('start_action, end_action, definition', 'length', 'max'=>255),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, name, study_id, category_id, start_action, end_action, definition, status', 'safe', 'on'=>'search'),
-		);
-	}
+    /**
+     * @return string the associated database table name
+     */
+    public function tableName() {
+        return '{{study_tasks}}';
+    }
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-			'observationTasks' => array(self::HAS_MANY, 'ObservationTasks', 'study_task_id'),
-			'study' => array(self::BELONGS_TO, 'Studies', 'study_id'),
-			'category' => array(self::BELONGS_TO, 'Types', 'category_id'),
-			'taskHierarchies' => array(self::HAS_MANY, 'TaskHierarchy', 'taskee_id'),
-			'taskHierarchies1' => array(self::HAS_MANY, 'TaskHierarchy', 'tasker_id'),
-		);
-	}
+    /**
+     * @return array validation rules for model attributes.
+     */
+    public function rules() {
+        // NOTE: you should only define rules for those attributes that
+        // will receive user inputs.
+        return array(
+            array('name, definition, category_id', 'required'),
+            array('study_id, category_id, status', 'numerical', 'integerOnly' => true),
+            array('name', 'length', 'max' => 50),
+            array('start_action, end_action, definition', 'length', 'max' => 255),
+            // The following rule is used by search().
+            // Please remove those attributes that should not be searched.
+            array('id, name, study_id, category_id, start_action, end_action, definition, status', 'safe', 'on' => 'search'),
+        );
+    }
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'id' => 'ID',
-			'name' => 'Name',
-			'study_id' => 'Study',
-			'category_id' => 'Category',
-			'start_action' => 'Start Action',
-			'end_action' => 'End Action',
-			'definition' => 'Definition',
-			'status' => 'Status',
-		);
-	}
+    /**
+     * @return array relational rules.
+     */
+    public function relations() {
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return array(
+            'observationTasks' => array(self::HAS_MANY, 'ObservationTasks', 'study_task_id'),
+            'study' => array(self::BELONGS_TO, 'Studies', 'study_id'),
+            'category' => array(self::BELONGS_TO, 'Types', 'category_id'),
+            'taskHierarchies' => array(self::HAS_MANY, 'TaskHierarchy', 'taskee_id'),
+            'taskHierarchies1' => array(self::HAS_MANY, 'TaskHierarchy', 'tasker_id'),
+        );
+    }
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels() {
+        return array(
+            'id' => 'ID',
+            'name' => 'Name',
+            'study_id' => 'Study',
+            'category_id' => 'Category',
+            'start_action' => 'Start Action',
+            'end_action' => 'End Action',
+            'definition' => 'Definition',
+            'status' => 'Status',
+        );
+    }
 
-		$criteria=new CDbCriteria;
+    /**
+     * Retrieves a list of models based on the current search/filter conditions.
+     * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+     */
+    public function search() {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('study_id',$this->study_id);
-		$criteria->compare('category_id',$this->category_id);
-		$criteria->compare('start_action',$this->start_action,true);
-		$criteria->compare('end_action',$this->end_action,true);
-		$criteria->compare('definition',$this->definition,true);
-		$criteria->compare('status',$this->status);
+        $criteria = new CDbCriteria;
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
+        $criteria->compare('id', $this->id);
+        $criteria->compare('name', $this->name, true);
+        $criteria->compare('study_id', $this->study_id);
+        $criteria->compare('category_id', $this->category_id);
+        $criteria->compare('start_action', $this->start_action, true);
+        $criteria->compare('end_action', $this->end_action, true);
+        $criteria->compare('definition', $this->definition, true);
+        $criteria->compare('status', $this->status);
+
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+        ));
+    }
+
 }
