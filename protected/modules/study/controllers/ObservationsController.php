@@ -42,15 +42,15 @@ class ObservationsController extends Controller {
 		);
 	}
 
-	public function actionDashboard($studyid) {
-		$this->study_name = Study::model()->findByPk($studyid)->name;
+	public function actionDashboard($studyId) {
+		$this->study_name = Study::model()->findByPk($studyId)->name;
 		$sitesCriteria = new CDbCriteria();
 		$sitesCriteria->alias = 't1';
-		$sitesCriteria->condition = "t1.study_id=" . $studyid;
+		$sitesCriteria->condition = "t1.study_id=" . $studyId;
 
 		$observationsCriteria = new CDbCriteria();
 		$observationsCriteria->alias = 't1';
-		$observationsCriteria->condition = "t1.study_id=" . $studyid;
+		$observationsCriteria->condition = "t1.study_id=" . $studyId;
 		$observationsCriteria->with = array(
 				"subject" => array('select' => 'description'),
 				"site" => array('select' => array('name', 'timezone')),
@@ -64,10 +64,10 @@ class ObservationsController extends Controller {
 		if (isset($_POST['Observations'])) {
 			$subjectModel = new Subjects;
 			$observationsModel->attributes = $_POST['Observations'];
-			$subjectModel->study_id = $studyid;
+			$subjectModel->study_id = $studyId;
 			$subjectModel->description = $observationsModel->subjectDescription;
 			$subjectModel->save();
-			$observationsModel->study_id = $studyid;
+			$observationsModel->study_id = $studyId;
 			$observationsModel->user_id = Yii::app()->user->id;
 			$observationsModel->subject_id = $subjectModel->id; //Subjects::model()->find("description='".$subjectModel->description."'");
 			if ($observationsModel->save()) {

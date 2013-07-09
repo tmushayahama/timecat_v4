@@ -11,9 +11,9 @@ class Controller extends RController
 		$profile = Profile::Model()->find('user_id='.Yii::app()->user->id);
 		return $profile->firstname." ".$profile->lastname;
 	}
-	public function populateStudyNav($studyid) {
-		$this->study_name = Study::model()->findByPk($studyid)->name;
-		$this->study_role = UserStudies::Model()->find('user_id='.Yii::app()->user->id.' AND study_id='.$studyid)->role->type_entry;
+	public function populateStudyNav($studyId) {
+		$this->study_name = Study::model()->findByPk($studyId)->name;
+		$this->study_role = UserStudies::Model()->find('user_id='.Yii::app()->user->id.' AND study_id='.$studyId)->role->type_entry;
 	}	
 	public function Avatar() {
 		$profile = Profile::model()->find('user_id='.Yii::app()->user->id);

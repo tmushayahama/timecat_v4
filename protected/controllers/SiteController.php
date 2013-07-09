@@ -5,17 +5,17 @@ class SiteController extends Controller {
 	private $_model;
 	public $avatar;
 
-	public function studySitesCount($studyid) {
-		return Sites::model()->count("study_id =".$studyid);
+	public function studySitesCount($studyId) {
+		return Sites::model()->count("study_id =".$studyId);
 	}
-	public function studyObserversCount($studyid) {
-		return UserStudies::model()->count("study_id =".$studyid);
+	public function studyObserversCount($studyId) {
+		return UserStudies::model()->count("study_id =".$studyId);
 	}
-	public function studyTasksCount($studyid) {
-		return StudyTasks::model()->count("study_id =".$studyid);
+	public function studyTasksCount($studyId) {
+		return StudyTasks::model()->count("study_id =".$studyId);
 	}
-	public function studyObservationsCount($studyid) {
-		return Observations::model()->count("study_id =".$studyid);
+	public function studyObservationsCount($studyId) {
+		return Observations::model()->count("study_id =".$studyId);
 	}
 	
 	/**
@@ -69,10 +69,10 @@ class SiteController extends Controller {
 		//$this->render($this->redirect(Yii::app()->user->loginUrl));
 	}
 
-	public function actionDeleteStudy($studyid) {
+	public function actionDeleteStudy($studyId) {
 		$userStudiesCriteria = new CDbCriteria();
 		$userId=Yii::app()->user->id;
-		$userStudiesCriteria->condition = "user_id=$userId AND study_id=$studyid";
+		$userStudiesCriteria->condition = "user_id=$userId AND study_id=$studyId";
 		$userStudies = UserStudies::Model()->find($userStudiesCriteria);
 		$userStudies->delete();
 		$this->actionIndex();

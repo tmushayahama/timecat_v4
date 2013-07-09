@@ -48,7 +48,7 @@ class StudyTasks extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, study_id, category_id', 'required'),
+			array('name, definition, category_id', 'required'),
 			array('study_id, category_id, status', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>50),
 			array('start_action, end_action, definition', 'length', 'max'=>255),

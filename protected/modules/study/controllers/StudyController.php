@@ -49,23 +49,23 @@ class StudyController extends Controller {
 	 * 
 	 */
 
-	public function actionDashboard($studyid) {
-		$this->populateStudyNav($studyid);
+	public function actionDashboard($studyId) {
+		$this->populateStudyNav($studyId);
 		//$model = new Study;
-		$this->study_name = $this->loadModel($studyid)->name;
+		$this->study_name = $this->loadModel($studyId)->name;
 		$this->render('dashboard', array(
-				'model' => $this->loadModel($studyid),
+				'model' => $this->loadModel($studyId),
 		));
 	}
 
-	public function actionJoin($studyid) {
+	public function actionJoin($studyId) {
 		$userStudiesCriteria = new CDbCriteria();
 		$userId = Yii::app()->user->id;
-		$userStudiesCriteria->condition = "user_id=$userId AND study_id=$studyid";
+		$userStudiesCriteria->condition = "user_id=$userId AND study_id=$studyId";
 		$userStudies = UserStudies::Model()->find($userStudiesCriteria);
 		$userStudies->status = 0;
 		$userStudies->save(false);
-		$this->actionDashboard($studyid);
+		$this->actionDashboard($studyId);
 	}
 
 	/**
@@ -88,7 +88,7 @@ class StudyController extends Controller {
 				$user_studies->study_id = $model->id;
 				$user_studies->role_id = 5; //temp value for the creator
 				if ($user_studies->save(false)) {
-					$this->redirect(array('dashboard', 'studyid' => $model->id));
+					$this->redirect(array('dashboard', 'studyId' => $model->id));
 				}
 			}
 		}

@@ -108,12 +108,12 @@ class Sites extends CActiveRecord {
 		}
 		return $timezones;
 	}
-	public function createSitesTimezone($sitelist, $timezonelist, $studyid) {
+	public function createSitesTimezone($sitelist, $timezonelist, $studyId) {
 		for ($i = 0; $i < count($sitelist); $i++) {
 			$site = new Sites;
 			$site->name = $sitelist[$i];
 			$site->timezone = $timezonelist[$i];
-			$site->study_id = $studyid;
+			$site->study_id = $studyId;
 			$site->save();
 		}
 	}

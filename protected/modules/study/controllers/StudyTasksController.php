@@ -45,37 +45,34 @@ class StudyTasksController extends Controller {
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionDashboard($studyid) {
-		$this->populateStudyNav($studyid);
+	public function actionDashboard($studyId) {
+		$this->populateStudyNav($studyId);
 		
 		$tasksCriteria = new CDbCriteria();
 		$tasksCriteria->alias = 't1';
-		$tasksCriteria->condition = "t1.study_id=" . $studyid;
+		$tasksCriteria->condition = "t1.study_id=" . $studyId;
 		$tasksCriteria->with = array(
 				'category' => array('select' => array('type_entry')));
 
 		$taskTypesCriteria = new CDbCriteria();
-		$taskTypesCriteria->condition = "category='task categories'";
+		$taskTypesCriteria->condition = "study_id=".$studyId;
 
 		$studyTasksModel = new StudyTasks;
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-		//if (isset($_POST['update'])) {
-		//	$tasksModel = $this->loadModel(2);
-		//}
-
-		if (isset($_POST['StudyTasks'])) {//, $_POST['StudyTasks'])) {
+	
+		if (isset($_POST['StudyTasks'])) {
 			$studyTasksModel->attributes = $_POST['StudyTasks'];
-			$studyTasksModel->study_id = $studyid;
+			$studyTasksModel->study_id = $studyId;
 			$studyTasksModel->status = 0;
 			$studyTasksModel->category_id = 4;
 			$studyTasksModel->save();
 		}
-		$taskTypes = Types::Model()->findAll($taskTypesCriteria);
+		$taskTypes = StudyTasks::Model()->findAll($taskTypesCriteria);
 		$this->render('tasks_dashboard', array(
 				'tasks_model' => $studyTasksModel,
 				'study_tasks' => StudyTasks::model()->findAll($tasksCriteria),
 				'task_types' => $taskTypes,
+				'studyId' => $studyId,
+				'study_type_id'=> Study::Model()->findByPk($studyId)->type_id,
 		));
 	}
 	/**
@@ -118,4 +115,3 @@ class StudyTasksController extends Controller {
 	}
 
 }
-
