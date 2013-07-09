@@ -41,15 +41,15 @@ class UserStudiesController extends Controller {
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionDashboard($studyid) {
-		$this->populateStudyNav($studyid);
+	public function actionDashboard($studyId) {
+		$this->populateStudyNav($studyId);
 		$userStudies = new UserStudies;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 		$observerCriteria = new CDbCriteria;
 		$observerCriteria->alias = "t1";
-		$observerCriteria->condition = "t1.study_id = " . $studyid;
+		$observerCriteria->condition = "t1.study_id = " . $studyId;
 		$observerCriteria->with = array(
 				"user.profile" => array('select' => 'avatar_url', 'firstname', 'lastname'),
 				"user" => array('select' => array('email')));
@@ -59,7 +59,7 @@ class UserStudiesController extends Controller {
 			$user = User::Model()->find("email='" . $userStudies->email . "'");
 			if ($user !== null) {
 				$userStudies->user_id = $user->id;
-				$userStudies->study_id = $studyid;
+				$userStudies->study_id = $studyId;
 				if ($userStudies->admin == 0) {
 					$userStudies->role_id = Types::model()->find("category='roles' AND type_entry='observer'")->id;
 				} else {

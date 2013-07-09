@@ -35,13 +35,13 @@
 						<div class="row blanko">
 							<?php if ($study->status == 1): ?>
 								<div class="small-12 columns">
-									<?php echo CHtml::link('Decline Invite', "/timecat_v4/site/deletestudy/studyid/" . $study->study_id, array('class' => 'button alert radius right entrar')); ?>
-									<?php echo CHtml::link('Join Study', "/timecat_v4/study/study/join/studyid/" . $study->study_id, array('class' => 'button radius right entrar')); ?>
+									<?php echo CHtml::link('Decline Invite', "/timecat_v4/site/deletestudy/studyId/" . $study->study_id, array('class' => 'button alert radius right entrar')); ?>
+									<?php echo CHtml::link('Join Study', "/timecat_v4/study/study/join/studyId/" . $study->study_id, array('class' => 'button radius right entrar')); ?>
 
 								</div>
 							<?php else: ?>
 								<div class="small-12 columns">
-									<?php echo CHtml::link('Access Study', "/timecat_v4/study/study/dashboard/studyid/" . $study->study_id, array('class' => 'button success radius right entrar')); ?>
+									<?php echo CHtml::link('Access Study', "/timecat_v4/study/study/dashboard/studyId/" . $study->study_id, array('class' => 'button success radius right entrar')); ?>
 								</div>
 							<?php endif; ?>
 						</div>

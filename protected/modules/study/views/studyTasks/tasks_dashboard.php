@@ -1,65 +1,74 @@
 <?php $this->beginContent('//study_layouts/study_nav'); ?>
-<div class="row">
-	<br/>
-	<div class="small-12 columns">
-		<a href="onsestudy.html" class="button tiny">Study Home</a>
-		&gt;
-		<a href="tasks.html" class="button tiny bnaranjo2">Task List</a>
-	</div>
-</div>
-
+<ul class="breadcrumbs">
+	<?php echo CHtml::link('Study Home', array('/study/study/dashboard/studyId/' . $studyId)); ?>
+	<li class="current"><a href="tasks.html">Tasks</a></li>
+</ul>	
 <div class="row">
 	<div class="large-7 columns">
-
-		<div class="row">
-			<p class="nomarg"><b>Task group "single" </b><a href="#" class="button tiny secondary">Change name</a></p>
+		<div class="section-container tabs" data-section="tabs" style="">
+			<?php
+			$tabs = array();
+			$tabCount = 1;
+			foreach ($task_types as $task_type):
+				?>
+				<?php
+				if (!in_array($task_type->category->type_entry, $tabs)):
+					array_push($tabs, $task_type->category->type_entry);
+					?>
+					<section class="section active" style="padding-top: 49px;">
+						<p class="title" style="left: 0px;"><a href="<?php echo '#panel'.$tabCount ?>"><?php echo $task_type->category->type_entry ?></a></p>
+						<div class="content" data-slug="<?php echo 'panel'.$tabCount ?>" style="">
+						<?php
+						foreach ($study_tasks as $task):
+							if ($task->category->type_entry == $task_type->category->type_entry):
+								?>
+								<div class="row task-block margibotom" >
+									<div class="large-11 large-centered columns task-border regordoon blanko sear" task-status="	<?php echo $task->status; ?>">
+										<div class="row minpad">
+											<div class="large-12 columns taskid" data-taskid=<?php echo $task->id ?>>
+												<span class="taskname vnam"><?php echo $task->name; ?></span>
+												<span class="round sucess label right task-status-name bverdon" task-status="	<?php echo $task->status; ?>">active</span>
+											</div>
+										</div>
+										<div class="row minpad">
+											<div class="large-2 columns">
+												<strong>Definition:</strong>
+											</div>
+											<div class="large-10 columns taskdefinition">
+												<?php echo $task->definition; ?>
+											</div>
+										</div>
+										<div class="row minpad">
+											<div class="large-2 columns">
+												<strong>Starts:</strong>
+											</div>
+											<div class="large-10 columns taskstart-action">
+												<?php echo $task->start_action; ?>
+											</div>
+										</div>
+										<div class="row minpad">
+											<div class="large-2 columns">
+												<strong>Ends:</strong>
+											</div>
+											<div class="large-10 columns taskend-action">
+												<?php echo $task->end_action; ?>
+											</div>
+										</div>
+										<div class="row task-bottom celeste" task-status="<?php echo $task->status; ?>">
+											<div class="small-12 columns">
+												<a href="#" class="button small secondary nomarg editers">Edit</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							<?php endif; ?>
+						<?php endforeach; ?>
+							</div>
+					</section>
+				<?php endif; ?>
+			<?php endforeach; ?>
 		</div>
-		<?php foreach ($study_tasks as $task): ?>
-			<div class="row task-block margibotom" >
-				<div class="large-11 large-centered columns task-border regordoon blanko sear" task-status="	<?php echo $task->status; ?>">
-					<div class="row minpad">
-						<div class="large-2 columns">
-							<strong>Name:</strong>
-						</div>
-						<div class="large-10 columns taskid" data-taskid=<?php echo $task->id ?>>
-							<span class="taskname"><?php echo $task->name; ?></span>
-							<span class="statuser task-status-name bverdon" task-status="	<?php echo $task->status; ?>">active</span>
-						</div>
-					</div>
-					<div class="row minpad">
-						<div class="large-2 columns">
-							<strong>Definition:</strong>
-						</div>
-						<div class="large-10 columns taskdefinition">
-							<?php echo $task->definition; ?>
-						</div>
-					</div>
-					<div class="row minpad">
-						<div class="large-2 columns">
-							<strong>Starts:</strong>
-						</div>
-						<div class="large-10 columns taskstart-action">
-							<?php echo $task->start_action; ?>
-						</div>
-					</div>
-					<div class="row minpad">
-						<div class="large-2 columns">
-							<strong>Ends:</strong>
-						</div>
-						<div class="large-10 columns taskend-action">
-							<?php echo $task->end_action; ?>
-						</div>
-					</div>
-					<div class="row task-bottom celeste" task-status="<?php echo $task->status; ?>">
-						<div class="small-12 columns text-right">
-							<a href="#" class="button small secondary nomarg editers">Edit</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		<?php endforeach; ?>
 	</div>
-
 	<div class="large-5 columns">
 		<div class="row">
 			<div class="large-11 large-centered columns blanko ">
@@ -78,7 +87,7 @@
 	</div>
 </div>
 <?php //echo $form->dropDownList($task_model, 'category_id', CHtml::listData($task_types, 'id', 'type_entry')); //$task_types);  ?>
-<?php // echo $form->error($task_model, 'category_id'); ?>
+<?php // echo $form->error($task_model, 'category_id');   ?>
 
 
 

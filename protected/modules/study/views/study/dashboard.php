@@ -9,7 +9,7 @@
 	<div class="large-6 columns">
 		<div class="row">
 			<div class="small-6 columns marabajo">
-				<a href="/timecat_v4/study/observations/dashboard/studyid/<?php echo $model->id ?>" >
+				<a href="/timecat_v4/study/observations/dashboard/studyId/<?php echo $model->id ?>" >
 					<div class="small-11 small-centered columns clptabs bazul1">
 						<br/>
 						<div class="row elicon">
@@ -89,7 +89,7 @@
 	<div class="large-6 columns">
 		<div class="row">
 			<div class="small-6 columns marabajo">
-				<a href="/timecat_v4/study/userstudies/dashboard/studyid/<?php echo $model->id ?>" >
+				<a href="/timecat_v4/study/userstudies/dashboard/studyId/<?php echo $model->id ?>" >
 					<div class="small-11 small-centered columns clptabs bmorado">
 						<br/>
 						<div class="row elicon">
@@ -106,7 +106,7 @@
 				</a>
 			</div>
 			<div class="small-6 columns marabajo">
-				<a href="/timecat_v4/study/studytasks/dashboard/studyid/<?php echo $model->id ?>" >
+				<a href="/timecat_v4/study/studytasks/dashboard/studyId/<?php echo $model->id ?>" >
 					<div class="small-11 small-centered columns clptabs bnaranjo2">
 						<br/>
 						<div class="row elicon">
@@ -128,7 +128,7 @@
 	<div class="large-6 columns">
 		<div class="row">
 			<div class="small-6 columns marabajo">
-				<a href="/timecat_v4/study/sites/dashboard/studyid/<?php echo $model->id ?>" >
+				<a href="/timecat_v4/study/sites/dashboard/studyId/<?php echo $model->id ?>" >
 					<div class="small-11 small-centered columns clptabs bceleste">
 						<br/>
 						<div class="row elicon">

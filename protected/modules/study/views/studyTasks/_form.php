@@ -28,7 +28,7 @@ $form = $this->beginWidget('CActiveForm', array(
 	<div class="large-9 large-centered columns celeste inputers">
 		<div class="row">
 			<div class="small-3 columns">
-				<label for="definit2" >Definition</label>
+				<?php echo $form->labelEx($tasks_model, 'definition'); ?>
 			</div>
 			<div class="small-9 columns">
 				<?php echo $form->textArea($tasks_model, 'definition', array('rows' => 6, 'maxlength' => 255)); ?>
@@ -66,7 +66,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
 	<div class="small-12 columns text-right">
 		<?php //echo CHtml::submitButton($task_model->isNewRecord ? 'Create' : 'Save'); ?>
-		<?php echo CHtml::tag('button', array('class' => 'small button radius entrar'), '<i class="foundicon-plus"></i> Create New Task'); ?>
+		<?php echo CHtml::tag('button', array('class' => 'button'), 'Create Task'); ?>
 	</div>
 </div>
 <?php $this->endWidget(); ?>
