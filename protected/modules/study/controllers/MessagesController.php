@@ -114,27 +114,37 @@ class MessagesController extends Controller {
 	 */
 	public function actionIndex($studyId, $messageId) {
 		$messageModel = new Messages;
-
+		//$userMessagesModel = new UserMessages;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
+		$messageCriteria = new CDbCriteria;
+		$messageCriteria->condition = "email='test4'";
 		if (isset($_POST['Messages'])) {
-			
+
 			$messageModel->attributes = $_POST['Messages'];
+			//$userMessageModel->attributes = $_POST['UserMessages'];
 			$messageModel->save();
 			$userMessageModel = new UserMessages;
 			$userMessageModel->message_id = $messageModel->id;
 			$userMessageModel->sender_id = Yii::app()->user->id;
-			$userMessageModel->recepient_id = Yii::app()->user->id;
+			$userMessageModel->recipient_id = User::Model()->find($messageCriteria)->id;
 			$userMessageModel->study_id = $studyId;
+			$userMessageModel->send_date = date('Y-m-d h:m:s');
 			$userMessageModel->save(false);
 		}
-
-		$this->render('dashboard', array(
-				'message_model' => $messageModel,
-				'messages' => UserMessages::Model()->findAll($studyId = 'study_id'),
-				'selected_message' => $this->loadModel($messageId),
-		));
+		if ($messageId == 0) {
+			$this->render('dashboard', array(
+					'message_model' => $messageModel,
+					'messages' => UserMessages::Model()->findAll($studyId = 'study_id'),
+			));
+		} else {
+			$this->render('dashboard', array(
+					'message_model' => $messageModel,
+					'messages' => UserMessages::Model()->findAll($studyId = 'study_id'),
+					'selected_message' => $this->loadModel($messageId),
+			));
+		}
 	}
 
 	/**

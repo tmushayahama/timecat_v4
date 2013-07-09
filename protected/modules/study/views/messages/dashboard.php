@@ -29,7 +29,7 @@
 	<?php endforeach; ?>
 </div>
 <div class="large-7 columns">
-	<?php echo $selected_message->body ?>
+	<?php //echo $selected_message->body ?>
 </div>
 </div>
 <div id="create-message-modal" class="reveal-modal medium">
