@@ -1,103 +1,114 @@
-<?php $this->beginContent('//home_layouts/study_layouts/study_main_2'); ?>
-<?php echo CHtml::link('<i class="foundicon-plus" >Add</i>', '', array('data-reveal-id' => 'create-observations-modal',  'class' => 'observations-edit medium button radius entrar')); ?>
-<table>
-  <thead>
-    <tr>
-      <th width="50">Id</th>
-      <th width="100">Observer</th>
-      <th width="100">Subject</th>
-      <th width="100">Site</th>
-			<th width="100">Begin</th>
-			<th width="100">End</th>
-			<th width="100">Duration</th>
-			<th width="100">Action</th>
-    </tr>
-  </thead>
-  <tbody>
+<?php $this->beginContent('//study_layouts/study_nav'); ?>
+<ul class="breadcrumbs">
+	<li><a href="onsestudy.html">Study Home</a></li>
+	<li class="current"><a href="observers.html">Observers</a></li>
+</ul>	
+<div class="row">
+	<div class="large-7 columns">
 		<?php foreach ($study_observations as $observations): ?>
-			<tr>
-				<td id="<?php echo 'observations-id' . $observations->id ?>">
-					<?php echo $observations->id ?>
-				</td>
-				<td id="<?php echo 'observations-observer' . $observations->id ?>">
-					<?php echo $observations->user_id ?>
-				</td>
-				<td id="<?php echo 'observations-site' . $observations->id ?>">
-					<?php echo $observations->site->name ?>
-				</td>
-				<td id="<?php echo 'observations-status' . $observations->id ?>">
-					<?php echo $observations->start_time ?>
-				</td>
-				<td>
-					<ul class="button-group even two-up">
-						<li>
-							<?php echo CHtml::link('<i class="foundicon-tools" ></i>', '', array('data-reveal-id' => 'edit-observations-modal', 'update-target-id' => $observations->id, 'class' => 'observations-edit tiny button radius secondary entrar')); ?>
-						</li>
-						<li>
-							<?php echo CHtml::link('<i class="foundicon-remove" ></i>', Yii::app()->getModule('user')->profileUrl, array('delete-target' => $observations->id, 'class' => 'tiny button alert radius entrar')); ?>
-						</li>
-					</ul>
-				</td>
-			</tr>
+			<div class="row margibotom">
+				<div class="large-11 large-centered columns regordoon blanko sear">	
+					<div class="row">
+						<div class="small-12 columns firstinfo grisos">
+							<div class="small-6 columns"><p>By First Last</p></div>
+							<div class="small-6 columns text-right"><p><em>Type: Training</em></p></div>
+						</div>
+						<div class="small-2 columns topad">
+							<img class="left" src="/timecat_v4/images/timecat_avatar.gif" alt="avatar" />
+						</div>
+						<div class="small-10 columns">
+							<div class="row minpad">
+								<div class="large-12 columns">
+									<span><em>id: <?php echo $observations->id ?></em></span>
+								</div>
+								<div class="large-6 columns">
+									<p class="studydesc">
+										<i class="foundicon-idea"></i> Start Time  <em><?php echo $observations->start_time ?></em><br/>
+										<i class="foundicon-checkmark"></i> Site: <?php echo $observations->site->name ?>
+									</p>
+								</div>
+								<div class="large-6 columns">
+									<p class="studydesc">
+										<i class="foundicon-flag"></i> End Time <em>(22h08m14s)</em><br/>
+										<i class="foundicon-location"></i> Observed: <?php echo $observations->site->name ?>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row celeste">
+						<div class="small-12 columns">
+							<a href="obs_detail.html" class="button small secondary nomarg">View details</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		<?php endforeach ?>
-	</tbody>
-</table>
-<div id="create-observations-modal" class="reveal-modal medium">
-  <h2>Edit Task.</h2>
-	<?php
-	$form = $this->beginWidget('CActiveForm', array(
-			'id' => 'observations-form',
-			'enableAjaxValidation' => false,
-	));
-	?>
-	<?php echo CHtml::errorSummary($observations_model); ?>
-	<div class="row">
-		<div class="large-9 large-centered columns celeste inputers">
-			<div class="row">
-				<div class="large-3 columns">
-					<?php echo $form->labelEx($observations_model, 'user_id'); ?>
+	</div>
+	<div class="large-5 columns">
+		<div class="row">
+			<div class="large-11 large-centered columns blanko ">
+				<div class="row bluerer">
+					<div class="large-12 columns">
+						<h5>New Observation</h5>
+					</div>
 				</div>
-				<div class="large-9 columns">
-					<?php echo $form->textField($observations_model, 'user_id', array('maxlength' => 50)); ?>
-					<?php echo $form->error($observations_model, 'user_id'); ?>
+				<?php
+				$form = $this->beginWidget('CActiveForm', array(
+						'id' => 'observations-form',
+						'enableAjaxValidation' => false,
+				));
+				?>
+				<?php echo CHtml::errorSummary($observations_model); ?>
+				<div class="row">
+					<div class="large-9 large-centered columns celeste inputers">
+						<div class="row">
+							<div class="large-3 columns">
+								<?php echo $form->labelEx($observations_model, 'observer'); ?>
+							</div>
+							<div class="large-9 columns">
+								<?php echo $form->textField($observations_model, 'observer', array('readonly'=>'true', 'value'=>Yii::app()->user->email, 'maxlength' => 50)); ?>
+							</div>
+						</div>
+					</div>
 				</div>
+				<div class="row">
+					<div class="large-9 large-centered columns celeste inputers">
+						<div class="row">
+							<div class="large-3 columns">
+								<?php echo $form->labelEx($observations_model, 'site_id'); ?>
+							</div>
+							<div class="large-9 columns">
+								<?php echo $form->dropDownList($observations_model, 'site_id', CHtml::listData($observations_sites, 'id', 'name'), array('id' => 'edit-observationscategory-field')); ?>
+								<?php echo $form->error($observations_model, 'site_id'); ?>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-9 large-centered columns celeste inputers">
+						<div class="row">
+							<div class="large-3 columns">
+								<?php echo $form->labelEx($observations_model, 'subjectDescription'); ?>
+							</div>
+							<div class="large-9 columns">
+								<?php echo $form->textArea($observations_model, 'subjectDescription', array('id' => 'edit-observationsdefinition-field', 'maxlength' => 255)); ?>
+								<?php echo $form->error($observations_model, 'subjectDescription'); ?>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns text-right">
+						<?php
+						echo CHtml::tag('button', array('class' => 'small button radius entrar'), '<i class="foundicon-plus"></i> Save Changes');
+						?>
+					</div>
+				</div>
+				<?php $this->endWidget(); ?>		
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="large-9 large-centered columns celeste inputers">
-			<div class="row">
-				<div class="large-3 columns">
-					<?php echo $form->labelEx($observations_model, 'site_id'); ?>
-				</div>
-				<div class="large-9 columns">
-					<?php echo $form->dropDownList($observations_model, 'site_id', CHtml::listData($observations_sites, 'id', 'name'), array('id' => 'edit-observationscategory-field')); ?>
-					<?php echo $form->error($observations_model, 'site_id'); ?>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="large-9 large-centered columns celeste inputers">
-			<div class="row">
-				<div class="large-3 columns">
-					<?php echo $form->labelEx($observations_model, 'subjectDescription'); ?>
-				</div>
-				<div class="large-9 columns">
-					<?php echo $form->textArea($observations_model, 'subjectDescription', array('id' => 'edit-observationsdefinition-field', 'maxlength' => 255)); ?>
-					<?php echo $form->error($observations_model, 'subjectDescription'); ?>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="small-12 columns text-right">
-			<?php
-			echo CHtml::tag('button', array('class' => 'small button radius entrar'), '<i class="foundicon-plus"></i> Save Changes');
-			?>
-		</div>
-	</div>
-  <a class="close-reveal-modal">&#215;</a>
-	<?php $this->endWidget(); ?>
 </div>
 <?php $this->endContent(); ?>
