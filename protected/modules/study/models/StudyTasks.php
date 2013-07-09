@@ -78,9 +78,9 @@ class StudyTasks extends CActiveRecord {
             'id' => 'ID',
             'name' => 'Name',
             'study_id' => 'Study',
-            'category_id' => 'Category',
-            'start_action' => 'Start Action',
-            'end_action' => 'End Action',
+            'category_id' => 'Dimension',
+            'start_action' => 'Start',
+            'end_action' => 'End',
             'definition' => 'Definition',
             'status' => 'Status',
         );

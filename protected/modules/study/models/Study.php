@@ -15,6 +15,11 @@
  */
 class Study extends CActiveRecord {
 
+    public static $linear_type_id = 8;
+    public static $multitask_type_id = 9;
+    public static $multiactor_type_id = 10;
+    public static $multiobserver_type_id = 11;
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.

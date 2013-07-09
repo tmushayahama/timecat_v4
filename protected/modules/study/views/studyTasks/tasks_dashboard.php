@@ -10,10 +10,10 @@
             $tabs = array();
             $tabCount = 1;
             $categorized_tasks = array();
-            foreach ($task_types as $task_type){
+            foreach ($task_types as $task_type) {
                 $categorized_tasks[$task_type->category->type_entry] = array();
             }
-            foreach($study_tasks as $task){
+            foreach ($study_tasks as $task) {
                 $category = $task->category->type_entry;
 //                if(!array_key_exists($category, $categorized_tasks)){
 //                    $categorized_tasks[$category] = array();
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                     <div>
-                        <?php echo $this->renderPartial('_form', array('tasks_model' => $tasks_model)); ?>
+                        <?php echo $this->renderPartial('_form', array('tasks_model' => $tasks_model, 'task_types' => $task_types, 'study_type_id' => $study_type_id)); ?>
                     </div>
                 </div>
             </div>
