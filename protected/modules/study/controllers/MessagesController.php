@@ -134,19 +134,13 @@ class MessagesController extends Controller {
             $userMessageModel->send_date = date('Y-m-d h:m:s');
             $userMessageModel->save(false);
         }
-        if ($messageId == 0) {
-            $this->render('dashboard', array(
-                'message_model' => $messageModel,
-                'messages' => UserMessages::Model()->findAll($studyId = 'study_id'),
-                'selected_message' => false,
-            ));
-        } else {
-            $this->render('dashboard', array(
-                'message_model' => $messageModel,
-                'messages' => UserMessages::Model()->findAll($studyId = 'study_id'),
-                'selected_message' => $this->loadModel($messageId),
-            ));
-        }
+
+        $this->render('dashboard', array(
+            'message_model' => $messageModel,
+            'messages' => UserMessages::Model()->findAll($studyId = 'study_id' && (Yii::app()->user->id = 'recipient_id' || Yii::app()->user->id = 'sender_id')),
+            'selected_message' => $messageId == 0 ? false : $this->loadModel($messageId),
+        ));
+        
     }
 
     public function escapeArroba($email) {
