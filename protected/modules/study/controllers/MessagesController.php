@@ -137,7 +137,8 @@ class MessagesController extends Controller {
 
         $this->render('dashboard', array(
             'message_model' => $messageModel,
-            'messages' => UserMessages::Model()->findAll($studyId = 'study_id' && (Yii::app()->user->id = 'recipient_id' || Yii::app()->user->id = 'sender_id')),
+//            'messages' => UserMessages::Model()->findAll($studyId = 'study_id' && (Yii::app()->user->id = 'recipient_id' || Yii::app()->user->id = 'sender_id')),
+            'messages' => UserMessages::Model()->findAll('study_id='.$studyId.' AND (recipient_id='.Yii::app()->user->id.' OR sender_id='.Yii::app()->user->id.')'),
             'selected_message' => $messageId == 0 ? false : $this->loadModel($messageId),
         ));
         
