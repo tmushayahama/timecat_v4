@@ -1,7 +1,7 @@
 <?php $this->beginContent('//study_layouts/study_nav'); ?>
 <ul class="breadcrumbs">
     <?php echo CHtml::link('Study Home', array('/study/study/dashboard/studyId/' . $studyId)); ?>
-    <li class="current"><a href="tasks.html">Tasks</a></li>
+    <li class="current">Tasks</li>
 </ul>	
 <div class="row">
     <div class="large-7 columns">

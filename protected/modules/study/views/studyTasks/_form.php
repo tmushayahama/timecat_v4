@@ -12,7 +12,7 @@ $form = $this->beginWidget('CActiveForm', array(
 ?>
 <?php echo $form->errorSummary($tasks_model); ?>
 
-<?php if ($study_type_id != Study::$linear_type_id): ?>
+<?php if ($study_type_id > Study::$linear_type_id): ?>
     <div class="row">
         <div class="large-10 large-centered columns celeste inputers">
             <div class="row">
@@ -92,5 +92,29 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php echo CHtml::tag('button', array('class' => 'button'), 'Create Task'); ?>
     </div>
 </div>
+
+<?php if (false)://$study_type_id >= Study::$multiactor_type_id): ?>
+<!--    <div class="row">
+        <div class="large-11 large-centered columns blanko ">
+            <div class="row bluerer">
+                <div class="large-12 columns">
+                    <h5>Manage dimensions</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns oblog">
+                    <?php foreach ($task_types as $type): ?>
+                        <p class="limpia"><form method="post" action="#" class="updadimen">
+                            <span class="negrita">////<?php echo $type->category->type_entry ?></span>
+                            <input type="text" name="newdimename" value="////<?php echo $type->category->type_entry ?>" class="left dimeninput aparece" />
+                            <input type="submit" value="Change name" href="#" class="right small dimnamchan button"><a href="#" class="ledimcancel right small alert button aparece">Cancel</a><input type="hidden" name="dimenx" class="dimenx" value="////<?php echo $type->category->type_entry ?>" /></form>
+                        </p><hr>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>-->
+<?php endif; ?>
+
 <?php $this->endWidget(); ?>
 
