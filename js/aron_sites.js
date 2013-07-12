@@ -39,12 +39,12 @@ function addInactive() {
 function addEventHandlers() {
 	$('.editers').click(function(e) {
 		e.preventDefault();
-		for (var i = 0; i < EDIT_TASK_MAP.length; i++) {
+	/*	for (var i = 0; i < EDIT_TASK_MAP.length; i++) {
 			var value = $(this).closest(".sear").find(EDIT_TASK_MAP[i][1]).html().trim();
 			$(EDIT_TASK_MAP[i][0]).val(value);
 		}
 		var taskid = $(this).closest(".sear").find('.taskid').data("taskid");
-		$("#taksid").val(taskid);
+		$("#taksid").val(taskid);*/
 		$('#edit-sites-modal').foundation('reveal', 'open');
 	});
 }

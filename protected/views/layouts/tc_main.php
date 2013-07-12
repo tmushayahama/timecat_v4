@@ -37,7 +37,8 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/tre_dashboard.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/tre_createstudy.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/tre_observers.js"></script>
-                <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/clpclocker.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/clpclocker.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/aron_sites.js"></script>
 		<script>
 			$(document).foundation();
 		</script>
