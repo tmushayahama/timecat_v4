@@ -1,11 +1,11 @@
 <?php $this->beginContent('//study_layouts/study_nav'); ?>
 <ul class="breadcrumbs">
     <?php echo CHtml::link('Study Home', array('/study/study/dashboard/studyid/' . $studyId)); ?>
-<!--    <li><a href="onsestudy.html">Study Home</a></li>-->
     <li class="current">Sites</li>
 </ul>	
 <div class="row">
     <div class="large-7 columns">
+        <?php $study_counter = 0; ?>
         <?php foreach ($study_sites as $site): ?>
             <div class="row margibotom">
                 <div class="large-11 large-centered columns regordoon blanko sear">
@@ -22,29 +22,30 @@
                                     <strong>Time-Zone:</strong>
                                 </div>
                                 <div class="large-9 columns vdef" data-thetmz="America/Anchorage">
-                                    <?php echo $site->timezone; ?>
+                                    <?php echo $site->timezone; date_default_timezone_set("$site->timezone");?>
                                 </div>
                             </div>
                             <div class="row minpad">
                                 <div class="large-3 columns">
                                     <strong>Current Time:</strong>
                                 </div>
-                                <div class="large-9 columns vstars">
-                                    18:25
+                                <div class="large-9 columns vstars clocks" data-timer="false">
+                                    <span class="hors"><?php echo date("H") ?></span>:<span class="mins"><?php echo date("i") ?></span>:<span class="secs"><?php echo date("s") ?></span>
                                 </div>
                             </div>
                         </div>
                         <div class="small-2 columns">
-                            <img src="<?php echo Yii::app()->request->baseUrl . '/img/site1.png' ?>" alt="site icon" />
+                            <img src="<?php echo Yii::app()->request->baseUrl . '/img/site'.($study_counter + 1).'.png' ?>" alt="site icon" />
                         </div>
                     </div>
                     <div class="row celeste">
                         <div class="small-12 columns">
-                            <a href="#" class="button small secondary nomarg editers">Edit</a>
+                            <a href="#" class="button small secondary nomarg editers aron_sites">Edit</a>
                         </div>
                     </div>
                 </div>
             </div>
+        <?php $study_counter = ($study_counter + 1)%6; ?>
         <?php endforeach ?>
     </div>
     <div class="large-5 columns">
