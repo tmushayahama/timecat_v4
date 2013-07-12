@@ -23,6 +23,8 @@ insert into `tc_types` (`category`, `type_entry`, `description`) values
 ('task categories', 'Communication', ''),
 ('task categories', 'Location', ''),
 ('task categories', 'Task', ''),
+('task categories', 'Focus 1', ''),
+('task categories', 'Focus 2', ''),
 ('task categories', 'actorN', ''),
 ('observation type','trainning', ''),
 ('observation type','IORA', ''),

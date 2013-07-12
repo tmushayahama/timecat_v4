@@ -165,6 +165,7 @@ CREATE TABLE `tc_study_tasks` (
 	`end_action` varchar(255) not null default "",
 	`definition` varchar(255) not null default "",
 	`status` int not null default 0,
+	`order_id` int,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
@@ -219,7 +220,6 @@ CREATE TABLE `tc_observation_tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
 	`observation_id` int,
 	`study_task_id` int,
-	`order_id` int,
 	`start_time` int(11) unsigned not null default 0,
 	`duration` int(11) unsigned not null default 0,
    PRIMARY KEY (`id`)
