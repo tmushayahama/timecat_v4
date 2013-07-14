@@ -1,14 +1,19 @@
 <?php
 
+/* * Study Controller extends the Controller Class
+ * 
+ * 
+ */
+
 class StudyController extends Controller {
+
+	public static $STUDY_CREATOR_ID = 5;
 
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout = 'home_layouts/study_layouts/study_nav';
-
-	//public $avatar = "";
 
 	/**
 	 * @return array action filters
@@ -46,13 +51,14 @@ class StudyController extends Controller {
 	}
 
 	/*	 * This is the main of the study
-	 * 
+	 * @param integer $studyId specifies the currently selected studyId
 	 */
 
 	public function actionDashboard($studyId) {
+//Populate the navbar
 		$this->populateStudyNav($studyId);
-		//$model = new Study;
 		$this->study_name = $this->loadModel($studyId)->name;
+
 		$this->render('dashboard', array(
 				'model' => $this->loadModel($studyId),
 		));
@@ -73,22 +79,24 @@ class StudyController extends Controller {
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate() {
-		$model = new Study;
-		$user_studies = new UserStudies;
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$studyModel = new Study;
+// Uncomment the following line if AJAX validation is needed
+// $this->performAjaxValidation($model);
 
 		if (isset($_POST['Study'])) {
-			$model->attributes = $_POST['Study'];
-			$model->created = date('Y-m-d');
-			if ($model->save()) {
+			$studyModel->attributes = $_POST['Study'];
+			$studyModel->created = date('Y-m-d');
+			if ($studyModel->save()) {
+				$userStudiesModel = new UserStudies;
 				$sites = new Sites;
-				$sites->createSitesTimezone($_POST['sitelist'], $_POST['timezonelist'], $model->id);
-				$user_studies->user_id = Yii::app()->user->id;
-				$user_studies->study_id = $model->id;
-				$user_studies->role_id = 5; //temp value for the creator
-				if ($user_studies->save(false)) {
-					$this->redirect(array('dashboard', 'studyId' => $model->id));
+				$sites->createSitesTimezone($_POST['sitelist'], $_POST['timezonelist'], $studyModel->id);
+				$userStudiesModel->user_id = Yii::app()->user->id;
+				$userStudiesModel->study_id = $studyModel->id;
+				$userStudiesModel->role_id = self::$STUDY_CREATOR_ID;
+
+				if ($userStudiesModel->save(false)) {
+					$this->initializeStudyDimensions($studyModel->id);
+					$this->redirect(array('dashboard', 'studyId' => $studyModel->id));
 				}
 			}
 		}
@@ -96,7 +104,7 @@ class StudyController extends Controller {
 		$studyTypesCriteria->condition = "category='study types'";
 
 		$this->render('create', array(
-				'model' => $model,
+				'model' => $studyModel,
 				'study_types' => Types::Model()->findAll($studyTypesCriteria),
 		));
 	}
@@ -109,7 +117,7 @@ class StudyController extends Controller {
 	public function actionDelete($id) {
 		$this->loadModel($id)->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if (!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
@@ -163,4 +171,25 @@ class StudyController extends Controller {
 		}
 	}
 
+	public function initializeStudyDimensions($studyId) {
+		$taskDimensionArray;
+		
+		switch (Study::Model()->findByPk($studyId)->type_id) {
+			case Study::$LINEAR_TYPE_ID:
+				$taskDimensionArray = StudyDimensions::LINEAR_DIMENSION();
+				break;
+			case Study::$MULTITASK_TYPE_ID:
+				$taskDimensionArray = StudyDimensions::MULTITASK_DIMENSION();
+				break;
+			case Study::$MULTIACTOR_TYPE_ID:
+				$taskDimensionArray = StudyDimensions::MULTIACTOR_DIMENSION();
+				break;
+		}
+		foreach ($taskDimensionArray as $dimension) {
+			$studyDimensions = new StudyDimensions;
+			$studyDimensions->study_id = $studyId;
+			$studyDimensions->dimension = $dimension;
+			$studyDimensions->save();
+		}
+	}
 }

@@ -48,33 +48,31 @@ class StudyTasksController extends Controller {
 	public function actionDashboard($studyId) {
 		$this->populateStudyNav($studyId);
 
-		$tasksCriteria = new CDbCriteria();
-		$tasksCriteria->alias = 't1';
-		$tasksCriteria->condition = "t1.study_id=" . $studyId;
-		$tasksCriteria->with = array(
-				'category' => array('select' => array('type_entry')));
+		$studyTasksCriteria = new CDbCriteria();
+		$studyTasksCriteria->alias = 't1';
+		$studyTasksCriteria->condition = "t1.study_id=" . $studyId;
+		//$studyTasksCriteria->with = array(
+		//		'dimenion' => array('select' => array('dimension')));
 
-		$taskTypesCriteria = new CDbCriteria();
-		$taskTypesCriteria->condition = "study_id=" . $studyId;
+		$studyDimensionCriteria = new CDbCriteria();
+		$studyDimensionCriteria->condition = "study_id=" . $studyId;
 
-		$defaultTaskTypesCriteria = new CDbCriteria();
-		$defaultTaskTypesCriteria->condition = "category='study_types'";
-
+	
 		$studyTasksModel = new StudyTasks;
 
 		if (isset($_POST['StudyTasks'])) {
 			$studyTasksModel->attributes = $_POST['StudyTasks'];
 			$studyTasksModel->study_id = $studyId;
 			$studyTasksModel->status = 0;
-			//$studyTasksModel->category_id = 4;
 			$studyTasksModel->save();
 		}
-		$taskTypes = StudyTasks::Model()->findAll($taskTypesCriteria);
+		//$taskTypes = StudyTasks::Model()->findAll($taskTypesCriteria);
 		$this->render('tasks_dashboard', array(
 				'tasks_model' => $studyTasksModel,
-				'study_tasks' => StudyTasks::model()->findAll($tasksCriteria),
-				'task_types' => $this->taskDropDownList($studyId),
-				'categorized_tasks' => $this->findTabs($studyId),
+				'study_tasks' => StudyTasks::model()->findAll($studyTasksCriteria),
+				//'task_types' => $this->taskDropDownList($studyId),
+				'study_dimensions' => StudyDimensions::Model()->findAll($studyDimensionCriteria),
+				'categorized_tasks' =>$this->categorizeTasks(StudyDimensions::Model()->findAll($studyDimensionCriteria)),
 				'studyId' => $studyId,
 				'study_type_id' => Study::Model()->findByPk($studyId)->type_id,
 		));
@@ -108,15 +106,12 @@ class StudyTasksController extends Controller {
 		return $model;
 	}
 
-	protected function findTabs($studyId) {
-		switch (Study::Model()->findByPk($studyId)->type_id) {
-			case Study::$LINEAR_TYPE_ID:
-				return array(Types::Model()->findByPk(StudyTasks::$LINEAR_TASK_TYPE_ID)->type_entry => StudyTasks::Model()->findAll('category_id=' . StudyTasks::$LINEAR_TASK_TYPE_ID . ' AND study_id=' . $studyId));
-			case Study::$MULTITASK_TYPE_ID:
-				return array(Types::Model()->findByPk(StudyTasks::$COMMUNICATION_TASK_TYPE_ID)->type_entry => StudyTasks::Model()->findAll('category_id=' . StudyTasks::$COMMUNICATION_TASK_TYPE_ID . ' AND study_id=' . $studyId),
-						Types::Model()->findByPk(StudyTasks::$SIMPLE_TASK_TYPE_ID)->type_entry => StudyTasks::Model()->findAll('category_id=' . StudyTasks::$SIMPLE_TASK_TYPE_ID . ' AND study_id=' . $studyId),
-						Types::Model()->findByPk(StudyTasks::$LOCATION_TASK_TYPE_ID)->type_entry => StudyTasks::Model()->findAll('category_id=' . StudyTasks::$LOCATION_TASK_TYPE_ID . ' AND study_id=' . $studyId));
+	protected function categorizeTasks($studyDimensions) {
+		$categorizeTask = array();
+		foreach ($studyDimensions as $studyDimension) {
+				$categorizeTask += array($studyDimension->dimension => StudyTasks::Model()->findAll('dimension_id=' . $studyDimension->id));				
 		}
+		return $categorizeTask;
 	}
 
 	protected function taskDropDownList($studyId) {

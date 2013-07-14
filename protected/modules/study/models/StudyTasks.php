@@ -22,10 +22,6 @@
  */
 class StudyTasks extends CActiveRecord {
 
-	public static $LINEAR_TASK_TYPE_ID = 14;
-	public static $COMMUNICATION_TASK_TYPE_ID = 15;
-	public static $LOCATION_TASK_TYPE_ID = 17;
-	public static $SIMPLE_TASK_TYPE_ID = 16;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -50,13 +46,13 @@ class StudyTasks extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-				array('name, definition, category_id', 'required'),
-				array('study_id, category_id, status', 'numerical', 'integerOnly' => true),
+				array('name, definition, dimension_id', 'required'),
+				array('study_id, dimension_id, status', 'numerical', 'integerOnly' => true),
 				array('name', 'length', 'max' => 50),
 				array('start_action, end_action, definition', 'length', 'max' => 255),
 				// The following rule is used by search().
 				// Please remove those attributes that should not be searched.
-				array('id, name, study_id, category_id, start_action, end_action, definition, status', 'safe', 'on' => 'search'),
+				array('id, name, study_id, dimension_id, start_action, end_action, definition, status', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -69,7 +65,7 @@ class StudyTasks extends CActiveRecord {
 		return array(
 				'observationTasks' => array(self::HAS_MANY, 'ObservationTasks', 'study_task_id'),
 				'study' => array(self::BELONGS_TO, 'Studies', 'study_id'),
-				'category' => array(self::BELONGS_TO, 'Types', 'category_id'),
+				'dimension' => array(self::BELONGS_TO, 'StudyDimensions', 'dimension_id'),
 				'taskHierarchies' => array(self::HAS_MANY, 'TaskHierarchy', 'taskee_id'),
 				'taskHierarchies1' => array(self::HAS_MANY, 'TaskHierarchy', 'tasker_id'),
 		);
@@ -83,7 +79,7 @@ class StudyTasks extends CActiveRecord {
 				'id' => 'ID',
 				'name' => 'Name',
 				'study_id' => 'Study',
-				'category_id' => 'Dimension',
+				'dimension_id' => 'Dimension',
 				'start_action' => 'Start',
 				'end_action' => 'End',
 				'definition' => 'Definition',
@@ -104,7 +100,7 @@ class StudyTasks extends CActiveRecord {
 		$criteria->compare('id', $this->id);
 		$criteria->compare('name', $this->name, true);
 		$criteria->compare('study_id', $this->study_id);
-		$criteria->compare('category_id', $this->category_id);
+		$criteria->compare('dimension_id', $this->category_id);
 		$criteria->compare('start_action', $this->start_action, true);
 		$criteria->compare('end_action', $this->end_action, true);
 		$criteria->compare('definition', $this->definition, true);

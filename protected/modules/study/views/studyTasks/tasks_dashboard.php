@@ -69,7 +69,7 @@
 						</div>
 					</div>
 					<div>
-						<?php echo $this->renderPartial('_form', array('tasks_model' => $tasks_model, 'task_types' => $task_types, 'study_type_id' => $study_type_id)); ?>
+						<?php echo $this->renderPartial('_form', array('tasks_model' => $tasks_model, 'task_types' => $study_dimensions, 'study_type_id' => $study_type_id)); ?>
 					</div>
 				</div>
 			</div>

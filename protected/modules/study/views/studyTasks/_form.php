@@ -19,8 +19,8 @@ $form = $this->beginWidget('CActiveForm', array(
 				<?php echo $form->labelEx($tasks_model, 'category_id'); ?>
 			</div>
 			<div class="large-9 columns">
-				<?php echo $form->dropDownList($tasks_model, 'category_id', CHtml::listData($task_types, 'id', 'type_entry')); //$task_types);   ?>
-				<?php echo $form->error($tasks_model, 'category_id'); ?>
+				<?php echo $form->dropDownList($tasks_model, 'dimension_id', CHtml::listData($task_types, 'id', 'dimension')); //$task_types);   ?>
+				<?php echo $form->error($tasks_model, 'dimension_id'); ?>
 			</div>
 		</div>
 	</div>
