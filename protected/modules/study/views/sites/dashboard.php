@@ -90,22 +90,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="large-9 large-centered columns celeste inputers">
-            <div class="row">
-                <div class="large-3 columns">
-                    <?php echo $form->labelEx($sites_model, 'description'); ?>
-                </div>
-                <div class="large-9 columns">
-                    <?php echo $form->textArea($sites_model, 'description', array('id' => 'edit-sitesdescription-field', 'maxlength' => 255)); ?>
-                    <?php echo $form->error($sites_model, 'description'); ?>
-                </div>
-            </div>
-        </div>
+
     </div>
     <div class="row">
         <div class="small-12 columns text-right">
             <?php
-            echo CHtml::tag('button', array('name' => 'update', 'class' => 'small button radius entrar'), '<i class="foundicon-plus"></i> Save Changes');
+            echo CHtml::tag('button', array('name' => 'update', 'class' => 'button'), 'Save Changes');
             ?>
         </div>
     </div>
