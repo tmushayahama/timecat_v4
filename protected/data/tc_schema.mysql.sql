@@ -105,8 +105,7 @@ CREATE TABLE `tc_types` (
 		`type_entry` varchar(50) not null,
 		`description` varchar(255) DEFAULT '',
 			PRIMARY KEY (`id`),
-			KEY `category` (`category`),
-	    KEY `type_entry` (`type_entry`)
+			UNIQUE KEY  (`category`, type_entry)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 -- -----------studies----------------
@@ -129,6 +128,7 @@ CREATE TABLE `tc_user_studies` (
   `study_id` int(11) not null,
 	`role_id` int(11) not null,
 	`status` int(2) not null default 0,
+	unique key (`study_id`, `user_id`),
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
@@ -141,6 +141,18 @@ ALTER TABLE `tc_user_studies`
 ALTER TABLE `tc_user_studies`
   ADD CONSTRAINT `user_studies_role_id` FOREIGN KEY (`role_id`) REFERENCES `tc_types` (`id`) ON DELETE CASCADE;
 
+
+CREATE TABLE `tc_study_dimensions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `study_id` int(11) not null,
+	`dimension` varchar(50) not null,
+	unique key (`study_id`,`dimension`),
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+ALTER TABLE `tc_study_dimensions`
+  ADD CONSTRAINT `study_dimesions_study_id` FOREIGN KEY (`study_id`) REFERENCES `tc_studies` (`id`) ON DELETE CASCADE;
+
 -- -----------sites----------
 CREATE TABLE `tc_sites` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -148,28 +160,29 @@ CREATE TABLE `tc_sites` (
   `study_id` int not null,
 	`timezone` varchar(50) not null default '',
   `description` varchar(255) DEFAULT '',
+	unique key (`name`, `study_id`, `timezone`),
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 ALTER TABLE `tc_sites`
   ADD CONSTRAINT `site_study_id` FOREIGN KEY (`study_id`) REFERENCES `tc_studies` (`id`) ON DELETE CASCADE;
 
-
 -- ------------study_tasks-------------------
 CREATE TABLE `tc_study_tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(50) not null,
   `study_id` int not null,
-	`category_id` int not null,
+	`dimension_id` int not null,
 	`start_action` varchar(255) not null default "",
 	`end_action` varchar(255) not null default "",
 	`definition` varchar(255) not null default "",
 	`status` int not null default 0,
+	`order_id` int,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 ALTER TABLE `tc_study_tasks`
-  ADD CONSTRAINT `study_tasks_category_id` FOREIGN KEY (`category_id`) REFERENCES `tc_types` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `study_tasks_dimesion_id` FOREIGN KEY (`dimension_id`) REFERENCES `tc_study_dimensions` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `tc_study_tasks`
   ADD CONSTRAINT `study_tasks_study_id` FOREIGN KEY (`study_id`) REFERENCES `tc_studies` (`id`) ON DELETE CASCADE;
@@ -179,6 +192,7 @@ CREATE TABLE `tc_subjects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
 	`study_id` int not null,
   `description` varchar(255) DEFAULT '',
+	unique key (`study_id`, `description`),
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
@@ -219,7 +233,6 @@ CREATE TABLE `tc_observation_tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
 	`observation_id` int,
 	`study_task_id` int,
-	`order_id` int,
 	`start_time` int(11) unsigned not null default 0,
 	`duration` int(11) unsigned not null default 0,
    PRIMARY KEY (`id`)
@@ -293,4 +306,3 @@ ALTER TABLE `tc_task_hierarchy`
 
 ALTER TABLE `tc_task_hierarchy`
   ADD CONSTRAINT `task_hierarchy_task_relationship_id` FOREIGN KEY (`task_relationship_id`) REFERENCES `tc_types` (`id`) ON DELETE CASCADE;
-
