@@ -11,7 +11,7 @@
                 <div class="large-11 large-centered columns regordoon blanko sear">
                     <div class="row minpad">
                         <div class="large-12 columns stid" data-stid="1">
-                            <span class="vnam"><?php echo $site->name ?></span>
+                            <span class="vnam sitename"><?php echo $site->name ?></span>
                             <span class="round success label right">active</span>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                     <?php echo $form->labelEx($sites_model, 'name'); ?>
                 </div>
                 <div class="large-9 columns">
-                    <?php echo $form->textField($sites_model, 'name', array('id' => 'edit-sitesname-field', 'maxlength' => 50)); ?>
+                    <?php echo $form->textField($sites_model, 'name', array('id' => 'edit-sitename-field', 'maxlength' => 50)); ?>
                     <?php echo $form->error($sites_model, 'name'); ?>
                 </div>
             </div>

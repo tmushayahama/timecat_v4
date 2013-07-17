@@ -18,7 +18,7 @@ $form = $this->beginWidget('CActiveForm', array(
                         <?php echo $form->labelEx($sites_model, 'name'); ?>
                     </div>
                     <div class="large-9 columns">
-                        <?php echo $form->textField($sites_model, 'name', array('maxlength' => 50)); ?>
+                        <?php echo $form->textField($sites_model, 'name', array( 'maxlength' => 50)); ?>
                         <?php echo $form->error($sites_model, 'name'); ?>
                     </div>
                 </div>
