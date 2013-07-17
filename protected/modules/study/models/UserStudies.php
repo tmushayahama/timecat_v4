@@ -19,6 +19,11 @@ class UserStudies extends CActiveRecord
 {
 	public $email;
 	public $admin;
+        
+        public static $active = "active";
+        public static $pending = "pending request";
+        public static $inactive = "inactive";
+        
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
