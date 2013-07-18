@@ -52,69 +52,74 @@ Yii::app()->clientScript->registerScriptFile(
 		</div>
 	</div>
 	<div id="main">
-		<div class="row megablock" data-dimen="1">
-			<div class="large-12 columns">
-				<br/>
-				<div class="row">
-					<div class="small-12 columns">
-						<h5 class="bburdeo atitle">Tasks</h5>
-					</div>
-				</div>
-				<div class="row unikdimenblock blanko bsup1">
-					<div class="large-7 columns cnada">
-						<div class="tareaslist">&nbsp;
-							<?php foreach ($study_tasks as $study_task): ?>
-							<a href="#" data-tkid="<?php echo $study_task->id ?>" class="button small secondary round tasktrig"><?php echo $study_task->name; ?></a>&nbsp;
-							<?php endforeach; ?>
+		<?php
+		$panelCount = 1;
+		foreach (array_keys($categorized_tasks) as $panelName):
+			?>
+			<div class="row megablock" data-dimen="1">
+				<div class="large-12 columns">
+					<br/>
+					<div class="row">
+						<div class="small-12 columns">
+							<h5 class="bburdeo atitle">Tasks</h5>
 						</div>
 					</div>
-					<div class="large-5 columns cnada">
-						<div class="actilist fblanco masgrande"><div class="holder">
-								<div id="currentasker1" class="listblock limpia papa ">
-									<div class="statindicator limpia">
-										<div class="aleditar aparece">
-											<input type="text" name="freetexttask" class="left"><a href="#" class="saveledit button small success left">Save</a>
+					<div class="row unikdimenblock blanko bsup1">
+						<div class="large-7 columns cnada">
+							<div class="tareaslist">&nbsp;
+								<?php foreach ($categorized_tasks[$panelName] as $task): ?>
+									<a href="#" data-tkid="<?php echo $task->id ?>" class="button small secondary round tasktrig"><?php echo $study_task->name; ?></a>&nbsp;
+								<?php endforeach; ?>
+							</div>
+						</div>
+						<div class="large-5 columns cnada">
+							<div class="actilist fblanco masgrande"><div class="holder">
+									<div id="currentasker1" class="listblock limpia papa ">
+										<div class="statindicator limpia">
+											<div class="aleditar aparece">
+												<input type="text" name="freetexttask" class="left"><a href="#" class="saveledit button small success left">Save</a>
+											</div>
+											<div class="normal">
+												<span class="tasknamer taknamep eliseo left" data-tkid="488">new task</span>
+												<a href="#" class="button alert small right borrat">Delete</a>
+												<a href="#" class="button small right tasktrig" data-tkid="1">Stop</a>
+											</div>
 										</div>
-										<div class="normal">
-											<span class="tasknamer taknamep eliseo left" data-tkid="488">new task</span>
-											<a href="#" class="button alert small right borrat">Delete</a>
-											<a href="#" class="button small right tasktrig" data-tkid="1">Stop</a>
-										</div>
-									</div>
-									<div class="maininfo limpia">
-										&nbsp;&nbsp;<b>Started at: </b><span class="letaskstamp">01:47:07</span>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<b>Duration: </b><span class="clocks taskruat" data-timer="true"><span class="hors">00</span>h <span class="mins">00</span>m <span class="secs">18</span>s</span>
+										<div class="maininfo limpia">
+											&nbsp;&nbsp;<b>Started at: </b><span class="letaskstamp">01:47:07</span>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<b>Duration: </b><span class="clocks taskruat" data-timer="true"><span class="hors">00</span>h <span class="mins">00</span>m <span class="secs">18</span>s</span>
 
+										</div>
+										<div class="acciones limpia">
+											<a href="#" class="editer button secondary small left">Edit name</a>
+											<a href="#" class="timfix button secondary small left">Fix time</a>
+											<a href="#" class="linkto button secondary small left ">Link to</a>
+											<a href="#" class="singlenote button secondary small right">Add note</a>
+										</div>
 									</div>
-									<div class="acciones limpia">
-										<a href="#" class="editer button secondary small left">Edit name</a>
-										<a href="#" class="timfix button secondary small left">Fix time</a>
-										<a href="#" class="linkto button secondary small left ">Link to</a>
-										<a href="#" class="singlenote button secondary small right">Add note</a>
-									</div>
-								</div>
-							</div><div class="fullist limpia grisos papa">
-								<p>
-									<span class="tasknamer letaskname eliseo left" data-tkid="487">washing hands</span>
-									<a href="#" class="breaknotifier button secondary small "><i class="foundicon-checkmark"></i></a>
-									<i class="foundicon-down-arrow "></i><span class="letaskstamp ">01:47:03</span>
-									<a href="#" class="linkfrom button small right aparece">Select</a>
-									<a href="#" class="singlenote button secondary small right"><i class="foundicon-edit"></i></a>
-								</p>
-							</div><div class="fullist limpia grisos papa">
-								<p>
-									<span class="tasknamer letaskname eliseo left" data-tkid="486">new task</span>
-									<a href="#" class="breaknotifier button secondary small "><i class="foundicon-checkmark"></i></a>
-									<i class="foundicon-down-arrow "></i><span class="letaskstamp ">01:47:00</span>
-									<a href="#" class="linkfrom button small right aparece">Select</a>
-									<a href="#" class="singlenote button secondary small right"><i class="foundicon-edit"></i></a>
-								</p>
-							</div></div>
+								</div><div class="fullist limpia grisos papa">
+									<p>
+										<span class="tasknamer letaskname eliseo left" data-tkid="487">washing hands</span>
+										<a href="#" class="breaknotifier button secondary small "><i class="foundicon-checkmark"></i></a>
+										<i class="foundicon-down-arrow "></i><span class="letaskstamp ">01:47:03</span>
+										<a href="#" class="linkfrom button small right aparece">Select</a>
+										<a href="#" class="singlenote button secondary small right"><i class="foundicon-edit"></i></a>
+									</p>
+								</div><div class="fullist limpia grisos papa">
+									<p>
+										<span class="tasknamer letaskname eliseo left" data-tkid="486">new task</span>
+										<a href="#" class="breaknotifier button secondary small "><i class="foundicon-checkmark"></i></a>
+										<i class="foundicon-down-arrow "></i><span class="letaskstamp ">01:47:00</span>
+										<a href="#" class="linkfrom button small right aparece">Select</a>
+										<a href="#" class="singlenote button secondary small right"><i class="foundicon-edit"></i></a>
+									</p>
+								</div></div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		<?php endforeach; ?>
 	</div>
 </div>
 <div id="myModal" class="reveal-modal small">

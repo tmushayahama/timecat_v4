@@ -44,10 +44,14 @@ class ObservationsController extends Controller {
 
 	public function actionCapture($studyId) {
 		//$this->study_name = Study::model()->findByPk($studyId)->name;
-		$studyTaskCriteria = new CDbCriteria();
+		
+		$studyDimensionCriteria = new CDbCriteria();
+		$studyDimensionCriteria->condition = "study_id=" . $studyId;
 		
 		$this->render('capture', array(
-				'study_tasks'=>  StudyTasks::Model()->findAll("study_id=".$studyId)
+				'study_tasks'=>  StudyTasks::Model()->findAll("study_id=".$studyId),
+				'categorized_tasks' =>$this->categorizeTasks(StudyDimensions::Model()->findAll($studyDimensionCriteria)),
+				'study_id' => $studyId,
 		));
 	}
 
@@ -193,6 +197,15 @@ class ObservationsController extends Controller {
 			throw new CHttpException(404, 'The requested page does not exist.');
 		return $model;
 	}
+	protected function categorizeTasks($studyDimensions) {
+		$categorizeTask = array();
+		foreach ($studyDimensions as $studyDimension) {
+				$categorizeTask += array($studyDimension->dimension => StudyTasks::Model()->findAll('dimension_id=' . $studyDimension->id));				
+		}
+		return $categorizeTask;
+	}
+
+
 
 	/**
 	 * Performs the AJAX validation.
