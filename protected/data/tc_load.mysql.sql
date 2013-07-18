@@ -23,10 +23,9 @@ insert into `tc_types` (`category`, `type_entry`, `description`) values
 ('task categories', 'communication', ''),
 ('task categories', 'location', ''),
 ('task categories', 'actorN', ''),
-('observation type','trainning', ''),
-('observation type','IORA', ''),
-('observation type','formal', ''),
-('observation type','trash', ''),
+('observation type','trainning', 'Training Session'),
+('observation type','IORA', 'I.O.R.A'),
+('observation type','formal', 'Real observation'),
 ('task relationship type','parent', ''),
 ('task relationship type','next', ''),
 ('task relationship type','siblings', '');

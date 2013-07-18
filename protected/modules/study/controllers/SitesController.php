@@ -39,11 +39,11 @@ class SitesController extends Controller
 		);
 	}
 
-	public function actionDashboard($studyid) {
-		$this->populateStudyNav($studyid);
+	public function actionDashboard($studyId) {
+		$this->populateStudyNav($studyId);
 		$sitesCriteria = new CDbCriteria();
 		$sitesCriteria->alias = 't1';
-		$sitesCriteria->condition = "t1.study_id=" . $studyid;
+		$sitesCriteria->condition = "t1.study_id=" . $studyId;
 
 		$sitesModel = new Sites;
 		// Uncomment the following line if AJAX validation is needed
@@ -55,7 +55,7 @@ class SitesController extends Controller
 						
 		if (isset($_POST['Sites'])) {
 			$sitesModel->attributes = $_POST['Sites'];
-			$sitesModel->study_id = $studyid;
+			$sitesModel->study_id = $studyId;
 			if ($sitesModel->save()) {
 				//$this->redirect(array('view', 'id' => $model->id));
 			}

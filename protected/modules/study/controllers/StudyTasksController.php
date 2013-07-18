@@ -45,12 +45,12 @@ class StudyTasksController extends Controller {
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionDashboard($studyid) {
-		$this->populateStudyNav($studyid);
+	public function actionDashboard($studyId) {
+		$this->populateStudyNav($studyId);
 		
 		$tasksCriteria = new CDbCriteria();
 		$tasksCriteria->alias = 't1';
-		$tasksCriteria->condition = "t1.study_id=" . $studyid;
+		$tasksCriteria->condition = "t1.study_id=" . $studyId;
 		$tasksCriteria->with = array(
 				'category' => array('select' => array('type_entry')));
 
@@ -66,7 +66,7 @@ class StudyTasksController extends Controller {
 
 		if (isset($_POST['StudyTasks'])) {//, $_POST['StudyTasks'])) {
 			$studyTasksModel->attributes = $_POST['StudyTasks'];
-			$studyTasksModel->study_id = $studyid;
+			$studyTasksModel->study_id = $studyId;
 			$studyTasksModel->status = 0;
 			$studyTasksModel->category_id = 4;
 			$studyTasksModel->save();

@@ -8,7 +8,7 @@ class StudyController extends Controller {
 	 */
 	public $layout = 'home_layouts/study_layouts/study_nav';
 
-	//public $avatar = "";
+//public $avatar = "";
 
 	/**
 	 * @return array action filters
@@ -49,23 +49,57 @@ class StudyController extends Controller {
 	 * 
 	 */
 
-	public function actionDashboard($studyid) {
-		$this->populateStudyNav($studyid);
-		//$model = new Study;
-		$this->study_name = $this->loadModel($studyid)->name;
+	public function actionDashboard($studyId) {
+		$this->populateStudyNav($studyId);
+		$this->study_name = Study::model()->findByPk($studyId)->name;
+
+		$sitesCriteria = new CDbCriteria();
+		$sitesCriteria->alias = 't1';
+		$sitesCriteria->condition = "t1.study_id=" . $studyId;
+
+		$observationsCriteria = new CDbCriteria();
+		$observationsCriteria->alias = 't1';
+		$observationsCriteria->condition = "t1.study_id=" . $studyId;
+		$observationsCriteria->with = array(
+				"subject" => array('select' => 'description'),
+				"site" => array('select' => array('name', 'timezone')),
+				"type" => array('select' => 'type_entry'));
+
+		$observationsModel = new Observations;
+// Uncomment the following line if AJAX validation is needed
+// $this->performAjaxValidation($model);
+
+		if (isset($_POST['Observations'])) {
+			$subjectModel = new Subjects;
+			$observationsModel->attributes = $_POST['Observations'];
+			$subjectModel->study_id = $studyId;
+			$subjectModel->description = $observationsModel->subjectDescription;
+			$subjectModel->save();
+			$observationsModel->study_id = $studyId;
+			$observationsModel->user_id = Yii::app()->user->id;
+			$observationsModel->subject_id = $subjectModel->id; //Subjects::model()->find("description='".$subjectModel->description."'");
+			if ($observationsModel->save()) {
+				$this->redirect(array('observations/capture', 'studyId' => $studyId));
+			}
+		}
+
 		$this->render('dashboard', array(
-				'model' => $this->loadModel($studyid),
+				'study_model' => $this->loadModel($studyId),
+				'observations_model' => $observationsModel,
+				'study_observations' => Observations::Model()->findAll($observationsCriteria),
+				'observation_sites' => Sites::Model()->findAll($sitesCriteria),
+				'observation_types' => Types::getAllTypes("observation type"),
 		));
 	}
 
-	public function actionJoin($studyid) {
+	public function actionJoin($studyId) {
 		$userStudiesCriteria = new CDbCriteria();
 		$userId = Yii::app()->user->id;
-		$userStudiesCriteria->condition = "user_id=$userId AND study_id=$studyid";
+		$userStudiesCriteria->condition = "user_id=$userId AND study_id=$studyId";
 		$userStudies = UserStudies::Model()->find($userStudiesCriteria);
 		$userStudies->status = 0;
 		$userStudies->save(false);
-		$this->actionDashboard($studyid);
+		$this->actionDashboard($studyId);
 	}
 
 	/**
@@ -75,8 +109,8 @@ class StudyController extends Controller {
 	public function actionCreate() {
 		$model = new Study;
 		$user_studies = new UserStudies;
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+// Uncomment the following line if AJAX validation is needed
+// $this->performAjaxValidation($model);
 
 		if (isset($_POST['Study'])) {
 			$model->attributes = $_POST['Study'];
@@ -88,7 +122,7 @@ class StudyController extends Controller {
 				$user_studies->study_id = $model->id;
 				$user_studies->role_id = 5; //temp value for the creator
 				if ($user_studies->save(false)) {
-					$this->redirect(array('dashboard', 'studyid' => $model->id));
+					$this->redirect(array('dashboard', 'studyId' => $model->id));
 				}
 			}
 		}
@@ -109,7 +143,7 @@ class StudyController extends Controller {
 	public function actionDelete($id) {
 		$this->loadModel($id)->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if (!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
@@ -164,3 +198,4 @@ class StudyController extends Controller {
 	}
 
 }
+
