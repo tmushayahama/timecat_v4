@@ -121,7 +121,7 @@ endforeach;
 					<option value="America/Caracas">(GMT-04:30) Caracas</option>
 					<option value="America/Santiago">(GMT-04:00) Santiago</option>
 					<option value="America/La_Paz">(GMT-04:00) La Paz</option>
-					<option value="Atlantic/Stanley">(GMT-04:00) Faukland Islands</option>
+					<option value="Atlantic/Stanley">(GMT-04:00) Falkland Islands</option>
 					<option value="America/Campo_Grande">(GMT-04:00) Brazil</option>
 					<option value="America/Goose_Bay">(GMT-04:00) Atlantic Time (Goose Bay)</option>
 					<option value="America/Glace_Bay">(GMT-04:00) Atlantic Time (Canada)</option>
@@ -158,7 +158,7 @@ endforeach;
 					<option value="Asia/Dubai">(GMT+04:00) Abu Dhabi, Muscat</option>
 					<option value="Asia/Yerevan">(GMT+04:00) Yerevan</option>
 					<option value="Asia/Kabul">(GMT+04:30) Kabul</option>
-					<option value="Asia/Yekaterinburg">(GMT+05:00) Ekaterinburg</option>
+					<option value="Asia/Yekaterinburg">(GMT+05:00) Yekaterinburg</option>
 					<option value="Asia/Tashkent">(GMT+05:00) Tashkent</option>
 					<option value="Asia/Kolkata">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
 					<option value="Asia/Katmandu">(GMT+05:45) Kathmandu</option>
@@ -168,7 +168,7 @@ endforeach;
 					<option value="Asia/Bangkok">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
 					<option value="Asia/Krasnoyarsk">(GMT+07:00) Krasnoyarsk</option>
 					<option value="Asia/Hong_Kong">(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
-					<option value="Asia/Irkutsk">(GMT+08:00) Irkutsk, Ulaan Bataar</option>
+					<option value="Asia/Irkutsk">(GMT+08:00) Irkutsk, Ulaanbataar</option>
 					<option value="Australia/Perth">(GMT+08:00) Perth</option>
 					<option value="Australia/Eucla">(GMT+08:45) Eucla</option>
 					<option value="Asia/Tokyo">(GMT+09:00) Osaka, Sapporo, Tokyo</option>

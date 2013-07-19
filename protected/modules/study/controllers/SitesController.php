@@ -52,10 +52,14 @@ class SitesController extends Controller {
         }
 
         if (isset($_POST['Sites'])) {
-            $sitesModel->attributes = $_POST['Sites'];
-            $sitesModel->study_id = $studyid;
-            if ($sitesModel->save()) {
-                //$this->redirect(array('view', 'id' => $model->id));
+            //THERE MUST BE A MORE ELEGANT WAY TO PREVENT USER FROM SELECTING "SELECT"
+            if (!$_POST['Sites']['timezone'] == '') {
+//                alert("NULLY");
+                $sitesModel->attributes = $_POST['Sites'];
+                $sitesModel->study_id = $studyid;
+                if ($sitesModel->save()) {
+                    //$this->redirect(array('view', 'id' => $model->id));
+                }
             }
         }
         $this->render('dashboard', array(

@@ -22,7 +22,7 @@
                                     <strong>Time-Zone:</strong>
                                 </div>
                                 <div class="large-9 columns vdef" data-thetmz="America/Anchorage">
-                                    <?php echo $site->timezone; date_default_timezone_set("$site->timezone");?>
+                                    <?php echo Sites::$timezoneMap[$site->timezone]; date_default_timezone_set("$site->timezone");?>
                                 </div>
                             </div>
                             <div class="row minpad">

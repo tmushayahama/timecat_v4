@@ -31,7 +31,7 @@ $form = $this->beginWidget('CActiveForm', array(
                         <?php echo $form->labelEx($sites_model, 'timezone'); ?>
                     </div>
                     <div class="large-9 columns">
-                        <?php echo $form->dropDownList($sites_model, 'timezone', CHtml::listData($sites_timezones, 'name', 'name')); //$sites_types); ?>
+                        <?php echo $form->dropDownList($sites_model, 'timezone', CHtml::listData($sites_timezones, 'value', 'name')); //$sites_types); ?>
                         <?php echo $form->error($sites_model, 'timezone'); ?>
                     </div>
                 </div>	 
