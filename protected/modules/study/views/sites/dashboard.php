@@ -56,7 +56,7 @@
     </div>
 </div>
 <div id="edit-sites-modal" class="reveal-modal medium">
-    <h2>Edit Site.</h2>
+    <h2>Edit Site</h2>
     <?php
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'sites-form',
@@ -83,7 +83,7 @@
                     <?php echo $form->labelEx($sites_model, 'timezone'); ?>
                 </div>
                 <div class="large-9 columns">
-                    <?php echo $form->dropDownList($sites_model, 'timezone', CHtml::listData($sites_timezones, 'name', 'name')); //$sites_types); ?>
+                    <?php echo $form->dropDownList($sites_model, 'timezone', CHtml::listData($sites_timezones, 'value', 'name')); //$sites_types); ?>
                     <?php echo $form->error($sites_model, 'timezone'); ?>
                 </div>
             </div>
