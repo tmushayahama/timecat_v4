@@ -16,20 +16,7 @@
                             <div class="row minpad">
                                 <div class="large-12 columns">
                                     <span class="vnam"><?php echo $observer->user->profile->firstname . " " . $observer->user->profile->lastname ?> </span>
-                                    <span class="round success label right observer-status-name" observer-status =<?php echo $observer->status ?>>
-                                        <?php
-                                        switch($observer->status){
-                                            case 0: echo $active;
-                                                break;
-                                            case 1: echo $pending;
-                                                break;
-                                            case 2: echo $inactive;
-                                                break;
-                                            default: echo "PIE";
-                                                break;
-                                        }
-                                        ?>
-                                    </span>
+                                    <span class="round label right observer-status-name" observer-status =<?php echo $observer->status ?>> loading status... </span>
                                 </div>
                                 <div class="large-6 columns">
                                     <p class="studydesc">

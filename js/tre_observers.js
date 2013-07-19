@@ -30,13 +30,17 @@ function colorStatus() {
     });
     $(".observer-status-name").each(function(e) {
         if ($(this).attr("observer-status") == 2) {
-            $(this).removeClass("bverdon success")
+            $(this)//.removeClass("bverdon success")
                     .addClass("brojo")
                     .text('inactive');
         } else if ($(this).attr("observer-status") == 1) {
-            $(this).removeClass("bverdon success")
+            $(this)//.removeClass("bverdon success")
                     .addClass("observer-pending-status-name")
                     .text('pending request');
+        } else if ($(this).attr("observer-status") == 0) {
+            $(this)//.removeClass("bverdon success")
+                    .addClass("bverdon success")
+                    .text('active');
         }
     });
 }
