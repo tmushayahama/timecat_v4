@@ -17,7 +17,7 @@
 class Sites extends CActiveRecord {
 
     public static $timezoneMap = array(
-        '' => "Select",
+        '' => "Select:",
         'Pacific/Midway' => "(GMT-11:00) Midway Island, Samoa",
         'America/Adak' => "(GMT-10:00) Hawaii-Aleutian",
         'Etc/GMT+10' => "(GMT-10:00) Hawaii",
@@ -133,14 +133,15 @@ class Sites extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('name, study_id', 'required'),
+            array('name, study_id, timezone', 'required'),
             array('study_id', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 128),
             array('timezone', 'length', 'max' => 50),
-            array('description', 'length', 'max' => 255),
+//            array('description', 'length', 'max' => 255),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, name, study_id, timezone, description', 'safe', 'on' => 'search'),
+            array('id, name, study_id, timezone,', //description', 
+                'safe', 'on' => 'search'),
         );
     }
 
@@ -165,7 +166,7 @@ class Sites extends CActiveRecord {
             'name' => 'Name',
             'study_id' => 'Study',
             'timezone' => 'Timezone',
-            'description' => 'Description',
+//            'description' => 'Description',
         );
     }
 
@@ -183,7 +184,7 @@ class Sites extends CActiveRecord {
         $criteria->compare('name', $this->name, true);
         $criteria->compare('study_id', $this->study_id);
         $criteria->compare('timezone', $this->timezone, true);
-        $criteria->compare('description', $this->description, true);
+//        $criteria->compare('description', $this->description, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
