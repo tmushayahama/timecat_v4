@@ -29,7 +29,7 @@ class ObservationsController extends Controller {
 						'users' => array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'actions' => array('create', 'update', 'dashboard'),
+						'actions' => array('create', 'update', 'capture'),
 						'users' => array('@'),
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -42,6 +42,19 @@ class ObservationsController extends Controller {
 		);
 	}
 
+	public function actionCapture($studyId) {
+		//$this->study_name = Study::model()->findByPk($studyId)->name;
+		
+		$studyDimensionCriteria = new CDbCriteria();
+		$studyDimensionCriteria->condition = "study_id=" . $studyId;
+		
+		$this->render('capture', array(
+				'study_tasks'=>  StudyTasks::Model()->findAll("study_id=".$studyId),
+				'categorized_tasks' =>$this->categorizeTasks(StudyDimensions::Model()->findAll($studyDimensionCriteria)),
+				'study_id' => $studyId,
+		));
+	}
+
 	public function actionDashboard($studyId) {
 		$this->study_name = Study::model()->findByPk($studyId)->name;
 		$sitesCriteria = new CDbCriteria();
@@ -51,7 +64,7 @@ class ObservationsController extends Controller {
 		$observationsCriteria = new CDbCriteria();
 		$observationsCriteria->alias = 't1';
 		$observationsCriteria->condition = "t1.study_id=" . $studyId;
-		$observationsCriteria->with = array(
+		$obserdvationsCriteria->with = array(
 				"subject" => array('select' => 'description'),
 				"site" => array('select' => array('name', 'timezone')),
 				"type" => array('select' => 'type_entry'));
@@ -184,6 +197,15 @@ class ObservationsController extends Controller {
 			throw new CHttpException(404, 'The requested page does not exist.');
 		return $model;
 	}
+	protected function categorizeTasks($studyDimensions) {
+		$categorizeTask = array();
+		foreach ($studyDimensions as $studyDimension) {
+				$categorizeTask += array($studyDimension->dimension => StudyTasks::Model()->findAll('dimension_id=' . $studyDimension->id));				
+		}
+		return $categorizeTask;
+	}
+
+
 
 	/**
 	 * Performs the AJAX validation.

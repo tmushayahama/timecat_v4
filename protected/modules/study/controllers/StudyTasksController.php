@@ -48,11 +48,13 @@ class StudyTasksController extends Controller {
 	public function actionDashboard($studyId) {
 		$this->populateStudyNav($studyId);
 
+
 		$studyTasksCriteria = new CDbCriteria();
 		$studyTasksCriteria->alias = 't1';
 		$studyTasksCriteria->condition = "t1.study_id=" . $studyId;
 		//$studyTasksCriteria->with = array(
 		//		'dimenion' => array('select' => array('dimension')));
+
 
 		$studyDimensionCriteria = new CDbCriteria();
 		$studyDimensionCriteria->condition = "study_id=" . $studyId;

@@ -3565,7 +3565,8 @@ form.custom {
   background-color: #f6f6f6;
   border-color: gainsboro;
   -webkit-border-radius: 3px;
-  border-radius: 3px; }
+  border-radius: 3px;
+  }
   .breadcrumbs > * {
     margin: 0;
     float: left;
