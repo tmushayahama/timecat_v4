@@ -1,7 +1,5 @@
 <?php
 $this->beginContent('//layouts/tc_main');
-
-
 Yii::app()->clientScript->registerScriptFile(
 				Yii::app()->baseUrl . '/js/clpclocker.js', CClientScript::POS_END
 );
@@ -9,8 +7,6 @@ Yii::app()->clientScript->registerScriptFile(
 				Yii::app()->baseUrl . '/js/tre_capture.js', CClientScript::POS_END
 );
 ?>
-<script id="record-task-url" type="text/javascript">
-	var record_task_url = "<?php echo Yii::app()->createUrl('study/observations/recordtask'); ?>"</script>
 <div id="wrap" class="blangradient">
 	<div id="cabecera" class="plomito bordinf">
 		<div class="capinfo left">
@@ -19,12 +15,9 @@ Yii::app()->clientScript->registerScriptFile(
 				<span class="show-for-small">Time: </span>
 				<strong>
 					<span id="currenttime" class="clocks">
-						<?php
-						$date = new DateTime('now', new DateTimeZone($site_timezone));
-						?>
-						<span class="hors"><?php echo $date->format('H'); ?></span>:
-						<span class="mins"><?php echo $date->format('i'); ?></span>:
-						<span class="secs"><?php echo $date->format('i'); ?></span>
+						<span class="hors">01</span>:
+						<span class="mins">47</span>:
+						<span class="secs">25</span>
 					</span>
 				</strong></span><input type="hidden" name="startedtime" id="begintim" class="letaskstamp" value="01:46:49">
 		</div> 
@@ -74,14 +67,9 @@ Yii::app()->clientScript->registerScriptFile(
 					<div class="row unikdimenblock blanko bsup1">
 						<div class="large-7 columns cnada">
 							<div class="tareaslist">&nbsp;
-								<?php
-								foreach ($categorized_tasks[$panelName] as $task) {
-									echo CHtml::link($task->name, '', array(
-											'task-id' => $task->id,
-											'observation-id' => $observation_id,
-											'class' => 'button small secondary round task-btn'));
-								}
-								?>
+								<?php foreach ($categorized_tasks[$panelName] as $task): ?>
+									<a href="#" data-tkid="<?php echo $task->id ?>" class="button small secondary round tasktrig"><?php echo $task->name; ?></a>&nbsp;
+								<?php endforeach; ?>
 							</div>
 						</div>
 						<div class="large-5 columns cnada">

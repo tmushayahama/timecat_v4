@@ -29,7 +29,7 @@ class ObservationsController extends Controller {
 						'users' => array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'actions' => array('create', 'update', 'capture'),
+						'actions' => array('create', 'update', 'capture', 'recordtask'),
 						'users' => array('@'),
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -42,17 +42,31 @@ class ObservationsController extends Controller {
 		);
 	}
 
-	public function actionCapture($studyId) {
-		//$this->study_name = Study::model()->findByPk($studyId)->name;
-		
+	public function actionCapture($studyId, $observationId) {
 		$studyDimensionCriteria = new CDbCriteria();
 		$studyDimensionCriteria->condition = "study_id=" . $studyId;
-		
+
 		$this->render('capture', array(
-				'study_tasks'=>  StudyTasks::Model()->findAll("study_id=".$studyId),
-				'categorized_tasks' =>$this->categorizeTasks(StudyDimensions::Model()->findAll($studyDimensionCriteria)),
+				'study_tasks' => StudyTasks::Model()->findAll("study_id=" . $studyId),
+				'categorized_tasks' => $this->categorizeTasks(StudyDimensions::Model()->findAll($studyDimensionCriteria)),
 				'study_id' => $studyId,
+				'observation_id'=>$observationId,
+				'site_timezone'=>Observations::Model()->findByPk($observationId)->site->timezone,
 		));
+	}
+
+	public function actionRecordTask() {
+		if (Yii::app()->request->isAjaxRequest) {
+			$taskId = Yii::app()->request->getParam('task_id');
+			$observationId = Yii::app()->request->getParam('observation_id');
+			$observationModel = new ObservationTasks;
+			$observationModel->observation_id = $observationId;
+			$observationModel->study_task_id = $taskId;
+			if ($observationModel->save()) {
+				
+			}
+			Yii::app()->end();
+		}
 	}
 
 	public function actionDashboard($studyId) {
@@ -197,15 +211,14 @@ class ObservationsController extends Controller {
 			throw new CHttpException(404, 'The requested page does not exist.');
 		return $model;
 	}
+
 	protected function categorizeTasks($studyDimensions) {
 		$categorizeTask = array();
 		foreach ($studyDimensions as $studyDimension) {
-				$categorizeTask += array($studyDimension->dimension => StudyTasks::Model()->findAll('dimension_id=' . $studyDimension->id));				
+			$categorizeTask += array($studyDimension->dimension => StudyTasks::Model()->findAll('dimension_id=' . $studyDimension->id));
 		}
 		return $categorizeTask;
 	}
-
-
 
 	/**
 	 * Performs the AJAX validation.

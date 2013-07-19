@@ -11,6 +11,7 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/vendor/custom.modernizr.js"></script>
 		<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/chelop.css" />
 		<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/tre_temp.css" />
+
 	</head>
 	<body>
 		<?php echo $content; ?>

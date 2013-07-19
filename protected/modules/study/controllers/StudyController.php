@@ -88,7 +88,7 @@ class StudyController extends Controller {
 			$observationsModel->user_id = Yii::app()->user->id;
 			$observationsModel->subject_id = $subjectModel->id; //Subjects::model()->find("description='".$subjectModel->description."'");
 			if ($observationsModel->save()) {
-				$this->redirect(array('observations/capture', 'studyId' => $studyId));
+				$this->redirect(array('observations/capture', 'studyId' => $studyId, 'observationId'=>$observationsModel->id));
 			}
 		}
 
