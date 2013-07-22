@@ -235,6 +235,7 @@ CREATE TABLE `tc_observation_tasks` (
 	`study_task_id` int,
 	`start_time` int(11) unsigned not null default 0,
 	`duration` int(11) unsigned not null default 0,
+	`status` int not null default 1, -- current task 
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 

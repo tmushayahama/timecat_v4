@@ -98,6 +98,7 @@ class StudyController extends Controller {
 				'study_observations' => Observations::Model()->findAll($observationsCriteria),
 				'observation_sites' => Sites::Model()->findAll($sitesCriteria),
 				'observation_types' => Types::getAllTypes("observation type"),
+				'resume_observation' => Observations::Model()->find("duration=0 AND study_id=".$studyId),
 		));
 	}
 
@@ -210,7 +211,6 @@ class StudyController extends Controller {
 
 	public function initializeStudyDimensions($studyId) {
 		$taskDimensionArray;
-		
 		switch (Study::Model()->findByPk($studyId)->type_id) {
 			case Study::$LINEAR_TYPE_ID:
 				$taskDimensionArray = StudyDimensions::LINEAR_DIMENSION();

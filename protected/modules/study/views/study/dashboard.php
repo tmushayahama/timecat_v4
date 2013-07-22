@@ -14,21 +14,39 @@ Yii::app()->clientScript->registerScriptFile(
 	<div class="large-6 columns">
 		<div class="row">
 			<div class="small-6 columns marabajo">
-				<a href="#" data-reveal-id="startobservation">
-					<div class="small-11 small-centered columns clptabs bazul1">
-						<br/>
-						<div class="row elicon">
-							<div class="small-10 small-centered columns">
-								<?php echo CHtml::image(Yii::app()->request->baseUrl . '/img/b_plus.png', "new observations"); ?>
+				<?php if ($resume_observation == null): ?>
+					<a href="#" data-reveal-id="startobservation">
+						<div class="small-11 small-centered columns clptabs bazul1">
+							<br/>
+							<div class="row elicon">
+								<div class="small-10 small-centered columns">
+									<?php echo CHtml::image(Yii::app()->request->baseUrl . '/img/b_plus.png', "new observations"); ?>
+								</div>
+							</div>
+							<div class="row">
+								<div class="small-11 small-centered columns">
+									<p class="eliseo subtile">New Observation</p>
+								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="small-11 small-centered columns">
-								<p class="eliseo subtile">New Observation</p>
+					</a>
+				<?php else: ?>
+					<a href="<?php echo Yii::app()->request->baseUrl . '/study/observations/capture/studyId/' . $study_model->id . '/observationId/' . $resume_observation->id ?>">
+						<div class="small-11 small-centered columns clptabs bazul1">
+							<br/>
+							<div class="row elicon">
+								<div class="small-10 small-centered columns">
+									<?php echo CHtml::image(Yii::app()->request->baseUrl . '/img/b_plus.png', "new observations"); ?>
+								</div>
+							</div>
+							<div class="row">
+								<div class="small-11 small-centered columns">
+									<p class="eliseo subtile">Resume Observation</p>
+								</div>
 							</div>
 						</div>
-					</div>
-				</a>
+					</a>
+				<?php endif; ?>
 			</div>
 			<div class="small-6 columns marabajo">
 				<a href="#">
@@ -169,42 +187,41 @@ Yii::app()->clientScript->registerScriptFile(
 		</div>
 	</div>
 </div>
-
 <div class="row">
-    <div class="large-6 columns">
-        <div class="row">
-            <div class="small-6 columns marabajo">
-                <a href="#">
-                    <div class="small-11 small-centered columns clptabs bverdon">
-                        <br/>
-                        <div class="row elicon">
-                            <div class="small-10 small-centered columns">
-                                <?php echo CHtml::image(Yii::app()->request->baseUrl . '/img/b_export.png', "data export"); ?>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="small-11 small-centered columns">
-                                <p class="eliseo subtile">Data Export</p>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="small-6 columns marabajo">
+	<div class="large-6 columns">
+		<div class="row">
+			<div class="small-6 columns marabajo">
+				<a href="#">
+					<div class="small-11 small-centered columns clptabs bverdon">
+						<br/>
+						<div class="row elicon">
+							<div class="small-10 small-centered columns">
+								<?php echo CHtml::image(Yii::app()->request->baseUrl . '/img/b_export.png', "data export"); ?>
+							</div>
+						</div>
+						<div class="row">
+							<div class="small-11 small-centered columns">
+								<p class="eliseo subtile">Data Export</p>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="small-6 columns marabajo">
 
-            </div>
-        </div>
-    </div>
-    <div class="large-6 columns">
-        <div class="row">
-            <div class="small-6 columns marabajo">
+			</div>
+		</div>
+	</div>
+	<div class="large-6 columns">
+		<div class="row">
+			<div class="small-6 columns marabajo">
 
-            </div>
-            <div class="small-6 columns marabajo">
+			</div>
+			<div class="small-6 columns marabajo">
 
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 </div>
 <div id="startobservation" class="reveal-modal medium">
 	<h2>Begin new observation.</h2>

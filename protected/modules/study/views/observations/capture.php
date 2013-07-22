@@ -6,6 +6,9 @@ Yii::app()->clientScript->registerScriptFile(
 				Yii::app()->baseUrl . '/js/clpclocker.js', CClientScript::POS_END
 );
 Yii::app()->clientScript->registerScriptFile(
+				Yii::app()->baseUrl . '/js/tc_components.js', CClientScript::POS_END
+);
+Yii::app()->clientScript->registerScriptFile(
 				Yii::app()->baseUrl . '/js/tre_capture.js', CClientScript::POS_END
 );
 ?>
@@ -85,14 +88,21 @@ Yii::app()->clientScript->registerScriptFile(
 							</div>
 						</div>
 						<div class="large-5 columns cnada">
-							<div class="actilist fblanco masgrande"><div class="holder">
+							<div class="actilist fblanco masgrande tc-hide" has-current-task="<?php echo $current_tasks[$panelName] != null; ?>">
+								<div class="holder">
 									<div id="currentasker1" class="listblock limpia papa ">
 										<div class="statindicator limpia">
 											<div class="aleditar aparece">
 												<input type="text" name="freetexttask" class="left"><a href="#" class="saveledit button small success left">Save</a>
 											</div>
 											<div class="normal">
-												<span class="tasknamer taknamep eliseo left" data-tkid="488">new task</span>
+												<span class="tasknamer taknamep eliseo left">					
+													<?php
+													if ($current_tasks[$panelName] != null) {
+														echo $current_tasks[$panelName]->studyTask->name;
+													}
+													?>
+												</span>
 												<a href="#" class="button alert small right borrat">Delete</a>
 												<a href="#" class="button small right tasktrig" data-tkid="1">Stop</a>
 											</div>
@@ -110,28 +120,34 @@ Yii::app()->clientScript->registerScriptFile(
 											<a href="#" class="singlenote button secondary small right">Add note</a>
 										</div>
 									</div>
-								</div><div class="fullist limpia grisos papa">
-									<p>
-										<span class="tasknamer letaskname eliseo left" data-tkid="487">washing hands</span>
-										<a href="#" class="breaknotifier button secondary small "><i class="foundicon-checkmark"></i></a>
-										<i class="foundicon-down-arrow "></i><span class="letaskstamp ">01:47:03</span>
-										<a href="#" class="linkfrom button small right aparece">Select</a>
-										<a href="#" class="singlenote button secondary small right"><i class="foundicon-edit"></i></a>
-									</p>
-								</div><div class="fullist limpia grisos papa">
-									<p>
-										<span class="tasknamer letaskname eliseo left" data-tkid="486">new task</span>
-										<a href="#" class="breaknotifier button secondary small "><i class="foundicon-checkmark"></i></a>
-										<i class="foundicon-down-arrow "></i><span class="letaskstamp ">01:47:00</span>
-										<a href="#" class="linkfrom button small right aparece">Select</a>
-										<a href="#" class="singlenote button secondary small right"><i class="foundicon-edit"></i></a>
-									</p>
-								</div></div>
+								</div>
+								<div class="tc-recorded-task-panel">
+									<?php foreach ($categorized_observation_tasks[$panelName] as $task): ?>
+										<div class="fullist limpia grisos papa">
+											<p>
+												<span class="tasknamer letaskname eliseo left" task-id="<?php echo $task->id ?>">
+													<?php echo $task->studyTask->name; ?>
+												</span>
+												<a href="#" class="breaknotifier button secondary small "><i class="foundicon-checkmark"></i></a>
+												<i class="foundicon-down-arrow "></i><span class="letaskstamp ">
+													<?php
+													$task_start_time = new DateTime('@' . $task->start_time);
+													$task_start_time->setTimeZone(new DateTimeZone($site_timezone));
+													echo $task_start_time->format("h:i:s");
+													?>
+												</span>
+												<a href="#" class="linkfrom button small right aparece">Select</a>
+												<a href="#" class="singlenote button secondary small right"><i class="foundicon-edit"></i></a>
+											</p>
+										</div>
+	<?php endforeach; ?>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		<?php endforeach; ?>
+<?php endforeach; ?>
 	</div>
 </div>
 <div id="myModal" class="reveal-modal small">

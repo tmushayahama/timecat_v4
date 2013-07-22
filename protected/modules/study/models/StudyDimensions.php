@@ -23,7 +23,7 @@ class StudyDimensions extends CActiveRecord {
 
 	public static function LINEAR_DIMENSION() {
 		return array(
-				StudyDimensions::$LINEAR_TYPE
+				StudyDimensions::$LINEAR_TASK_TYPE
 		);
 	}
 	public static function MULTITASK_DIMENSION() {

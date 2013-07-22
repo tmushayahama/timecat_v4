@@ -19,12 +19,6 @@ insert into `tc_types` (`category`, `type_entry`, `description`) values
 ('study types', 'Multi-Observer Patient Flow', 'Each observer is strategically located to track/follow patients\' flow.'),
 ('task status', 'active', ''),
 ('task status', 'inactive', ''),
-<<<<<<< HEAD
-('observation type','trainning', ''),
-('observation type','IORA', ''),
-('observation type','formal', ''),
-('observation type','trash', ''),
-=======
 ('task categories', 'simpletime', ''),
 ('task categories', 'communication', ''),
 ('task categories', 'location', ''),
@@ -32,7 +26,6 @@ insert into `tc_types` (`category`, `type_entry`, `description`) values
 ('observation type','trainning', 'Training Session'),
 ('observation type','IORA', 'I.O.R.A'),
 ('observation type','formal', 'Real observation'),
->>>>>>> tc_observations
 ('task relationship type','parent', ''),
 ('task relationship type','next', ''),
 ('task relationship type','siblings', '');

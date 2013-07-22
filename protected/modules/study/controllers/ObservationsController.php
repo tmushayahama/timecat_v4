@@ -1,11 +1,6 @@
 <?php
 
 class ObservationsController extends Controller {
-	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
-	 */
-	//public $layout='//layouts/column2';
 
 	/**
 	 * @return array action filters
@@ -25,7 +20,7 @@ class ObservationsController extends Controller {
 	public function accessRules() {
 		return array(
 				array('allow', // allow all users to perform 'index' and 'view' actions
-						'actions' => array('index', 'view'),
+						'actions' => array('index'),
 						'users' => array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -49,9 +44,11 @@ class ObservationsController extends Controller {
 		$this->render('capture', array(
 				'study_tasks' => StudyTasks::Model()->findAll("study_id=" . $studyId),
 				'categorized_tasks' => $this->categorizeTasks(StudyDimensions::Model()->findAll($studyDimensionCriteria)),
+				'categorized_observation_tasks' => $this->categorizeObservationTasks(StudyDimensions::Model()->findAll($studyDimensionCriteria), $observationId),
 				'study_id' => $studyId,
-				'observation_id'=>$observationId,
-				'site_timezone'=>Observations::Model()->findByPk($observationId)->site->timezone,
+				'observation_id' => $observationId,
+				'site_timezone' => Observations::Model()->findByPk($observationId)->site->timezone,
+				'current_tasks' => $this->getCurrentTasks(StudyDimensions::Model()->findAll($studyDimensionCriteria), $observationId),
 		));
 	}
 
@@ -59,9 +56,12 @@ class ObservationsController extends Controller {
 		if (Yii::app()->request->isAjaxRequest) {
 			$taskId = Yii::app()->request->getParam('task_id');
 			$observationId = Yii::app()->request->getParam('observation_id');
+			$taskStartTime = new DateTime('now', new DateTimeZone(Observations::Model()->findByPk($observationId)->site->timezone));
+
 			$observationModel = new ObservationTasks;
 			$observationModel->observation_id = $observationId;
 			$observationModel->study_task_id = $taskId;
+			$observationModel->start_time = strtotime($taskStartTime->format("Y-m-d h:i:s"));
 			if ($observationModel->save()) {
 				
 			}
@@ -78,7 +78,7 @@ class ObservationsController extends Controller {
 		$observationsCriteria = new CDbCriteria();
 		$observationsCriteria->alias = 't1';
 		$observationsCriteria->condition = "t1.study_id=" . $studyId;
-		$obserdvationsCriteria->with = array(
+		$observationsCriteria->with = array(
 				"subject" => array('select' => 'description'),
 				"site" => array('select' => array('name', 'timezone')),
 				"type" => array('select' => 'type_entry'));
@@ -210,6 +210,34 @@ class ObservationsController extends Controller {
 		if ($model === null)
 			throw new CHttpException(404, 'The requested page does not exist.');
 		return $model;
+	}
+
+	protected function getCurrentTasks($studyDimensions, $observationId) {
+		$categorizeTask = array();
+		foreach ($studyDimensions as $studyDimension) {
+			$observationTasksCriteria = new CDbCriteria();
+			$observationTasksCriteria->alias = 't1';
+			$observationTasksCriteria->condition = "t1.observation_id=" . $observationId . ' AND t1.status =' . 1;
+			$observationTasksCriteria->with = array('studyTask');
+			$observationTasksCriteria->addCondition("studyTask.dimension_id=" . $studyDimension->id);
+			$categorizeTask += array($studyDimension->dimension => ObservationTasks::Model()->find($observationTasksCriteria));
+		}
+		return $categorizeTask;
+	}
+
+	protected function categorizeObservationTasks($studyDimensions, $observationId) {
+		$categorizeTask = array();
+		foreach ($studyDimensions as $studyDimension) {
+			$observationTasksCriteria = new CDbCriteria();
+			$observationTasksCriteria->alias = 't1';
+			//$observationTasksCriteria->join = 'RIGHT JOIN tc_study_tasks ON dimension_id=' . $studyDimension->id;
+			$observationTasksCriteria->condition = "t1.observation_id=" . $observationId;
+			$observationTasksCriteria->with = array('studyTask');
+			$observationTasksCriteria->addCondition("studyTask.dimension_id=" . $studyDimension->id);
+			
+			$categorizeTask += array($studyDimension->dimension => ObservationTasks::Model()->findAll($observationTasksCriteria));
+		}
+		return $categorizeTask;
 	}
 
 	protected function categorizeTasks($studyDimensions) {
