@@ -112,7 +112,7 @@ class MessagesController extends Controller {
     /**
      * Lists all models.
      */
-    public function actionIndex($studyId, $messageId) {
+    public function actionIndex($studyid, $messageid) {
         $messageModel = new Messages;
         //$userMessagesModel = new UserMessages;
         // Uncomment the following line if AJAX validation is needed
@@ -130,16 +130,32 @@ class MessagesController extends Controller {
             $userMessageModel->message_id = $messageModel->id;
             $userMessageModel->sender_id = Yii::app()->user->id;
             $userMessageModel->recipient_id = User::Model()->find($messageCriteria)->id;
-            $userMessageModel->study_id = $studyId;
-            $userMessageModel->send_date = date('Y-m-d h:m:s');
+            $userMessageModel->study_id = $studyid;
+//            $userMessageModel->send_date = date('Y-m-d h:m:s');
+            $sendDate = new DateTime("now");
+            $userMessageModel->send_date = $sendDate->format('Y-m-d H:i:s');
             $userMessageModel->save(false);
         }
 
+        $unsortedMessages = UserMessages::Model()->findAll('study_id='.$studyid.' AND (recipient_id='.Yii::app()->user->id.' OR sender_id='.Yii::app()->user->id.')');
+        $messages = array();
+        $messageMetaData = array();
+        foreach($unsortedMessages as $message){
+            $messages[$message->send_date] = $message;
+            $messageMetaData[$message->message_id] = array(
+                'recipient' => User::Model()->findByPk($message->recipient_id)->email,
+                'sender' => User::Model()->findByPk($message->sender_id)->email,
+                'sent_by_user' => $message->sender_id == Yii::app()->user->id,
+            );
+        }
+        krsort($messages);
         $this->render('dashboard', array(
             'message_model' => $messageModel,
 //            'messages' => UserMessages::Model()->findAll($studyId = 'study_id' && (Yii::app()->user->id = 'recipient_id' || Yii::app()->user->id = 'sender_id')),
-            'messages' => UserMessages::Model()->findAll('study_id='.$studyId.' AND (recipient_id='.Yii::app()->user->id.' OR sender_id='.Yii::app()->user->id.')'),
-            'selected_message' => $messageId == 0 ? false : $this->loadModel($messageId),
+            'messages' => $messages,
+            'message_meta_data' => $messageMetaData,
+            'selected_message' => $messageid == 0 ? false : $this->loadModel($messageid),
+            'studyid'=>$studyid,
         ));
         
     }
