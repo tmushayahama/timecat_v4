@@ -1,13 +1,13 @@
 /* 
  * This js is for all html components added
  */
-function addRecordedTaskEntry(taskname) {
-	$(".tc-recorded-task-panel")
+function addRecordedTaskEntry(recordedTaskId, taskname, startTime) {
+	$(recordedTaskId)
 					.prepend($("<div />")
-					.addClass("fullist limpia grisos papa")
-					.append($("<p />")
-					.append($("<span />")
-					.addClass("tasknamer letaskname eliseo left")
+						.addClass("fullist limpia grisos papa")
+						.append($("<p />")
+							.append($("<span />")
+							.addClass("tasknamer letaskname eliseo left")
 					.attr('task-id', '')
 					.text(taskname))
 					.append($("<a />")
@@ -17,7 +17,8 @@ function addRecordedTaskEntry(taskname) {
 					.append($("<i />")
 					.addClass("foundicon-down-arrow")
 					.append($("<span />")
-					.addClass("letaskstamp")))
+					.addClass("letaskstamp"))
+					.text(' '+startTime))
 					.append($("<a />")
 					.addClass("linkfrom button small right aparece")
 					.text("Select"))

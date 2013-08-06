@@ -4,12 +4,9 @@ Yii::app()->clientScript->registerScriptFile(
 				Yii::app()->baseUrl . '/js/tre_study.js', CClientScript::POS_END
 );
 ?>
-<div class="row">
-	<br/>
-	<div class="small-12 columns">
-		<a href="onsestudy.html" class="button tiny">Study Home</a>
-	</div>
-</div>
+<ul class="breadcrumbs">
+	<?php echo CHtml::link('Study Home', array('/study/study/dashboard/studyId/' . $study_model->id)); ?>
+</ul>	
 <div class="row ">
 	<div class="large-6 columns">
 		<div class="row">

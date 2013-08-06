@@ -1,5 +1,9 @@
 <?php
 
+/* * tHIS 
+ * 
+ */
+
 class ObservationsController extends Controller {
 
 	/**
@@ -19,10 +23,6 @@ class ObservationsController extends Controller {
 	 */
 	public function accessRules() {
 		return array(
-				array('allow', // allow all users to perform 'index' and 'view' actions
-						'actions' => array('index'),
-						'users' => array('*'),
-				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
 						'actions' => array('create', 'update', 'capture', 'recordtask'),
 						'users' => array('@'),
@@ -37,33 +37,48 @@ class ObservationsController extends Controller {
 		);
 	}
 
+	/*	 * The default action when rendering the Capture view.
+	 * 
+	 * @param type $studyId
+	 * @param type $observationId
+	 */
+
 	public function actionCapture($studyId, $observationId) {
 		$studyDimensionCriteria = new CDbCriteria();
 		$studyDimensionCriteria->condition = "study_id=" . $studyId;
-
+		$studyDimensions = StudyDimensions::Model()->findAll($studyDimensionCriteria);
 		$this->render('capture', array(
+				'dimensions' => $this->dimensions($studyDimensions),
 				'study_tasks' => StudyTasks::Model()->findAll("study_id=" . $studyId),
-				'categorized_tasks' => $this->categorizeTasks(StudyDimensions::Model()->findAll($studyDimensionCriteria)),
-				'categorized_observation_tasks' => $this->categorizeObservationTasks(StudyDimensions::Model()->findAll($studyDimensionCriteria), $observationId),
+				'categorized_tasks' => $this->categorizeTasks($studyDimensions),
+				'categorized_observation_tasks' => $this->categorizeObservationTasks($studyDimensions, $observationId),
 				'study_id' => $studyId,
 				'observation_id' => $observationId,
-				'site_timezone' => Observations::Model()->findByPk($observationId)->site->timezone,
-				'current_tasks' => $this->getCurrentTasks(StudyDimensions::Model()->findAll($studyDimensionCriteria), $observationId),
+				'current_time' => $this->getCurrentTime($observationId),
+				'current_tasks' => $this->getCurrentTasks($studyDimensions, $observationId),
+				'observation_duration' => $this->calculateDuration($observationId),
 		));
 	}
+
+	/*	 * Ajax call for recording a task
+	 * 
+	 */
 
 	public function actionRecordTask() {
 		if (Yii::app()->request->isAjaxRequest) {
 			$taskId = Yii::app()->request->getParam('task_id');
 			$observationId = Yii::app()->request->getParam('observation_id');
-			$taskStartTime = new DateTime('now', new DateTimeZone(Observations::Model()->findByPk($observationId)->site->timezone));
+			$taskStartTime =	$this->getCurrentTime($observationId);//new DateTime('now', new DateTimeZone(Observations::Model()->findByPk($observationId)->site->timezone));
 
 			$observationModel = new ObservationTasks;
 			$observationModel->observation_id = $observationId;
 			$observationModel->study_task_id = $taskId;
 			$observationModel->start_time = strtotime($taskStartTime->format("Y-m-d h:i:s"));
 			if ($observationModel->save()) {
-				
+				echo CJSON::encode(array(
+				'taskname' => $observationModel->studyTask->name,
+				'dimension_id' => $observationModel->studyTask->dimension_id,
+				'start_time' => $taskStartTime->format("H:i:s")));//$this->getCurrentTime($observationId)));
 			}
 			Yii::app()->end();
 		}
@@ -232,9 +247,10 @@ class ObservationsController extends Controller {
 			$observationTasksCriteria->alias = 't1';
 			//$observationTasksCriteria->join = 'RIGHT JOIN tc_study_tasks ON dimension_id=' . $studyDimension->id;
 			$observationTasksCriteria->condition = "t1.observation_id=" . $observationId;
+			$observationTasksCriteria->order ="start_time DESC";
 			$observationTasksCriteria->with = array('studyTask');
 			$observationTasksCriteria->addCondition("studyTask.dimension_id=" . $studyDimension->id);
-			
+
 			$categorizeTask += array($studyDimension->dimension => ObservationTasks::Model()->findAll($observationTasksCriteria));
 		}
 		return $categorizeTask;
@@ -246,6 +262,37 @@ class ObservationsController extends Controller {
 			$categorizeTask += array($studyDimension->dimension => StudyTasks::Model()->findAll('dimension_id=' . $studyDimension->id));
 		}
 		return $categorizeTask;
+	}
+
+	protected function dimensions($studyDimensions) {
+		$dimension = array();
+		foreach ($studyDimensions as $studyDimension) {
+			$dimension += array($studyDimension->dimension => $studyDimension->id);
+		}
+		return $dimension;
+	}
+
+	public function findDimensionId($studyId, $dimensionName) {
+		$dimension = StudyDimensions::Model()->find("study_id=" . $studyId . " AND dimension = '" . $dimensionName . "'");
+		if ($dimension == null)
+			return null;
+		return $dimension->id;
+	}
+
+	/*	 * Calculates the duration given the start time. The current time is the 
+	 * "now" +- the offset of the study particular site timezone.
+	 * 
+	 * @param type $startTime - the start time of the 
+	 */
+
+	public function calculateDuration($observationId) {
+		$currentTime = $this->getCurrentTime($observationId);
+		$observationStartTime = new DateTime("@" . Observations::Model()->findByPk($observationId)->start_time);
+		return $currentTime->diff($observationStartTime);
+	}
+
+	public function getCurrentTime($observationId) {
+		return new DateTime('now', new DateTimeZone(Observations::Model()->findByPk($observationId)->site->timezone));
 	}
 
 	/**

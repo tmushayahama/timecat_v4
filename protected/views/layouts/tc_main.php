@@ -40,6 +40,15 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/tre_observers.js"></script>
 		<script>
 			$(document).foundation();
+
+			$(document).foundation();
+			$(document)
+							.ajaxStart(function() {
+				$(".spinner").show();
+			})
+							.ajaxStop(function() {
+				$(".spinner").hide();
+			});
 		</script>
 	</body>
 </html>
