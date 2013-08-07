@@ -1,0 +1,62 @@
+pseudocode
+
+
+QUERY TABLE tc_observations: all Observations with study_id S AND type_id <IORA>
+fill set of Observations returned from query
+
+for each Observation A in valid set
+
+	//create set of all other Observations that are valid for IORA comparison
+	for each Observation B in valid set that is not A
+	
+		//if B started at the same time as or after A started 
+		// AND A ended after B started
+		if B.start_time >= A.start_time && A.end_time > B.start_time
+		
+			add B to set of valid IORA comparisons for A
+		
+	//run IORA comparisons
+	
+	//get Observation_Tasks in Observation A from database
+	if IORA comparison set for A is not empty
+	
+		QUERY TABLE tc_observation_tasks: all Observation_Tasks with observation_id A 
+		fill set of Observation_Tasks returned from query
+		CONVERT Observation_Tasks set for A into map of strings and arrays 
+			where string key=dimension name
+			where in each array index=time and references string=task name
+	
+	
+	for each Observation Z in IORA comparison set for A 
+		
+		//get all task data from database
+		QUERY TABLE tc_observation_tasks: all Observation_Tasks with observation_id Z
+		fill set of Observation_Tasks returned from query
+		CONVERT Observation_Tasks set for A into map of strings and arrays
+		
+		for each dimension D in key set of strings
+		
+			//compare each overlapping second
+
+			int matching_seconds = 0;
+
+			int total_seconds = 0;
+
+			int offset = Z.start_time - A.start_time;
+
+			//for each second that is a member of the intersection of A and Z
+			for int i = 0, i+offset < A.duration && i < Z.duration, i++
+
+				if mapA.get(D).get(i+offset).equals(mapZ.get(D).get(i)) 
+
+					matching_seconds++;
+
+				total_seconds++;
+
+			double match_fraction = (double)matching_seconds/total_seconds;
+
+			add match_fraction to map of Observations.dimensions and return values for Observation A
+		
+
+		
+		
