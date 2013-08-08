@@ -23,6 +23,10 @@
  */
 class Observations extends CActiveRecord {
 
+	public static function getCurrentTime($observationId) {
+		return new DateTime('now', new DateTimeZone(Observations::Model()->findByPk($observationId)->site->timezone));
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.

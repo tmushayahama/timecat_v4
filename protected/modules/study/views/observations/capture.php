@@ -78,7 +78,7 @@ Yii::app()->clientScript->registerScriptFile(
 								<?php
 								foreach ($categorized_tasks[$panelName] as $task) {
 									echo CHtml::link($task->name, '', array(
-											'task-id' => $task->id,
+											'current-task-id' => $task->id,
 											'observation-id' => $observation_id,
 											'dimension-id' => $dimensions[$panelName],
 											'class' => 'button small secondary round task-btn'));
@@ -87,9 +87,9 @@ Yii::app()->clientScript->registerScriptFile(
 							</div>
 						</div>
 						<div class="large-5 columns cnada">
-							<?php if ($current_tasks[$panelName] != null) : ?>
-								<div class="actilist fblanco masgrande">
-									<div class="holder">
+							<div class="actilist fblanco masgrande">
+								<?php if ($current_tasks[$panelName] != null) : ?>
+									<div  id="<?php echo 'recorded-task-panel-' . $dimensions[$panelName]?>" class="holder">
 										<div class="listblock limpia papa ">
 											<div class="statindicator limpia">
 												<div class="aleditar aparece">
@@ -98,7 +98,7 @@ Yii::app()->clientScript->registerScriptFile(
 												<div class="normal">
 													<span id="<?php echo 'current-task-' . $dimensions[$panelName] ?>"
 																class="tasknamer taknamep eliseo left" 
-																current-task-id="<?php echo $current_tasks[$panelName]->studyTask->id; ?>">					
+																current-task-id="<?php echo $current_tasks[$panelName]->id; ?>">					
 																	<?php echo $current_tasks[$panelName]->studyTask->name; ?>
 													</span>
 													<a href="#" class="button alert small right borrat">Delete</a>
@@ -110,6 +110,7 @@ Yii::app()->clientScript->registerScriptFile(
 												<span id="<?php echo 'current-task-start-time-' . $dimensions[$panelName] ?>" class="letaskstamp">
 													<?php
 													$currentTaskStartTime = new DateTime('@' . $current_tasks[$panelName]->start_time);
+													$currentTaskStartTime->setTimeZone(new DateTimeZone($site_timezone));
 													echo $currentTaskStartTime->format('H:i:s');
 													?>
 												</span>
@@ -132,29 +133,56 @@ Yii::app()->clientScript->registerScriptFile(
 											</div>
 										</div>
 									</div>
-									<div id="<?php echo 'recorded-tasks-' . $dimensions[$panelName] ?>">
-										<?php foreach ($categorized_observation_tasks[$panelName] as $task): ?>
-											<div class="fullist limpia grisos papa">
-												<p>
-													<span class="tasknamer letaskname eliseo left" task-id="<?php echo $task->id ?>">
-														<?php echo $task->studyTask->name; ?>
+								<?php else: ?>	
+									<div id="<?php echo 'recorded-task-panel-' . $dimensions[$panelName]?>" class="holder tc-hide">
+										<div class="listblock limpia papa ">
+											<div class="statindicator limpia">
+												<div class="aleditar aparece">
+													<input type="text" name="freetexttask" class="left"><a href="#" class="saveledit button small success left">Save</a>
+												</div>
+												<div class="normal">
+													<span id="<?php echo 'current-task-' . $dimensions[$panelName] ?>"
+																class="tasknamer taknamep eliseo left" 
+																current-task-id=0>		
+														----
 													</span>
-													<a href="#" class="breaknotifier button secondary small "><i class="foundicon-checkmark"></i></a>
-													<i class="foundicon-down-arrow "></i><span class="letaskstamp ">
-														<?php
-														$task_start_time = new DateTime('@' . $task->start_time);
-														//$task_start_time->setTimeZone(new DateTimeZone($site_timezone));
-														echo $task_start_time->format("h:i:s");
-														?>
-													</span>
-													<a href="#" class="linkfrom button small right aparece">Select</a>
-													<a href="#" class="singlenote button secondary small right"><i class="foundicon-edit"></i></a>
-												</p>
+													<a href="#" class="button alert small right borrat">Delete</a>
+													<a href="#" class="button small right tasktrig" data-tkid="1">Stop</a>
+												</div>
 											</div>
-										<?php endforeach; ?>
+											<div class="maininfo limpia">
+												&nbsp;&nbsp;<b>Started at: </b>
+												<span id="<?php echo 'current-task-start-time-' . $dimensions[$panelName] ?>" class="letaskstamp">
+												
+												</span>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<b>Duration: </b>
+												<span class="clocks taskruat" data-timer="true">
+													<span id="<?php echo 'current-task-duration-hours-' . $dimensions[$panelName] ?>" class="hors"><?php echo $observation_duration->format("%H"); ?></span>h 
+													<span id="<?php echo 'current-task-duration-mins-' . $dimensions[$panelName] ?>" class="mins"><?php echo $observation_duration->format("%i"); ?></span>m 
+													<span id="<?php echo 'current-task-duration-secs-' . $dimensions[$panelName] ?>" class="secs"><?php echo $observation_duration->format("%s"); ?></span>s
+												</span>
+											</div>
+											<div class="acciones limpia">
+												<a href="#" class="editer button secondary small left">Edit name</a>
+												<a href="#" class="timfix button secondary small left">Fix time</a>
+												<a href="#" class="linkto button secondary small left ">Link to</a>
+												<a href="#" class="singlenote button secondary small right">Add note</a>
+											</div>
+										</div>
 									</div>
+								<?php endif ?>
+								<div id="<?php echo 'recorded-tasks-' . $dimensions[$panelName] ?>">
+									<?php foreach ($categorized_observation_tasks[$panelName] as $task): ?>
+										<?php
+										echo $this->renderPartial('_recorded_task_row', array(
+												'task' => $task,
+												'site_timezone' => $site_timezone
+										));
+										?>
+									<?php endforeach; ?>
 								</div>
-							<?php endif ?>
+							</div>
 						</div>
 					</div>
 				</div>

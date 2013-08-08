@@ -1,10 +1,16 @@
 <?php
 
-/* * tHIS 
+/**
+ * A controller to capture all the activities of data capture. 
  * 
+ * An observation can be a new one or a resumed one. Most of the events are ajax 
+ * requests. Current time depends on the site of the observation.
  */
-
 class ObservationsController extends Controller {
+
+	
+
+	
 
 	/**
 	 * @return array action filters
@@ -18,6 +24,7 @@ class ObservationsController extends Controller {
 
 	/**
 	 * Specifies the access control rules.
+	 * 
 	 * This method is used by the 'accessControl' filter.
 	 * @return array access control rules
 	 */
@@ -37,49 +44,77 @@ class ObservationsController extends Controller {
 		);
 	}
 
-	/*	 * The default action when rendering the Capture view.
+	/** The default action when rendering the Capture view.
 	 * 
-	 * @param type $studyId
-	 * @param type $observationId
+	 * This rendering can be an observation which is newly made or a resumed one.
+	 * @param type $studyId The study associated with observation
+	 * @param type $observationId The current observation id which is being recorded
 	 */
-
 	public function actionCapture($studyId, $observationId) {
+		/* a query to search study_dimension(s) given of a particular study.
+		 */
 		$studyDimensionCriteria = new CDbCriteria();
 		$studyDimensionCriteria->condition = "study_id=" . $studyId;
 		$studyDimensions = StudyDimensions::Model()->findAll($studyDimensionCriteria);
+
 		$this->render('capture', array(
 				'dimensions' => $this->dimensions($studyDimensions),
 				'study_tasks' => StudyTasks::Model()->findAll("study_id=" . $studyId),
+				'site_timezone' => Observations::Model()->findByPk($observationId)->site->timezone,
 				'categorized_tasks' => $this->categorizeTasks($studyDimensions),
 				'categorized_observation_tasks' => $this->categorizeObservationTasks($studyDimensions, $observationId),
 				'study_id' => $studyId,
 				'observation_id' => $observationId,
-				'current_time' => $this->getCurrentTime($observationId),
+				'current_time' => Observations::getCurrentTime($observationId),
 				'current_tasks' => $this->getCurrentTasks($studyDimensions, $observationId),
 				'observation_duration' => $this->calculateDuration($observationId),
 		));
 	}
 
-	/*	 * Ajax call for recording a task
+	/**
+	 * Ajax call for recording a task.
+	 * 
+	 * When a task button is clicked, an ajax call is triggered which records
+	 * the current time of the observation site.
 	 * 
 	 */
-
 	public function actionRecordTask() {
 		if (Yii::app()->request->isAjaxRequest) {
-			$taskId = Yii::app()->request->getParam('task_id');
+			$currentTaskId = Yii::app()->request->getParam('current_task_id');
 			$observationId = Yii::app()->request->getParam('observation_id');
-			$taskStartTime =	$this->getCurrentTime($observationId);//new DateTime('now', new DateTimeZone(Observations::Model()->findByPk($observationId)->site->timezone));
+			$previousObservationTaskId = Yii::app()->request->getParam('previous_observation_task_id');
+			$previousObservationTask = ObservationTasks::Model()->findByPk($previousObservationTaskId);
+			$taskStartTime = Observations::getCurrentTime($observationId); //new DateTime('now', new DateTimeZone(Observations::Model()->findByPk($observationId)->site->timezone));
 
 			$observationModel = new ObservationTasks;
 			$observationModel->observation_id = $observationId;
-			$observationModel->study_task_id = $taskId;
-			$observationModel->start_time = strtotime($taskStartTime->format("Y-m-d h:i:s"));
+			$observationModel->study_task_id = $currentTaskId;
+			$observationModel->start_time = $taskStartTime->getTimestamp();
+			$observationModel->status = 1;
 			if ($observationModel->save()) {
+				if ($previousObservationTask != null) {
+					$previousObservationTask->status = 0;
+					$previousObservationTask->save();
+				}
+				$unix_time = $taskStartTime->getTimestamp();
+				$task_start_time = new DateTime('@' . $unix_time);
+				$task_start_time->setTimeZone(new DateTimeZone(Observations::Model()->findByPk($observationId)->site->timezone));
+				$taskStartTime->setTimeZone(new DateTimeZone(Observations::Model()->findByPk($observationId)->site->timezone));
+
 				echo CJSON::encode(array(
-				'taskname' => $observationModel->studyTask->name,
-				'dimension_id' => $observationModel->studyTask->dimension_id,
-				'start_time' => $taskStartTime->format("H:i:s")));//$this->getCurrentTime($observationId)));
+						'current_observation_task_id' => $observationModel->id,
+						'taskname' => $observationModel->studyTask->name,
+						'dimension_id' => $observationModel->studyTask->dimension_id,
+						'start_time' => $taskStartTime->format("H:i:s"),
+						'unix_time' => strtotime($taskStartTime->format("Y-m-d H:i:s")),
+						'after_unix_time' => $task_start_time->format("H:i:s"),
+						'recorded_task_row' => $this->renderPartial('_recorded_task_row', array(
+								'task' => $previousObservationTask,
+								'site_timezone' => Observations::Model()->findByPk($observationId)->site->timezone
+										)
+										, true)));
 			}
+
 			Yii::app()->end();
 		}
 	}
@@ -245,9 +280,9 @@ class ObservationsController extends Controller {
 		foreach ($studyDimensions as $studyDimension) {
 			$observationTasksCriteria = new CDbCriteria();
 			$observationTasksCriteria->alias = 't1';
-			//$observationTasksCriteria->join = 'RIGHT JOIN tc_study_tasks ON dimension_id=' . $studyDimension->id;
 			$observationTasksCriteria->condition = "t1.observation_id=" . $observationId;
-			$observationTasksCriteria->order ="start_time DESC";
+			$observationTasksCriteria->addCondition("t1.status=" . ObservationTasks::$FINISHED_TASK);
+			$observationTasksCriteria->order = "start_time DESC";
 			$observationTasksCriteria->with = array('studyTask');
 			$observationTasksCriteria->addCondition("studyTask.dimension_id=" . $studyDimension->id);
 
@@ -286,15 +321,11 @@ class ObservationsController extends Controller {
 	 */
 
 	public function calculateDuration($observationId) {
-		$currentTime = $this->getCurrentTime($observationId);
+		$currentTime = Observations::getCurrentTime($observationId);
 		$observationStartTime = new DateTime("@" . Observations::Model()->findByPk($observationId)->start_time);
+		$observationStartTime->setTimeZone(new DateTimeZone(Observations::Model()->findByPk($observationId)->site->timezone));
 		return $currentTime->diff($observationStartTime);
 	}
-
-	public function getCurrentTime($observationId) {
-		return new DateTime('now', new DateTimeZone(Observations::Model()->findByPk($observationId)->site->timezone));
-	}
-
 	/**
 	 * Performs the AJAX validation.
 	 * @param Observations $model the model to be validated

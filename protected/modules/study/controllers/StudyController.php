@@ -75,18 +75,17 @@ class StudyController extends Controller {
 				"type" => array('select' => 'type_entry'));
 
 		$observationsModel = new Observations;
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
-
 		if (isset($_POST['Observations'])) {
 			$subjectModel = new Subjects;
 			$observationsModel->attributes = $_POST['Observations'];
 			$subjectModel->study_id = $studyId;
 			$subjectModel->description = $observationsModel->subjectDescription;
 			$subjectModel->save();
+			$startTime = new DateTime('now', new DateTimeZone($observationsModel->site->timezone));
+			$observationsModel->start_time = $startTime->getTimestamp();
 			$observationsModel->study_id = $studyId;
 			$observationsModel->user_id = Yii::app()->user->id;
-			$observationsModel->subject_id = $subjectModel->id; //Subjects::model()->find("description='".$subjectModel->description."'");
+			$observationsModel->subject_id = $subjectModel->id;
 			if ($observationsModel->save()) {
 				$this->redirect(array('observations/capture', 'studyId' => $studyId, 'observationId'=>$observationsModel->id));
 			}
