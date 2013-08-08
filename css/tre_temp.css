@@ -12,7 +12,7 @@
 	margin:6px 10px 6px 0px;
 }
 .tc-hide {
-	visibility:hidden;
+	display: none!important;
 }
 .observer-pending-border {
 	border: 2px solid #FFCC66;

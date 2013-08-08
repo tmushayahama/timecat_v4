@@ -19,6 +19,40 @@ class ObservationTasks extends CActiveRecord
 {
 	public static $FINISHED_TASK = 0;
 	public static $CURRENT_OBSERVATION_TASK = 1;
+	public static function getCurrentTasks($studyId, $observationId) {
+		$categorizeTask = array();
+		foreach (StudyDimensions::getStudyDimensions($studyId) as $studyDimension) {
+			$observationTasksCriteria = new CDbCriteria();
+			$observationTasksCriteria->alias = 't1';
+			$observationTasksCriteria->condition = "t1.observation_id=" . $observationId . ' AND t1.status =' . 1;
+			$observationTasksCriteria->with = array('studyTask');
+			$observationTasksCriteria->addCondition("studyTask.dimension_id=" . $studyDimension->id);
+			$categorizeTask += array($studyDimension->dimension => ObservationTasks::Model()->find($observationTasksCriteria));
+		}
+		return $categorizeTask;
+	}
+	public static function getCategorizedObservationTasks($studyId, $observationId) {
+		$categorizeTask = array();
+		foreach (StudyDimensions::getStudyDimensions($studyId) as $studyDimension) {
+			$observationTasksCriteria = new CDbCriteria();
+			$observationTasksCriteria->alias = 't1';
+			$observationTasksCriteria->condition = "t1.observation_id=" . $observationId;
+			$observationTasksCriteria->addCondition("t1.status=" . ObservationTasks::$FINISHED_TASK);
+			$observationTasksCriteria->order = "start_time DESC";
+			$observationTasksCriteria->with = array('studyTask');
+			$observationTasksCriteria->addCondition("studyTask.dimension_id=" . $studyDimension->id);
+			$categorizeTask += array($studyDimension->dimension => ObservationTasks::Model()->findAll($observationTasksCriteria));
+		}
+		return $categorizeTask;
+	}
+
+	public static function getCategorizedTasks($studyId) {
+		$categorizeTask = array();
+		foreach (StudyDimensions::getStudyDimensions($studyId) as $studyDimension) {
+			$categorizeTask += array($studyDimension->dimension => StudyTasks::Model()->findAll('dimension_id=' . $studyDimension->id));
+		}
+		return $categorizeTask;
+	}
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -102,4 +136,5 @@ class ObservationTasks extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
 }

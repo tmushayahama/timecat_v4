@@ -26,6 +26,7 @@ class StudyDimensions extends CActiveRecord {
 				StudyDimensions::$LINEAR_TASK_TYPE
 		);
 	}
+
 	public static function MULTITASK_DIMENSION() {
 		return array(
 				StudyDimensions::$COMMUNICATION_TASK_TYPE,
@@ -33,6 +34,7 @@ class StudyDimensions extends CActiveRecord {
 				StudyDimensions::$SIMPLE_TASK_TYPE
 		);
 	}
+
 	public static function MULTIACTOR_DIMENSION() {
 		return array(
 				StudyDimensions::$FOCUS_1_TASK_TYPE,
@@ -40,6 +42,18 @@ class StudyDimensions extends CActiveRecord {
 		);
 	}
 
+	public static function getStudyDimensions($studyId) {
+		$studyDimensionCriteria = new CDbCriteria();
+		$studyDimensionCriteria->condition = "study_id=" . $studyId;
+		return StudyDimensions::Model()->findAll($studyDimensionCriteria);
+	}
+	public static function getDimensionsNameIdMap($studyId) {
+		$dimension = array();
+		foreach (StudyDimensions::getStudyDimensions($studyId) as $studyDimension) {
+			$dimension += array($studyDimension->dimension => $studyDimension->id);
+		}
+		return $dimension;
+	}
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -113,5 +127,4 @@ class StudyDimensions extends CActiveRecord {
 				'criteria' => $criteria,
 		));
 	}
-
 }

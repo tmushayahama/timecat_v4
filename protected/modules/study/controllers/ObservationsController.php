@@ -51,22 +51,16 @@ class ObservationsController extends Controller {
 	 * @param type $observationId The current observation id which is being recorded
 	 */
 	public function actionCapture($studyId, $observationId) {
-		/* a query to search study_dimension(s) given of a particular study.
-		 */
-		$studyDimensionCriteria = new CDbCriteria();
-		$studyDimensionCriteria->condition = "study_id=" . $studyId;
-		$studyDimensions = StudyDimensions::Model()->findAll($studyDimensionCriteria);
-
 		$this->render('capture', array(
-				'dimensions' => $this->dimensions($studyDimensions),
+				'dimensions' => StudyDimensions::getDimensionsNameIdMap($studyId),
 				'study_tasks' => StudyTasks::Model()->findAll("study_id=" . $studyId),
 				'site_timezone' => Observations::Model()->findByPk($observationId)->site->timezone,
-				'categorized_tasks' => $this->categorizeTasks($studyDimensions),
-				'categorized_observation_tasks' => $this->categorizeObservationTasks($studyDimensions, $observationId),
+				'categorized_tasks' => ObservationTasks::getCategorizedTasks($studyId),
+				'categorized_observation_tasks' => ObservationTasks::getCategorizedObservationTasks($studyId, $observationId),
 				'study_id' => $studyId,
 				'observation_id' => $observationId,
 				'current_time' => Observations::getCurrentTime($observationId),
-				'current_tasks' => $this->getCurrentTasks($studyDimensions, $observationId),
+				'current_tasks' => ObservationTasks::getCurrentTasks($studyId, $observationId),
 				'observation_duration' => $this->calculateDuration($observationId),
 		));
 	}
@@ -262,50 +256,11 @@ class ObservationsController extends Controller {
 		return $model;
 	}
 
-	protected function getCurrentTasks($studyDimensions, $observationId) {
-		$categorizeTask = array();
-		foreach ($studyDimensions as $studyDimension) {
-			$observationTasksCriteria = new CDbCriteria();
-			$observationTasksCriteria->alias = 't1';
-			$observationTasksCriteria->condition = "t1.observation_id=" . $observationId . ' AND t1.status =' . 1;
-			$observationTasksCriteria->with = array('studyTask');
-			$observationTasksCriteria->addCondition("studyTask.dimension_id=" . $studyDimension->id);
-			$categorizeTask += array($studyDimension->dimension => ObservationTasks::Model()->find($observationTasksCriteria));
-		}
-		return $categorizeTask;
-	}
+	
 
-	protected function categorizeObservationTasks($studyDimensions, $observationId) {
-		$categorizeTask = array();
-		foreach ($studyDimensions as $studyDimension) {
-			$observationTasksCriteria = new CDbCriteria();
-			$observationTasksCriteria->alias = 't1';
-			$observationTasksCriteria->condition = "t1.observation_id=" . $observationId;
-			$observationTasksCriteria->addCondition("t1.status=" . ObservationTasks::$FINISHED_TASK);
-			$observationTasksCriteria->order = "start_time DESC";
-			$observationTasksCriteria->with = array('studyTask');
-			$observationTasksCriteria->addCondition("studyTask.dimension_id=" . $studyDimension->id);
+	
 
-			$categorizeTask += array($studyDimension->dimension => ObservationTasks::Model()->findAll($observationTasksCriteria));
-		}
-		return $categorizeTask;
-	}
-
-	protected function categorizeTasks($studyDimensions) {
-		$categorizeTask = array();
-		foreach ($studyDimensions as $studyDimension) {
-			$categorizeTask += array($studyDimension->dimension => StudyTasks::Model()->findAll('dimension_id=' . $studyDimension->id));
-		}
-		return $categorizeTask;
-	}
-
-	protected function dimensions($studyDimensions) {
-		$dimension = array();
-		foreach ($studyDimensions as $studyDimension) {
-			$dimension += array($studyDimension->dimension => $studyDimension->id);
-		}
-		return $dimension;
-	}
+	
 
 	public function findDimensionId($studyId, $dimensionName) {
 		$dimension = StudyDimensions::Model()->find("study_id=" . $studyId . " AND dimension = '" . $dimensionName . "'");

@@ -92,9 +92,12 @@ Yii::app()->clientScript->registerScriptFile(
 									<div  id="<?php echo 'recorded-task-panel-' . $dimensions[$panelName]?>" class="holder">
 										<div class="listblock limpia papa ">
 											<div class="statindicator limpia">
-												<div class="aleditar aparece">
-													<input type="text" name="freetexttask" class="left"><a href="#" class="saveledit button small success left">Save</a>
-												</div>
+												<div class="edit-task aleditar tc-hide">
+													<input type="text" name="<?php echo 'edit-task-' . $dimensions[$panelName]?>" class="left">
+													<a href="#" class="edit-task-save-btn saveledit button small success left" dimension-id="<?php echo $dimensions[$panelName]?>">
+														Save
+													</a>
+												</div> 
 												<div class="normal">
 													<span id="<?php echo 'current-task-' . $dimensions[$panelName] ?>"
 																class="tasknamer taknamep eliseo left" 
@@ -126,7 +129,8 @@ Yii::app()->clientScript->registerScriptFile(
 												</span>
 											</div>
 											<div class="acciones limpia">
-												<a href="#" class="editer button secondary small left">Edit name</a>
+												<a href="#" class="cancel-edit-task-btn button secondary small left alert tc-hide">Cancel</a>
+												<a href="#" class="edit-task-btn button secondary small left" dimension-id="<?php echo $dimensions[$panelName]?>">Edit name</a>
 												<a href="#" class="timfix button secondary small left">Fix time</a>
 												<a href="#" class="linkto button secondary small left ">Link to</a>
 												<a href="#" class="singlenote button secondary small right">Add note</a>
