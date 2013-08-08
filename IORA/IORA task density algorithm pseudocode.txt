@@ -1,0 +1,10 @@
+int time = Observation.start_time;
+int interval = 0;
+int[] density = new int[];
+for each key time pointing to value Observation.tasks
+    if timestamp key >= time + 10
+        interval++;
+    density[interval]++;
+return density;
+
+int avg = sum(density[:])/density.length;
