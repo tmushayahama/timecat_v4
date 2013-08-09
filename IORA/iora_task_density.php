@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-function iora_task_density($observation, $period){
+function task_density($observation, $period){
     $time = $observation->start_time;
     $interval = 0;
     $density = array();
@@ -14,13 +14,14 @@ function iora_task_density($observation, $period){
         if($timestamp >= ($time + $period)){
             $interval++;
             $density[$interval] = 0;
+            $time += $period;
         }
         $density[$interval]++;
     }
     return $density;
 }
 
-function iora_avg_task_density($density){
+function avg_task_density($density){
     $sum = 0;
     foreach($density as $value){
         $sum+=$value;

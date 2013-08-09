@@ -1,6 +1,6 @@
 <?php
 
-function iora_kappa($observationA, $observationZ) {
+function persistence_agreement($observationA, $observationZ) {
     $matching_seconds = 0;
     $total_seconds = 0;
     $offset = $observationZ->start_time - $observationA->start_time;

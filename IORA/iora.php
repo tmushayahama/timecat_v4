@@ -1,18 +1,35 @@
 <?php
 
-$idA = 214;
-$idZ = 215;
+function iora_main($study_id){
+    $iora_sql = new IORA_SQL();
+    $pairs = $iora_sql->get_comparable_observations($study_id);
+    
+    //arbitrarily gets the ids for the first pair returned
+    $idA = $pairs[0][0];
+    $idZ = $pairs[0][1];
 
-$iora_sql = new IORA_SQL();
+    //gets the manipulatable Observation object (see below) from the id
+    $observationA = $iora_sql->query_tasks($idA);
+    $observationZ = $iora_sql->query_tasks($idZ); 
 
-$observationA = $iora_sql->query_tasks($idA);
-$observationZ = $iora_sql->query_tasks($idZ); 
+    //calls iora functions
+    echo persistence_agreement($observationA, $observationZ);
+    echo avg_task_density(task_density($observationA, 10));
+}
 
-echo iora_kappa($observationA, $observationZ);
 
-echo iora_avg_task_density(iora_task_density($observationA, 10));
+function get_comparable_observations($study_id){
+    $iora_sql = new IORA_SQL();
+    return $iora_sql->get_comparable_observations($study_id);
+}
 
-function iora_kappa($observationA, $observationZ){
+function get_observation($observation_id){
+    $iora_sql = new IORA_SQL();
+    return $iora_sql->query_tasks($observation_id);
+}
+
+
+function persistence_agreement($observationA, $observationZ){
     $matching_seconds = 0;
     $total_seconds = 0;
     $offset = $observationZ->start_time - $observationA->start_time;
@@ -28,7 +45,7 @@ function iora_kappa($observationA, $observationZ){
     return $match_fraction;
 }
 
-function iora_task_density($observation, $period){
+function task_density($observation, $period){
     $time = $observation->start_time;
     $interval = 0;
     $density = array();
@@ -37,13 +54,14 @@ function iora_task_density($observation, $period){
         if($timestamp >= ($time + $period)){
             $interval++;
             $density[$interval] = 0;
+            $time += $period;
         }
         $density[$interval]++;
     }
     return $density;
 }
 
-function iora_avg_task_density($density){
+function avg_task_density($density){
     $sum = 0;
     foreach($density as $value){
         $sum+=$value;
@@ -53,25 +71,44 @@ function iora_avg_task_density($density){
 
 class IORA_SQL {
 
-    public static $host = "localhost";
-    public static $username = "";
-    public static $password = "";
-    public static $database_name = "test";
-    public static $port = 3306;
-    public static $socket = "";
-    public static $tc_observation_tasks = "task";
-    public static $observation_id = "idtc5";
-    public static $task_name = "idt";
-    public static $start_time = "timeon";
     public $link;
 
     function IORA_SQL() {
-        $this->link = new mysqli(IORA_SQL::$host, IORA_SQL::$username, IORA_SQL::$password, IORA_SQL::$database_name, IORA_SQL::$port, IORA_SQL::$socket);
+        $this->link = new mysqli(Metadata::$host, Metadata::$username, Metadata::$password, Metadata::$database_name, Metadata::$port, Metadata::$socket);
+    }
+
+    function get_comparable_observations($study_id) {
+        $result = $this->link->query("SELECT " . "*" . " FROM " . Metadata::$tc_observations . " WHERE " . Metadata::$observation_study_id . " = '" . $study_id . "' AND " . Metadata::$observation_type_id . " = '" . Metadata::$type_iora . "'");
+        $observations = array();
+        while ($row = $result->fetch_assoc()) {
+            $observations[] = $row;
+        }
+        
+        $validPairs = array();
+        
+        foreach ($observations as $observationA) {
+            foreach ($observations as $observationB) {
+                if ($observationA != $observationB) {
+                    //if B started at the same time as or after A started 
+                    // AND A ended after B started
+                    if ($observationA[Metadata::$observation_site_id] == $observationB[Metadata::$observation_site_id]
+                            && $observationB[Metadata::$observation_start_time] >= $observationA[Metadata::$observation_start_time] 
+                            && ($observationA[Metadata::$observation_start_time] + $observationA[Metadata::$observation_duration]) 
+                                > $observationB[Metadata::$observation_start_time]
+                        ) {
+                        $validPairs[] = array($observationA[Metadata::$tc_observations_id], $observationB[Metadata::$tc_observations_id]);
+                    }
+                }
+            }
+        }
+        
+        return $validPairs;
+        
     }
 
     function query_tasks($observation_id) {
-        $result = $this->link->query("SELECT " . IORA_SQL::$task_name . ", " . IORA_SQL::$start_time . " FROM " . IORA_SQL::$tc_observation_tasks . " WHERE " . IORA_SQL::$observation_id . " = '" . $observation_id . "'");
-//        '".IORA_SQL::$task_name.", ".IORA_SQL::$start_time."'
+        $result = $this->link->query("SELECT " . Metadata::$task_id . ", " . Metadata::$start_time . " FROM " . Metadata::$tc_observation_tasks . " WHERE " . Metadata::$observation_id . " = '" . $observation_id . "'");
+//        '".Metadata::$task_name.", ".Metadata::$start_time."'
         $taskTable = array();
         while ($row = $result->fetch_assoc()) {
             $taskTable[] = $row;
@@ -81,15 +118,15 @@ class IORA_SQL {
         $seconds = array();
         $taskTableSize = sizeof($taskTable);
         for ($i = 0; $i < $taskTableSize - 1; $i++) {
-            $tasks[$taskTable[$i][IORA_SQL::$start_time]] = $taskTable[$i][IORA_SQL::$task_name];
-            $diff = $taskTable[$i + 1][IORA_SQL::$start_time] - $taskTable[$i][IORA_SQL::$start_time];
+            $tasks[$taskTable[$i][Metadata::$start_time]] = $taskTable[$i][Metadata::$task_id];
+            $diff = $taskTable[$i + 1][Metadata::$start_time] - $taskTable[$i][Metadata::$start_time];
             for ($j = 0; $j < $diff; $j++) {
-                $seconds[] = $taskTable[$i][IORA_SQL::$task_name];
+                $seconds[] = $taskTable[$i][Metadata::$task_id];
             }
         }
-        $seconds[] = $taskTable[$taskTableSize - 1][IORA_SQL::$task_name];
+        $seconds[] = $taskTable[$taskTableSize - 1][Metadata::$task_id];
 
-        return new Observation($taskTable[0][IORA_SQL::$start_time], $taskTable[$taskTableSize - 1][IORA_SQL::$start_time] - $taskTable[0][IORA_SQL::$start_time], $seconds, $tasks);
+        return new Observation($taskTable[0][Metadata::$start_time], $taskTable[$taskTableSize - 1][Metadata::$start_time] - $taskTable[0][Metadata::$start_time], $seconds, $tasks);
     }
 
 }
@@ -111,5 +148,32 @@ class Observation {
     }
 
 }
+
+class Metadata {
+
+    public static $host = "timecat.bmi.osumc.edu";
+    public static $username = "cheloptc4";
+    public static $password = "723MwiJf7m2xaZ$2#BNR";
+    public static $database_name = "timecat4";
+    public static $port = 22;
+    public static $socket = "";
+    //for Observation_Tasks table
+    public static $tc_observation_tasks = "maindata";
+    public static $observation_id = "obs_id";
+    public static $task_id = "task_id";
+    public static $start_time = "start";
+    //for Observations table
+    public static $tc_observations = "observations";
+    public static $tc_observations_id = "id";
+    public static $observation_study_id = "study_id";
+    public static $observation_user_id = "user_id";
+    public static $observation_site_id = "site_id";
+    public static $observation_start_time = "begin";
+    public static $observation_duration = "duration";
+    public static $observation_type_id = "type_id";
+    public static $type_iora = 3;
+
+}
+
 
 ?>

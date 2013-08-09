@@ -4,6 +4,7 @@ int[] density = new int[];
 for each key time pointing to value Observation.tasks
     if timestamp key >= time + 10
         interval++;
+        time+=10;
     density[interval]++;
 return density;
 

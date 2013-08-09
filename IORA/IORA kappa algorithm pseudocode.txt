@@ -15,6 +15,10 @@ for each Observation A in valid set
 		
 			add B to set of valid IORA comparisons for A
 		
+
+
+
+
 	//run IORA comparisons
 	
 	//get Observation_Tasks in Observation A from database
