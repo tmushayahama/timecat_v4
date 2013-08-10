@@ -55,6 +55,7 @@ class ObservationsController extends Controller {
 				'categorized_observation_tasks' => ObservationTasks::getCategorizedObservationTasks($studyId, $observationId),
 				'study_id' => $studyId,
 				'observation_id' => $observationId,
+				'observation_notes' => Observations::getAllNotes($observationId),
 				'current_time' => Observations::getCurrentTime($observationId),
 				'current_tasks' => ObservationTasks::getCurrentTasks($studyId, $observationId),
 				'observation_duration' => $this->calculateDuration($observationId),
@@ -96,8 +97,6 @@ class ObservationsController extends Controller {
 						'taskname' => $observationModel->studyTask->name,
 						'dimension_id' => $observationModel->studyTask->dimension_id,
 						'start_time' => $taskStartTime->format("H:i:s"),
-						'unix_time' => strtotime($taskStartTime->format("Y-m-d H:i:s")),
-						'after_unix_time' => $task_start_time->format("H:i:s"),
 						'recorded_task_row' => $this->renderPartial('_recorded_task_row', array(
 								'task' => $previousObservationTask,
 								'site_timezone' => Observations::Model()->findByPk($observationId)->site->timezone
@@ -128,7 +127,13 @@ class ObservationsController extends Controller {
 			$observationNoteModel->time_taken = $noteTime->getTimestamp();
 			if ($observationNoteModel->save()) {
 				echo CJSON::encode(array(
-				));
+						'recorded_note_row' => $this->renderPartial('_recorded_note_row', array(
+								'note_time' => $noteTime,
+								'note' => $note,
+								'type' => 'Global Note',
+								'site_timezone' => Observations::Model()->findByPk($observationId)->site->timezone
+										)
+										, true)));
 			}
 			Yii::app()->end();
 		}

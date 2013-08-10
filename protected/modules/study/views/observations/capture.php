@@ -42,11 +42,19 @@ Yii::app()->clientScript->registerScriptFile(
 		<div id="titenote" class="anote grisos">
 			<p class="oblog"><strong>Observation log</strong></p>
 		</div>
-		<div id="thenotes" class="blanko">
-			<div class="onenote">
-				<p class="oblog"><span class="notetime">01:46:49</span> - <span class="notetype">Global note</span><br/>
-					<em><span class="oblog notexts">Observation started OK.</span></em></p>
-			</div>
+		<div id="all-recorded-notes" class="blanko">
+			<?php
+			foreach ($observation_notes as $note):
+				$type = ($note->observation_task_id == null) ? "Global Note" : $note->observationTask->studyTask->name;
+				$note_time = new DateTime('@' . $note->time_taken);
+				echo $this->renderPartial('_recorded_note_row', array(
+						'note_time' => $note_time,
+						'type' => $type,
+						'note' => $note->note,
+						'site_timezone' => $site_timezone
+				));
+			endforeach;
+			?>
 		</div>
 		<div id="neonote" class="a64 griso">
 			<div id="notetypo" data-tkinstid="0">General note</div>

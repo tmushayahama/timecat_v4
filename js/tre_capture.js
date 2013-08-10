@@ -28,8 +28,8 @@ function recordNote(data) {
 		type: "POST",
 		dataType: 'json',
 		data: data,
-		success: function(data) {
-			alert("yes");
+		success: function(recordedNoteData) {
+			$('#all-recorded-notes').prepend(recordedNoteData["recorded_note_row"]);
 		}
 	});
 }
@@ -128,7 +128,7 @@ function addObservationNotesEventHandlers() {
 			} else {
 				data = {'observation_id': observationId,
 					'global_note': note};
-				$(this).val(null);
+				$(this).val('');
 				recordNote(data);
 			}
 		}

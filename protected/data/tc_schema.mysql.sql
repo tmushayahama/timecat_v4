@@ -248,6 +248,7 @@ ALTER TABLE `tc_observation_tasks`
 CREATE TABLE `tc_observation_notes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `observation_id` int not null,
+  `observation_task_id` int,
   `note` varchar(255) DEFAULT '',
   `time_taken` int(11) unsigned not null default 0,
    PRIMARY KEY (`id`)
@@ -256,16 +257,8 @@ CREATE TABLE `tc_observation_notes` (
 ALTER TABLE `tc_observation_notes`
   ADD CONSTRAINT `observation_observation_id` FOREIGN KEY (`observation_id`) REFERENCES `tc_observations` (`id`) ON DELETE CASCADE;
 
-CREATE TABLE `tc_observation_tasks_notes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-	`observation_task_id` int,
-  `note` varchar(255) DEFAULT '',
-`time_taken` int(11) unsigned not null default 0,
-   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
-
-ALTER TABLE `tc_observation_tasks_notes`
-  ADD CONSTRAINT `observation_tasks_notes_observaztion_task_id` FOREIGN KEY (`observation_task_id`) REFERENCES `tc_observation_tasks`(`id`) ON DELETE CASCADE;
+ALTER TABLE `tc_observation_notes`
+  ADD CONSTRAINT `observation_notes_observaztion_task_id` FOREIGN KEY (`observation_task_id`) REFERENCES `tc_observation_tasks`(`id`) ON DELETE CASCADE;
 
 CREATE TABLE `tc_messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
