@@ -24,4 +24,12 @@
 	background-color: #FFCC66;
 	color:#000;
 }
-
+#observation-log{
+	width: 300px;
+	height: 400px;
+	z-index: 9999 !important;
+	position: absolute;
+	top: 33px;
+	right: 0px;
+	display: none;
+}

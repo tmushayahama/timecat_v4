@@ -190,9 +190,8 @@ ALTER TABLE `tc_study_tasks`
 -- -------------subject-------------
 CREATE TABLE `tc_subjects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-	`study_id` int not null,
+  `study_id` int not null,
   `description` varchar(255) DEFAULT '',
-	unique key (`study_id`, `description`),
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
@@ -246,19 +245,27 @@ ALTER TABLE `tc_observation_tasks`
   ADD CONSTRAINT `observation_tasks_study_task_id` FOREIGN KEY (`study_task_id`) REFERENCES `tc_study_tasks` (`id`) ON DELETE CASCADE;
 
 
-CREATE TABLE `tc_notes` (
+CREATE TABLE `tc_observation_notes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-	`observation_id` int not null,
-	`observation_task_id` int,
-  `notes` varchar(255) DEFAULT '',
+  `observation_id` int not null,
+  `note` varchar(255) DEFAULT '',
+  `time_taken` int(11) unsigned not null default 0,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
-ALTER TABLE `tc_notes`
-  ADD CONSTRAINT `observation_notes_id` FOREIGN KEY (`observation_id`) REFERENCES `tc_observations` (`id`) ON DELETE CASCADE;
+ALTER TABLE `tc_observation_notes`
+  ADD CONSTRAINT `observation_observation_id` FOREIGN KEY (`observation_id`) REFERENCES `tc_observations` (`id`) ON DELETE CASCADE;
 
-ALTER TABLE `tc_notes`
-  ADD CONSTRAINT `observation_tasks_notes_id` FOREIGN KEY (`observation_task_id`) REFERENCES `tc_observation_tasks`(`id`) ON DELETE CASCADE;
+CREATE TABLE `tc_observation_tasks_notes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+	`observation_task_id` int,
+  `note` varchar(255) DEFAULT '',
+`time_taken` int(11) unsigned not null default 0,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+ALTER TABLE `tc_observation_tasks_notes`
+  ADD CONSTRAINT `observation_tasks_notes_observaztion_task_id` FOREIGN KEY (`observation_task_id`) REFERENCES `tc_observation_tasks`(`id`) ON DELETE CASCADE;
 
 CREATE TABLE `tc_messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

@@ -4,8 +4,9 @@
  */
 $(document).ready(function() {
 	console.log("Loading tre_capture.js....");
-	addRordTaecordTaskEventHandlers();
+	addRecordTaskEventHandlers();
 	addEditTaskEventHandlers();
+	addObservationNotesEventHandlers();
 });
 /**
  * To animate a blink of the recorded task. 
@@ -21,12 +22,22 @@ jQuery.fn.flash = function(opacity, duration)
 	this.animate({opacity: opacity}, duration / 2);
 	this.animate({opacity: current}, duration / 2);
 };
-
+function recordNote(data) {
+	$.ajax({
+		url: recordGlobalNoteUrl,
+		type: "POST",
+		dataType: 'json',
+		data: data,
+		success: function(data) {
+			alert("yes");
+		}
+	});
+}
 /** Binds the task button events.
  * 
  * 
  */
-function addRordTaecordTaskEventHandlers() {
+function addRecordTaskEventHandlers() {
 	$(".task-btn").click(function(e) {
 		e.preventDefault();
 		$('#recorded-task-panel-' + $(this).attr("dimension-id")).removeClass('tc-hide');
@@ -36,7 +47,7 @@ function addRordTaecordTaskEventHandlers() {
 		console.log($(this).text() + " clicked" + " Previous Task Id = " +
 						$('#current-task-' + $(this).attr("dimension-id")).attr("current-task-id"));
 		$.ajax({
-			url: record_task_url,
+			url: recordTaskUrl,
 			type: "POST",
 			dataType: 'json',
 			data: {"current_task_id": $(this).attr("current-task-id"),
@@ -88,19 +99,38 @@ function addEditTaskEventHandlers() {
 		if (taskName.trim() == "") {
 			alert("Task Name should not be blank");
 		} else {
-		/*	$.ajax({
-				url: record_task_url,
-				type: "POST",
-				dataType: 'json',
-				data: {"current_task_id": $(this).attr("current-task-id"),
-					"observation_id": $(this).attr("observation-id"),
-					"previous_observation_task_id": ($('#current-task-' + $(this).attr("dimension-id")).attr("current-task-id") == undefined) ?
-									0 :
-									$('#current-task-' + $(this).attr("dimension-id")).attr("current-task-id")
-				},
-				success: function(data) {
-
-				 */
+			/*	$.ajax({
+			 url: record_task_url,
+			 type: "POST",
+			 dataType: 'json',
+			 data: {"current_task_id": $(this).attr("current-task-id"),
+			 "observation_id": $(this).attr("observation-id"),
+			 "previous_observation_task_id": ($('#current-task-' + $(this).attr("dimension-id")).attr("current-task-id") == undefined) ?
+			 0 :
+			 $('#current-task-' + $(this).attr("dimension-id")).attr("current-task-id")
+			 },
+			 success: function(data) {
+			 
+			 */
+		}
+	});
+}
+function addObservationNotesEventHandlers() {
+	$('.observation-notes-btn').click(function(e) {
+		e.preventDefault();
+		$('#observation-log').slideToggle();
+	});
+	$("textarea[name='newnote']").keypress(function(e) {
+		if (e.keyCode == 13) {
+			var note = $(this).val().trim();
+			if (note === "") {
+				alert("Note cannote be blank");
+			} else {
+				data = {'observation_id': observationId,
+					'global_note': note};
+				$(this).val(null);
+				recordNote(data);
+			}
 		}
 	});
 }

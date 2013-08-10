@@ -8,10 +8,6 @@
  */
 class ObservationsController extends Controller {
 
-	
-
-	
-
 	/**
 	 * @return array action filters
 	 */
@@ -31,7 +27,7 @@ class ObservationsController extends Controller {
 	public function accessRules() {
 		return array(
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'actions' => array('create', 'update', 'capture', 'recordtask'),
+						'actions' => array('create', 'update', 'capture', 'recordtask', 'recordglobalnote'),
 						'users' => array('@'),
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -109,6 +105,31 @@ class ObservationsController extends Controller {
 										, true)));
 			}
 
+			Yii::app()->end();
+		}
+	}
+
+	/**
+	 * Ajax call for recording a note.
+	 * 
+	 * When a task button is clicked, an ajax call is triggered which records
+	 * the current time of the observation site.
+	 * 
+	 */
+	public function actionRecordGlobalNote() {
+		if (Yii::app()->request->isAjaxRequest) {
+			$observationId = Yii::app()->request->getParam('observation_id');
+			$note = Yii::app()->request->getParam('global_note');
+			$noteTime = Observations::getCurrentTime($observationId); //new DateTime('now', new DateTimeZone(Observations::Model()->findByPk($observationId)->site->timezone));
+
+			$observationNoteModel = new ObservationNotes;
+			$observationNoteModel->observation_id = $observationId;
+			$observationNoteModel->note = $note;
+			$observationNoteModel->time_taken = $noteTime->getTimestamp();
+			if ($observationNoteModel->save()) {
+				echo CJSON::encode(array(
+				));
+			}
 			Yii::app()->end();
 		}
 	}
@@ -256,12 +277,6 @@ class ObservationsController extends Controller {
 		return $model;
 	}
 
-	
-
-	
-
-	
-
 	public function findDimensionId($studyId, $dimensionName) {
 		$dimension = StudyDimensions::Model()->find("study_id=" . $studyId . " AND dimension = '" . $dimensionName . "'");
 		if ($dimension == null)
@@ -281,6 +296,7 @@ class ObservationsController extends Controller {
 		$observationStartTime->setTimeZone(new DateTimeZone(Observations::Model()->findByPk($observationId)->site->timezone));
 		return $currentTime->diff($observationStartTime);
 	}
+
 	/**
 	 * Performs the AJAX validation.
 	 * @param Observations $model the model to be validated

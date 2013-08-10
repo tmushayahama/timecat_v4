@@ -54,7 +54,8 @@ class StudyController extends Controller {
 		);
 	}
 
-	/*	 * This is the main of the study
+	/**
+	 *  This is the main of the study
 	 * @param integer $studyId specifies the currently selected studyId
 	 */
 
