@@ -11,7 +11,7 @@ Yii::app()->clientScript->registerScriptFile(
 ?>
 <script id="record-task-url" type="text/javascript">
 	var recordTaskUrl = "<?php echo Yii::app()->createUrl('study/observations/recordtask'); ?>";
-	var recordGlobalNoteUrl = "<?php echo Yii::app()->createUrl('study/observations/recordglobalnote'); ?>";
+	var recordNoteUrl = "<?php echo Yii::app()->createUrl('study/observations/recordnote'); ?>";
 	var observationId = "<?php echo $observation_id; ?>"
 </script>
 <div id="wrap" class="blangradient">
@@ -57,9 +57,9 @@ Yii::app()->clientScript->registerScriptFile(
 			?>
 		</div>
 		<div id="neonote" class="a64 griso">
-			<div id="notetypo" data-tkinstid="0">General note</div>
+			<div id="note-type" observation-task-id="0" ></div>
 			<div id="newnoter" class="noteinput left">
-				<textarea name="newnote" placeholder="Write your notes here..."></textarea>
+				<textarea name="new-note" placeholder="Write your notes here..."></textarea>
 			</div>
 			<div class="savebuton right">
 				<a id="notecloser" href="#" class="button secondary small a50"><i class="foundicon-up-arrow"></i></a>
@@ -140,7 +140,7 @@ Yii::app()->clientScript->registerScriptFile(
 												<a href="#" class="edit-task-btn button secondary small left" dimension-id="<?php echo $dimensions[$panelName] ?>">Edit name</a>
 												<a href="#" class="timfix button secondary small left">Fix time</a>
 												<a href="#" class="linkto button secondary small left ">Link to</a>
-												<a href="#" class="singlenote button secondary small right">Add note</a>
+												<a href="#" class="current-task-note-btn singlenote button secondary small right" dimension-id="<?php echo $dimensions[$panelName]; ?>">Add note</a>
 											</div>
 										</div>
 									</div>

@@ -24,12 +24,12 @@ jQuery.fn.flash = function(opacity, duration)
 };
 function recordNote(data) {
 	$.ajax({
-		url: recordGlobalNoteUrl,
+		url: recordNoteUrl,
 		type: "POST",
 		dataType: 'json',
 		data: data,
 		success: function(recordedNoteData) {
-			$('#all-recorded-notes').prepend(recordedNoteData["recorded_note_row"]);
+			$('#all-recorded-notes').append(recordedNoteData["recorded_note_row"]);
 		}
 	});
 }
@@ -118,16 +118,26 @@ function addEditTaskEventHandlers() {
 function addObservationNotesEventHandlers() {
 	$('.observation-notes-btn').click(function(e) {
 		e.preventDefault();
+		$("#note-type").attr("observation-task-id", 0);
+		$("#note-type").text("Global Note");
 		$('#observation-log').slideToggle();
 	});
-	$("textarea[name='newnote']").keypress(function(e) {
+	$('.current-task-note-btn').click(function(e) {
+		e.preventDefault();
+		$("#note-type").attr("observation-task-id", $("#current-task-"+$(this).attr("dimension-id")).attr("current-task-id"));
+		$("#note-type").text("Note for " + $("#current-task-"+$(this).attr("dimension-id")).text());
+		$('#observation-log').slideDown();
+	//	alert(	$("#note-type").attr("observation-task-id"));
+	});
+	$("textarea[name='new-note']").keypress(function(e) {
 		if (e.keyCode == 13) {
 			var note = $(this).val().trim();
 			if (note === "") {
 				alert("Note cannote be blank");
 			} else {
-				data = {'observation_id': observationId,
-					'global_note': note};
+				data = {"observation_id": observationId,
+					"observation_task_id": $("#note-type").attr("observation-task-id"),
+					"note": note};
 				$(this).val('');
 				recordNote(data);
 			}

@@ -27,7 +27,7 @@ class ObservationsController extends Controller {
 	public function accessRules() {
 		return array(
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'actions' => array('create', 'update', 'capture', 'recordtask', 'recordglobalnote'),
+						'actions' => array('create', 'update', 'capture', 'recordtask', 'recordnote'),
 						'users' => array('@'),
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -131,6 +131,38 @@ class ObservationsController extends Controller {
 								'note_time' => $noteTime,
 								'note' => $note,
 								'type' => 'Global Note',
+								'site_timezone' => Observations::Model()->findByPk($observationId)->site->timezone
+										)
+										, true)));
+			}
+			Yii::app()->end();
+		}
+	}
+
+	public function actionRecordNote() {
+		if (Yii::app()->request->isAjaxRequest) {
+			$observationId = Yii::app()->request->getParam('observation_id');
+			$note = Yii::app()->request->getParam('note');
+			$observation_task_id = Yii::app()->request->getParam('observation_task_id');
+			$noteTime = Observations::getCurrentTime($observationId);
+
+			$observationNoteModel = new ObservationNotes;
+			$observationNoteModel->observation_id = $observationId;
+			$type;
+			if ($observation_task_id!=0){//it is a global note
+				$observationNoteModel->observation_task_id = $observation_task_id;
+				$type=ObservationTasks::Model()->findByPk($observation_task_id)->studyTask->name;
+			} else {
+				$type="Global Note";
+			}	
+			$observationNoteModel->note = $note;
+			$observationNoteModel->time_taken = $noteTime->getTimestamp();
+			if ($observationNoteModel->save()) {
+				echo CJSON::encode(array(
+						'recorded_note_row' => $this->renderPartial('_recorded_note_row', array(
+								'note_time' => $noteTime,
+								'note' => $note,
+								'type' => $type,
 								'site_timezone' => Observations::Model()->findByPk($observationId)->site->timezone
 										)
 										, true)));

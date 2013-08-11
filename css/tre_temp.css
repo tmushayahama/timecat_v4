@@ -37,3 +37,9 @@
 	height: 310px;
 	overflow-y: auto;
 }
+#note-type{
+	font-size: 12px;
+	margin: 0px;
+	padding-left: 5px;
+	height: 12px;
+}
