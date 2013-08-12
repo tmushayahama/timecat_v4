@@ -7,6 +7,7 @@ $(document).ready(function() {
 	addRecordTaskEventHandlers();
 	addEditTaskEventHandlers();
 	addObservationNotesEventHandlers();
+	addLinkToEventHandlers();
 });
 /**
  * To animate a blink of the recorded task. 
@@ -22,6 +23,22 @@ jQuery.fn.flash = function(opacity, duration)
 	this.animate({opacity: opacity}, duration / 2);
 	this.animate({opacity: current}, duration / 2);
 };
+function getCurrentTaskName(listblockChild) {
+	return listblockChild.closest(".listblock").find(".current-task-name").text();
+}
+function getCurrentTaskId(listblockChild) {
+	return listblockChild.closest(".listblock").find(".current-task-name").attr("current-task-id");
+}
+function recordCurrentTask(dimensionId, taskname, startTime) {//, currentTimeDiv) {
+	$('#current-task-' + dimensionId).text(taskname);
+	$('#current-task-start-time-' + dimensionId).text(startTime);
+	$('#current-task-duration-hours-' + dimensionId).text("00");
+	$('#current-task-duration-mins-' + dimensionId).text("00");
+	$('#current-task-duration-secs-' + dimensionId).text("00");
+}
+function getCurrentTask(dimensionId) {
+	$('#current-task-' + dimensionId).attr('current-task');
+}
 function recordNote(data) {
 	$.ajax({
 		url: recordNoteUrl,
@@ -33,7 +50,10 @@ function recordNote(data) {
 		}
 	});
 }
-/** Binds the task button events.
+
+/*==============================EVENT HANDLERS================================*/
+/**
+ *  Binds the task button events.
  * 
  * 
  */
@@ -120,14 +140,26 @@ function addObservationNotesEventHandlers() {
 		e.preventDefault();
 		$("#note-type").attr("observation-task-id", 0);
 		$("#note-type").text("Global Note");
+		$("textarea[name='new-note']").attr("placeholder", "Write global notes here");
 		$('#observation-log').slideToggle();
 	});
 	$('.current-task-note-btn').click(function(e) {
 		e.preventDefault();
-		$("#note-type").attr("observation-task-id", $("#current-task-"+$(this).attr("dimension-id")).attr("current-task-id"));
-		$("#note-type").text("Note for " + $("#current-task-"+$(this).attr("dimension-id")).text());
+		var taskName = $("#current-task-" + $(this).attr("dimension-id")).text().trim();
+		$("#note-type").attr("observation-task-id", $("#current-task-" + $(this).attr("dimension-id")).attr("current-task-id"));
+		$("#note-type").text("Note for " + taskName);
+		$("textarea[name='new-note']").attr("placeholder", "Write notes for " + taskName + " here");
 		$('#observation-log').slideDown();
-	//	alert(	$("#note-type").attr("observation-task-id"));
+	});
+	$('.recorded-task-note-btn').click(function(e) {
+		e.preventDefault();
+		var taskId = $(this).closest(".recorded-task-row").find(".recorded-task-name").attr("task-id");
+		var taskName = $(this).closest(".recorded-task-row").find(".recorded-task-name").text().trim();
+		$("#note-type")
+						.attr("observation-task-id", taskId)
+						.text("Note for " + taskName);
+		$("textarea[name='new-note']").attr("placeholder", "Write notes for " + taskName + " here");
+		$('#observation-log').slideDown();
 	});
 	$("textarea[name='new-note']").keypress(function(e) {
 		if (e.keyCode == 13) {
@@ -144,13 +176,11 @@ function addObservationNotesEventHandlers() {
 		}
 	});
 }
-function recordCurrentTask(dimensionId, taskname, startTime) {//, currentTimeDiv) {
-	$('#current-task-' + dimensionId).text(taskname);
-	$('#current-task-start-time-' + dimensionId).text(startTime);
-	$('#current-task-duration-hours-' + dimensionId).text("00");
-	$('#current-task-duration-mins-' + dimensionId).text("00");
-	$('#current-task-duration-secs-' + dimensionId).text("00");
-}
-function getCurrentTask(dimensionId) {
-	$('#current-task-' + dimensionId).attr('current-task');
+function addLinkToEventHandlers() {
+	$(".current-task-linkto-btn").click(function(e) {
+		e.preventDefault();
+		var linkToTaskId = getCurrentTaskId($(this));
+
+		alert(linkToTaskId);
+	});
 }

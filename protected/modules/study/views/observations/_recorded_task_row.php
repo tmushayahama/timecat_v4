@@ -4,9 +4,9 @@
 /* @var $form CActiveForm */
 ?>
 <?php if ($task != null): ?>
-	<div class="fullist limpia grisos papa">
+	<div class="recorded-task-row fullist limpia grisos papa">
 		<p>
-			<span class="tasknamer letaskname eliseo left" task-id="<?php echo $task->id ?>">
+			<span class="recorded-task-name tasknamer letaskname eliseo left" task-id="<?php echo $task->id ?>">
 				<?php echo $task->studyTask->name; ?>
 			</span>
 			<a href="#" class="breaknotifier button secondary small "><i class="foundicon-checkmark"></i></a>
@@ -18,7 +18,7 @@
 				?>
 			</span>
 			<a href="#" class="linkfrom button small right aparece">Select</a>
-			<a href="#" class="singlenote button secondary small right"><i class="foundicon-edit"></i></a>
+			<a href="#" class="recorded-task-note-btn singlenote button secondary small right"><i class="foundicon-edit"></i></a>
 		</p>
 	</div>
 <?php endif; ?>

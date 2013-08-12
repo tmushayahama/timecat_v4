@@ -115,6 +115,15 @@ class SiteController extends Controller {
 		$this->render('contact', array('model' => $model));
 	}
 
+	public function actionHelp_GettingStarted() {
+		$this->render("help_gettingstarted");
+	}
+	public function actionHelp_UsingTimeCat() {
+		$this->render("help_usingtimecat");
+	}
+	public function actionHelp_Components() {
+		$this->render("help_components");
+	}
 	/**
 	 * Displays the login page
 	 */

@@ -107,7 +107,7 @@ Yii::app()->clientScript->registerScriptFile(
 												</div> 
 												<div class="normal">
 													<span id="<?php echo 'current-task-' . $dimensions[$panelName] ?>"
-																class="tasknamer taknamep eliseo left" 
+																class="current-task-name tasknamer taknamep eliseo left" 
 																current-task-id="<?php echo $current_tasks[$panelName]->id; ?>">					
 																	<?php echo $current_tasks[$panelName]->studyTask->name; ?>
 													</span>
@@ -139,7 +139,7 @@ Yii::app()->clientScript->registerScriptFile(
 												<a href="#" class="cancel-edit-task-btn button secondary small left alert tc-hide">Cancel</a>
 												<a href="#" class="edit-task-btn button secondary small left" dimension-id="<?php echo $dimensions[$panelName] ?>">Edit name</a>
 												<a href="#" class="timfix button secondary small left">Fix time</a>
-												<a href="#" class="linkto button secondary small left ">Link to</a>
+												<a href="#" class="current-task-linkto-btn linkto button secondary small left ">Link to</a>
 												<a href="#" class="current-task-note-btn singlenote button secondary small right" dimension-id="<?php echo $dimensions[$panelName]; ?>">Add note</a>
 											</div>
 										</div>
