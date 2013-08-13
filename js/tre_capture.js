@@ -60,9 +60,6 @@ function recordTask(data) {
 	$('#recorded-tasks-' + data["dimension_id"] + " :first-child").hide().slideDown();
 	$('#current-task-' + data["dimension_id"]).attr("current-task-id", data["current_observation_task_id"]);
 	recordCurrentTask(data["dimension_id"], data["taskname"], data["start_time"]);
-	$('#recorded-task-panel-' + data["dimension_id"]).removeClass('tc-hide');
-	$('#recorded-task-panel-' + data["dimension_id"]).hide().fadeIn("slow");
-
 	var noteBtn = $('#recorded-tasks-' + data["dimension_id"] + " :first-child").find(".recorded-task-note-btn");
 	addRecordedTaskNoteBtnEventHandlers(noteBtn);
 	console.log(data["start_time"] + ' ' + data["unix_time"] + ' ' + data["after_unix_time"]);
@@ -72,6 +69,15 @@ function recordTask(data) {
 function recordNote(data) {
 	$('#all-recorded-notes').append(data["recorded_note_row"]);
 }
+function editTask(data) {
+	$('#task-btns-container-'+data["dimension_id"])
+					.append($("<a />")
+					.text(data["task_name"])
+					.attr('current-task-id', data["current_task_id"])
+					.attr('dimension-id', data["dimension_id"])
+					.addClass("button small secondary round task-btn'"));
+}
+
 
 /*==============================EVENT HANDLERS================================*/
 /**
@@ -84,15 +90,15 @@ function addRecordTaskEventHandlers() {
 		e.preventDefault();
 		console.log($(this).text() + " clicked" + " Previous Task Id = " +
 						$('#current-task-' + $(this).attr("dimension-id")).attr("current-task-id"));
-
+		$('#recorded-task-panel-' + $(this).attr("dimension-id")).removeClass('tc-hide');
+		$('#recorded-task-panel-' + $(this).attr("dimension-id")).hide().fadeIn("slow");
 		data = {"current_task_id": $(this).attr("current-task-id"),
-			"observation_id": $(this).attr("observation-id"),
+			"observation_id": observationId,
 			"previous_observation_task_id": ($('#current-task-' + $(this).attr("dimension-id")).attr("current-task-id") == undefined) ?
 							0 :
 							$('#current-task-' + $(this).attr("dimension-id")).attr("current-task-id")
 		};
 		ajaxCall(recordTaskUrl, data, recordTask);
-
 	});
 }
 function addEditTaskEventHandlers() {
@@ -119,14 +125,20 @@ function addEditTaskEventHandlers() {
 	});
 	$('.edit-task-save-btn').click(function(e) {
 		e.preventDefault();
-		$('.cancel-edit-task-btn').click();
-		var dimension = "edit-task-" + $(this).attr("dimension-id");
-		var taskName = $("input[name='" + dimension + "']").val();
-		if (taskName.trim() == "") {
-			alert("Task Name should not be blank");
-		} else {
 
+		var dimensionDivId = "edit-task-" + $(this).attr("dimension-id");
+		var taskName = $("input[name='" + dimensionDivId + "']").val();
+		if (taskName.trim() == "") {
+			alert('Taskname should not be blank! ');
+		} else {
+			data = {edited_name: taskName,
+				observation_id: observationId,
+				study_id: studyId,
+				dimension_id: $(this).attr("dimension-id"),
+				current_task_id: getCurrentTaskId($(this))};
+			ajaxCall(editTaskUrl, data, editTask);
 		}
+		$('.cancel-edit-task-btn').click();
 	});
 }
 function addObservationNotesEventHandlers() {
@@ -147,7 +159,6 @@ function addObservationNotesEventHandlers() {
 	$("#observation-notes-close-btn").click(function(e) {
 		$("#observation-log").slideUp();
 	});
-
 	$('.current-task-note-btn').click(function(e) {
 		e.preventDefault();
 		var taskName = $("#current-task-" + $(this).attr("dimension-id")).text().trim();

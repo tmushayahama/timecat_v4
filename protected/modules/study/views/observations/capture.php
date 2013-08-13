@@ -12,7 +12,10 @@ Yii::app()->clientScript->registerScriptFile(
 <script id="record-task-url" type="text/javascript">
 	var recordTaskUrl = "<?php echo Yii::app()->createUrl('study/observations/recordtask'); ?>";
 	var recordNoteUrl = "<?php echo Yii::app()->createUrl('study/observations/recordnote'); ?>";
-	var observationId = "<?php echo $observation_id; ?>"
+	var editTaskUrl = "<?php echo Yii::app()->createUrl('study/observations/edittask'); ?>";
+	
+	var studyId = "<?php echo $study_id; ?>";
+	var observationId = "<?php echo $observation_id; ?>";
 </script>
 <div id="wrap" class="blangradient">
 	<div id="cabecera" class="plomito bordinf">
@@ -46,7 +49,6 @@ Yii::app()->clientScript->registerScriptFile(
 					Switch to Global Note
 				</a>
 			</p>
-
 		</div>
 		<div id="all-recorded-notes" class="blanko">
 			<?php
@@ -75,7 +77,7 @@ Yii::app()->clientScript->registerScriptFile(
 	</div>
 	<div id="main">
 		<?php
-		$panelCount = 1;
+		$panelCount = 0;
 		foreach (array_keys($categorized_tasks) as $panelName):
 			?>
 			<div class="row megablock">
@@ -83,17 +85,16 @@ Yii::app()->clientScript->registerScriptFile(
 					<br/>
 					<div class="row">
 						<div class="small-12 columns">
-							<h5 class="bburdeo atitle"><?php echo $panelName; ?></h5>
+							<h5 class="<?php echo 'atitle observation-dimension-color-' . ($panelCount % 3) ?>"><?php echo $panelName; ?></h5>
 						</div>
 					</div>
-					<div class="row unikdimenblock blanko bsup1">
+					<div class="row dimenblock blanko bsup1">
 						<div class="large-7 columns cnada">
-							<div class="tareaslist">&nbsp;
+							<div id="<?php echo 'task-btns-container-'.$dimensions[$panelName] ?>" class="tareaslist">&nbsp;
 								<?php
 								foreach ($categorized_tasks[$panelName] as $task) {
 									echo CHtml::link($task->name, '', array(
 											'current-task-id' => $task->id,
-											'observation-id' => $observation_id,
 											'dimension-id' => $dimensions[$panelName],
 											'class' => 'button small secondary round task-btn'));
 								}
@@ -152,17 +153,20 @@ Yii::app()->clientScript->registerScriptFile(
 										</div>
 									</div>
 								<?php else: ?>	
-									<div id="<?php echo 'recorded-task-panel-' . $dimensions[$panelName] ?>" class="holder tc-hide">
+									<div  id="<?php echo 'recorded-task-panel-' . $dimensions[$panelName] ?>" class="holder">
 										<div class="listblock limpia papa ">
 											<div class="statindicator limpia">
-												<div class="aleditar aparece">
-													<input type="text" name="freetexttask" class="left"><a href="#" class="saveledit button small success left">Save</a>
-												</div>
+												<div class="edit-task aleditar tc-hide">
+													<input type="text" name="<?php echo 'edit-task-' . $dimensions[$panelName] ?>" class="left">
+													<a href="#" class="edit-task-save-btn saveledit button small success left" dimension-id="<?php echo $dimensions[$panelName] ?>">
+														Save
+													</a>
+												</div> 
 												<div class="normal">
 													<span id="<?php echo 'current-task-' . $dimensions[$panelName] ?>"
-																class="tasknamer taknamep eliseo left" 
-																current-task-id=0>		
-														----
+																class="current-task-name tasknamer taknamep eliseo left" 
+																current-task-id=0>					
+																	-----
 													</span>
 													<a href="#" class="button alert small right borrat">Delete</a>
 													<a href="#" class="button small right tasktrig" data-tkid="1">Stop</a>
@@ -171,7 +175,7 @@ Yii::app()->clientScript->registerScriptFile(
 											<div class="maininfo limpia">
 												&nbsp;&nbsp;<b>Started at: </b>
 												<span id="<?php echo 'current-task-start-time-' . $dimensions[$panelName] ?>" class="letaskstamp">
-
+												
 												</span>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<b>Duration: </b>
@@ -182,10 +186,11 @@ Yii::app()->clientScript->registerScriptFile(
 												</span>
 											</div>
 											<div class="acciones limpia">
-												<a href="#" class="editer button secondary small left">Edit name</a>
+												<a href="#" class="cancel-edit-task-btn button secondary small left alert tc-hide">Cancel</a>
+												<a href="#" class="edit-task-btn button secondary small left" dimension-id="<?php echo $dimensions[$panelName] ?>">Edit name</a>
 												<a href="#" class="timfix button secondary small left">Fix time</a>
-												<a href="#" class="linkto button secondary small left ">Link to</a>
-												<a href="#" class="singlenote button secondary small right">Add note</a>
+												<a href="#" class="current-task-linkto-btn linkto button secondary small left ">Link to</a>
+												<a href="#" class="current-task-note-btn singlenote button secondary small right" dimension-id="<?php echo $dimensions[$panelName]; ?>">Add note</a>
 											</div>
 										</div>
 									</div>
@@ -205,7 +210,11 @@ Yii::app()->clientScript->registerScriptFile(
 					</div>
 				</div>
 			</div>
-		<?php endforeach; ?>
+			<?php
+			$panelCount++;
+		endforeach;
+		?>
+
 	</div>
 </div>
 <div id="myModal" class="reveal-modal small">

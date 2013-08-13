@@ -24,6 +24,15 @@
 	background-color: #FFCC66;
 	color:#000;
 }
+.observation-dimension-color-0{
+	background: #b82e2e!important;
+}
+.observation-dimension-color-1{
+	background: #0099c6!important;
+}
+.observation-dimension-color-2{
+	background: #66aa00!important;
+}
 #observation-log{
 	width: 300px;
 	height: 400px;

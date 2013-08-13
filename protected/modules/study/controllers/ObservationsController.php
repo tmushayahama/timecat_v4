@@ -27,7 +27,7 @@ class ObservationsController extends Controller {
 	public function accessRules() {
 		return array(
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'actions' => array('create', 'update', 'capture', 'recordtask', 'recordnote'),
+						'actions' => array('create', 'update', 'capture', 'recordtask', 'recordnote', 'edittask'),
 						'users' => array('@'),
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -108,37 +108,6 @@ class ObservationsController extends Controller {
 		}
 	}
 
-	/**
-	 * Ajax call for recording a note.
-	 * 
-	 * When a task button is clicked, an ajax call is triggered which records
-	 * the current time of the observation site.
-	 * 
-	 */
-	public function actionRecordGlobalNote() {
-		if (Yii::app()->request->isAjaxRequest) {
-			$observationId = Yii::app()->request->getParam('observation_id');
-			$note = Yii::app()->request->getParam('global_note');
-			$noteTime = Observations::getCurrentTime($observationId); //new DateTime('now', new DateTimeZone(Observations::Model()->findByPk($observationId)->site->timezone));
-
-			$observationNoteModel = new ObservationNotes;
-			$observationNoteModel->observation_id = $observationId;
-			$observationNoteModel->note = $note;
-			$observationNoteModel->time_taken = $noteTime->getTimestamp();
-			if ($observationNoteModel->save()) {
-				echo CJSON::encode(array(
-						'recorded_note_row' => $this->renderPartial('_recorded_note_row', array(
-								'note_time' => $noteTime,
-								'note' => $note,
-								'type' => 'Global Note',
-								'site_timezone' => Observations::Model()->findByPk($observationId)->site->timezone
-										)
-										, true)));
-			}
-			Yii::app()->end();
-		}
-	}
-
 	public function actionRecordNote() {
 		if (Yii::app()->request->isAjaxRequest) {
 			$observationId = Yii::app()->request->getParam('observation_id');
@@ -149,12 +118,12 @@ class ObservationsController extends Controller {
 			$observationNoteModel = new ObservationNotes;
 			$observationNoteModel->observation_id = $observationId;
 			$type;
-			if ($observation_task_id!=0){//it is a global note
+			if ($observation_task_id != 0) {//it is a global note
 				$observationNoteModel->observation_task_id = $observation_task_id;
-				$type=ObservationTasks::Model()->findByPk($observation_task_id)->studyTask->name;
+				$type = ObservationTasks::Model()->findByPk($observation_task_id)->studyTask->name;
 			} else {
-				$type="Global Note";
-			}	
+				$type = "Global Note";
+			}
 			$observationNoteModel->note = $note;
 			$observationNoteModel->time_taken = $noteTime->getTimestamp();
 			if ($observationNoteModel->save()) {
@@ -167,6 +136,34 @@ class ObservationsController extends Controller {
 										)
 										, true)));
 			}
+			Yii::app()->end();
+		}
+	}
+
+	public function actionEditTask() {
+		if (Yii::app()->request->isAjaxRequest) {
+			$editedName = Yii::app()->request->getParam('edited_name');
+			$currentTaskId = Yii::app()->request->getParam('current_task_id');
+			$studyId = Yii::app()->request->getParam('study_id');
+			$observationId = Yii::app()->request->getParam('observation_id');
+			$dimensionId = Yii::app()->request->getParam('dimension_id');
+
+			$studyTaskModel = new StudyTasks;
+			$studyTaskModel->name = $editedName;
+			$studyTaskModel->study_id = $studyId;
+			$studyTaskModel->dimension_id = $dimensionId;
+			$studyTaskModel->status = 1;
+			if ($studyTaskModel->save(false)) {
+				$observationTask = ObservationTasks::Model()->findByPk($currentTaskId);
+				$observationTask->study_task_id = $studyTaskModel->id;
+
+				echo CJSON::encode(array(
+						
+						'current_task_id' => $currentTaskId,
+						'task_name'=>$editedName,
+						'dimension_id'=>$dimensionId));
+			}
+
 			Yii::app()->end();
 		}
 	}
@@ -186,8 +183,8 @@ class ObservationsController extends Controller {
 				"type" => array('select' => 'type_entry'));
 
 		$observationsModel = new Observations;
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+// Uncomment the following line if AJAX validation is needed
+// $this->performAjaxValidation($model);
 
 
 		if (isset($_POST['Observations'])) {
@@ -200,7 +197,7 @@ class ObservationsController extends Controller {
 			$observationsModel->user_id = Yii::app()->user->id;
 			$observationsModel->subject_id = $subjectModel->id; //Subjects::model()->find("description='".$subjectModel->description."'");
 			if ($observationsModel->save()) {
-				//$this->redirect(array('view', 'id' => $model->id));
+//$this->redirect(array('view', 'id' => $model->id));
 			}
 		}
 		$this->render('observations_dashboard', array(
@@ -227,8 +224,8 @@ class ObservationsController extends Controller {
 	public function actionCreate() {
 		$model = new Observations;
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+// Uncomment the following line if AJAX validation is needed
+// $this->performAjaxValidation($model);
 
 		if (isset($_POST['Observations'])) {
 			$model->attributes = $_POST['Observations'];
@@ -249,8 +246,8 @@ class ObservationsController extends Controller {
 	public function actionUpdate($id) {
 		$model = $this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+// Uncomment the following line if AJAX validation is needed
+// $this->performAjaxValidation($model);
 
 		if (isset($_POST['Observations'])) {
 			$model->attributes = $_POST['Observations'];
@@ -271,7 +268,7 @@ class ObservationsController extends Controller {
 	public function actionDelete($id) {
 		$this->loadModel($id)->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if (!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}

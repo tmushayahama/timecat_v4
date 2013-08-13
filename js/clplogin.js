@@ -15,7 +15,7 @@ $(document).ready(function() {
 			$('#username').parent().parent().removeClass("error");
 			if(!password){
 				$('#password').parent().parent().addClass("error");
-				$.notify.alert('Password can not be blank!', { autoClose : 3000 });
+				$.notify.zalert('Password can not be blank!', { autoClose : 3000 });
 		
 			}
 			else{
