@@ -1,9 +1,10 @@
-/* For use in data capture page.
+/** For use in data capture page.
  * 
- *
+ * Most of the calls are ajax calls to the 
  */
 $(document).ready(function() {
-	console.log("Loading tre_capture.js....");
+	console.log("Loading tre_capture.js...");
+	$.ajaxSetup({traditional: true});
 	addRecordTaskEventHandlers();
 	addEditTaskEventHandlers();
 	addObservationNotesEventHandlers();
@@ -19,16 +20,22 @@ $(document).ready(function() {
  */
 jQuery.fn.flash = function(opacity, duration)
 {
-	var current = this.css('opacity');
-	this.animate({opacity: opacity}, duration / 2);
-	this.animate({opacity: current}, duration / 2);
+	var current = this.css('backgroundColor');
+	this.animate({backgroundColor: opacity}, duration / 2);
+	this.animate({backgroundColor: current}, duration / 2);
 };
+/**
+ * 
+ * @param  listblockChild
+ * @returns 
+ */
 function getCurrentTaskName(listblockChild) {
 	return listblockChild.closest(".listblock").find(".current-task-name").text();
 }
 function getCurrentTaskId(listblockChild) {
 	return listblockChild.closest(".listblock").find(".current-task-name").attr("current-task-id");
 }
+
 function recordCurrentTask(dimensionId, taskname, startTime) {//, currentTimeDiv) {
 	$('#current-task-' + dimensionId).text(taskname);
 	$('#current-task-start-time-' + dimensionId).text(startTime);
@@ -36,19 +43,34 @@ function recordCurrentTask(dimensionId, taskname, startTime) {//, currentTimeDiv
 	$('#current-task-duration-mins-' + dimensionId).text("00");
 	$('#current-task-duration-secs-' + dimensionId).text("00");
 }
-function getCurrentTask(dimensionId) {
+function getCurrentTaskNameByDimension(dimensionId) {
 	$('#current-task-' + dimensionId).attr('current-task');
 }
-function recordNote(data) {
+function ajaxCall(url, data, callback) {
 	$.ajax({
-		url: recordNoteUrl,
+		url: url,
 		type: "POST",
 		dataType: 'json',
 		data: data,
-		success: function(recordedNoteData) {
-			$('#all-recorded-notes').append(recordedNoteData["recorded_note_row"]);
-		}
+		success: callback
 	});
+}
+function recordTask(data) {
+	$('#recorded-tasks-' + data["dimension_id"]).prepend(data["recorded_task_row"]);
+	$('#recorded-tasks-' + data["dimension_id"] + " :first-child").hide().slideDown();
+	$('#current-task-' + data["dimension_id"]).attr("current-task-id", data["current_observation_task_id"]);
+	recordCurrentTask(data["dimension_id"], data["taskname"], data["start_time"]);
+	$('#recorded-task-panel-' + data["dimension_id"]).removeClass('tc-hide');
+	$('#recorded-task-panel-' + data["dimension_id"]).hide().fadeIn("slow");
+
+	var noteBtn = $('#recorded-tasks-' + data["dimension_id"] + " :first-child").find(".recorded-task-note-btn");
+	addRecordedTaskNoteBtnEventHandlers(noteBtn);
+	console.log(data["start_time"] + ' ' + data["unix_time"] + ' ' + data["after_unix_time"]);
+	console.log("Current Task Id = " +
+					$('#current-task-' + data["dimension_id"]).attr("current-task-id"));
+}
+function recordNote(data) {
+	$('#all-recorded-notes').append(data["recorded_note_row"]);
 }
 
 /*==============================EVENT HANDLERS================================*/
@@ -60,32 +82,17 @@ function recordNote(data) {
 function addRecordTaskEventHandlers() {
 	$(".task-btn").click(function(e) {
 		e.preventDefault();
-		$('#recorded-task-panel-' + $(this).attr("dimension-id")).removeClass('tc-hide');
-		$('#recorded-task-panel-' + $(this).attr("dimension-id")).flash('0.5', 1000);
-
-
 		console.log($(this).text() + " clicked" + " Previous Task Id = " +
 						$('#current-task-' + $(this).attr("dimension-id")).attr("current-task-id"));
-		$.ajax({
-			url: recordTaskUrl,
-			type: "POST",
-			dataType: 'json',
-			data: {"current_task_id": $(this).attr("current-task-id"),
-				"observation_id": $(this).attr("observation-id"),
-				"previous_observation_task_id": ($('#current-task-' + $(this).attr("dimension-id")).attr("current-task-id") == undefined) ?
-								0 :
-								$('#current-task-' + $(this).attr("dimension-id")).attr("current-task-id")
-			},
-			success: function(data) {
 
-				$('#recorded-tasks-' + data["dimension_id"]).prepend(data["recorded_task_row"]);
-				$('#current-task-' + data["dimension_id"]).attr("current-task-id", data["current_observation_task_id"]);
-				recordCurrentTask(data["dimension_id"], data["taskname"], data["start_time"]);
+		data = {"current_task_id": $(this).attr("current-task-id"),
+			"observation_id": $(this).attr("observation-id"),
+			"previous_observation_task_id": ($('#current-task-' + $(this).attr("dimension-id")).attr("current-task-id") == undefined) ?
+							0 :
+							$('#current-task-' + $(this).attr("dimension-id")).attr("current-task-id")
+		};
+		ajaxCall(recordTaskUrl, data, recordTask);
 
-				console.log(data["start_time"] + ' ' + data["unix_time"] + ' ' + data["after_unix_time"]);
-				console.log("Current Task Id = " +
-								$('#current-task-' + data["dimension_id"]).attr("current-task-id"));
-			}});
 	});
 }
 function addEditTaskEventHandlers() {
@@ -97,7 +104,6 @@ function addEditTaskEventHandlers() {
 		$(this).next().next().addClass('tc-hide');
 		$(this).closest('.listblock').find('.edit-task').removeClass('tc-hide');
 		$(this).closest('.listblock').find('.normal').addClass('tc-hide');
-
 		var dimension = "edit-task-" + $(this).attr("dimension-id");
 		var currentTaskName = $('#current-task-' + $(this).attr("dimension-id")).text().trim();
 		$("input[name='" + dimension + "']").val(currentTaskName).select();
@@ -119,19 +125,7 @@ function addEditTaskEventHandlers() {
 		if (taskName.trim() == "") {
 			alert("Task Name should not be blank");
 		} else {
-			/*	$.ajax({
-			 url: record_task_url,
-			 type: "POST",
-			 dataType: 'json',
-			 data: {"current_task_id": $(this).attr("current-task-id"),
-			 "observation_id": $(this).attr("observation-id"),
-			 "previous_observation_task_id": ($('#current-task-' + $(this).attr("dimension-id")).attr("current-task-id") == undefined) ?
-			 0 :
-			 $('#current-task-' + $(this).attr("dimension-id")).attr("current-task-id")
-			 },
-			 success: function(data) {
-			 
-			 */
+
 		}
 	});
 }
@@ -170,17 +164,28 @@ function addObservationNotesEventHandlers() {
 				data = {"observation_id": observationId,
 					"observation_task_id": $("#note-type").attr("observation-task-id"),
 					"note": note};
+				ajaxCall(recordNoteUrl, data, recordNote);
 				$(this).val('');
-				recordNote(data);
 			}
 		}
+	});
+}
+function addRecordedTaskNoteBtnEventHandlers(btn) {
+	btn.click(function(e) {
+		e.preventDefault();
+		var taskId = $(this).closest(".recorded-task-row").find(".recorded-task-name").attr("task-id");
+		var taskName = $(this).closest(".recorded-task-row").find(".recorded-task-name").text().trim();
+		$("#note-type")
+						.attr("observation-task-id", taskId)
+						.text("Note for " + taskName);
+		$("textarea[name='new-note']").attr("placeholder", "Write notes for " + taskName + " here");
+		$('#observation-log').slideDown();
 	});
 }
 function addLinkToEventHandlers() {
 	$(".current-task-linkto-btn").click(function(e) {
 		e.preventDefault();
 		var linkToTaskId = getCurrentTaskId($(this));
-
 		alert(linkToTaskId);
 	});
 }

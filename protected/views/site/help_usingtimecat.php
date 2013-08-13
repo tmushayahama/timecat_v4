@@ -49,7 +49,7 @@
 
 	<div class="row-fluid">
 		<div id="tc-help-sidebar" class="span3">
-			<ul id="help-sidebar" class="nav nav-list affix">
+			<ul id="help-sidebar" class="nav nav-pills nav-stacked affix">
 				<li><a href="#introduction-tms">Introduction to TMS <i class="pull-right icon-chevron-right"></i></a></li>
 				<li><a href="#introduction-timecat">TimeCat 4.0 <i class="pull-right icon-chevron-right"></i></a></li>
 				<li><a href="#included">Features and Functions <i class="pull-right icon-chevron-right"></i></a></li>

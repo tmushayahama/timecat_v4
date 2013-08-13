@@ -49,7 +49,7 @@
 
 	<div class="row-fluid">
 		<div id="tc-help-sidebar" class="span3">
-			<ul id="help-sidebar" class="nav nav-list affix">
+			<ul id="help-sidebar" class="nav nav-list nav-pills nav-stacked affix">
 				<li><a href="#intro-components">Components Introduction <i class="pull-right icon-chevron-right"></i></a></li>
 				<li><a href="#recovery">Password Recovery <i class="pull-right icon-chevron-right"></i></a></li>
 				<li><a href="#profile">TimeCat Profile Management <i class="pull-right icon-chevron-right"></i></a></li>
