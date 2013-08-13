@@ -26,21 +26,27 @@ Yii::app()->clientScript->registerScriptFile(
 						<span class="mins"><?php echo $current_time->format('i'); ?></span>:
 						<span class="secs"><?php echo $current_time->format('s'); ?></span>
 					</span>
-				</strong></span><input type="hidden" name="startedtime" id="begintim" class="letaskstamp" value="01:46:49">
+				</strong>
+			</span>
 		</div> 
 		<div class="capinfo left">
 			<span>| <span class="hide-for-small">Total duration: </span><span class="show-for-small">Duration: </span><strong><span id="elapsedtime" class="clocks" data-timer="true"><span class="hors"><?php echo $observation_duration->format('%H'); ?></span>h <span class="mins"><?php echo $observation_duration->format('%i'); ?></span>m <span class="secs"><?php echo $observation_duration->format('%s'); ?></span>s</span> </strong></span>
 		</div>
-		<div class="left">
-			<a href="#" class="observation-notes-btn button secondary nomargin"><span class="hide-for-small">Notes</span><span class="show-for-small"><i class="foundicon-edit "></i></span></a>
-		</div>
 		<div id="quiter" class="right">
 			<a href="#" data-reveal-id="myModal" class="button alert nomargin"><span class="hide-for-small">End observation</span><span class="show-for-small"><i class="foundicon-flag "></i></span></a>
 		</div>		
+		<div class="right">
+			<a href="#" class="observation-notes-btn button secondary nomargin"><span class="hide-for-small">Observation Notes <i id="observation-notes-icon" class="foundicon-down-arrow "></i></span><span class="show-for-small"><i class="foundicon-edit "></i></span></a>
+		</div>
 	</div>
 	<div id="observation-log" class="cnada blanko">
 		<div id="titenote" class="anote grisos">
-			<p class="oblog"><strong>Observation log</strong></p>
+			<p class="oblog"><strong>Observation log</strong>
+				<a id="observation-notes-switch-btn" class="right button secondary tiny nomargin">
+					Switch to Global Note
+				</a>
+			</p>
+
 		</div>
 		<div id="all-recorded-notes" class="blanko">
 			<?php
@@ -56,13 +62,14 @@ Yii::app()->clientScript->registerScriptFile(
 			endforeach;
 			?>
 		</div>
-		<div id="neonote" class="a64 griso">
-			<div id="note-type" observation-task-id="0" ></div>
+		<div id="observation-note-input" class="a64">
+			<div id="note-type" observation-task-id="0" >	
+			</div>
 			<div id="newnoter" class="noteinput left">
 				<textarea name="new-note" placeholder="Write your notes here..."></textarea>
 			</div>
 			<div class="savebuton right">
-				<a id="notecloser" href="#" class="button secondary small a50"><i class="foundicon-up-arrow"></i></a>
+				<a id="observation-notes-close-btn" href="#" class="button secondary small a50"><i class="foundicon-up-arrow"></i></a>
 			</div>
 		</div>
 	</div>

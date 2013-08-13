@@ -39,12 +39,22 @@
 }
 #note-type{
 	font-size: 12px;
+	font-weight:bold;
 	margin: 0px;
 	padding-left: 5px;
 	height: 12px;
+}
+#observation-note-input {
+	height:75px;
+	padding-top:8px;
+	background-color: #aaaaaa;
 }
 
 ul.magellan {width: 240px}
 @media only screen and (max-width: 767px) {
   ul.magellan {position: static !important; width: 100%}
+}
+a.observation-notes-btn {
+	color:#006699;
+	margin-top:0px;
 }

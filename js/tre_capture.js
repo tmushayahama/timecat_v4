@@ -136,7 +136,18 @@ function addObservationNotesEventHandlers() {
 		$("#note-type").text("Global Note");
 		$("textarea[name='new-note']").attr("placeholder", "Write global notes here");
 		$('#observation-log').slideToggle();
+		$("#observation-notes-switch-btn").hide();
 	});
+	$("#observation-notes-switch-btn").click(function(e) {
+		$("#note-type").attr("observation-task-id", 0);
+		$("#note-type").text("Global Note");
+		$("textarea[name='new-note']").attr("placeholder", "Write global notes here");
+		$("#observation-notes-switch-btn").hide();
+	});
+	$("#observation-notes-close-btn").click(function(e) {
+		$("#observation-log").slideUp();
+	});
+
 	$('.current-task-note-btn').click(function(e) {
 		e.preventDefault();
 		var taskName = $("#current-task-" + $(this).attr("dimension-id")).text().trim();
@@ -144,6 +155,7 @@ function addObservationNotesEventHandlers() {
 		$("#note-type").text("Note for " + taskName);
 		$("textarea[name='new-note']").attr("placeholder", "Write notes for " + taskName + " here");
 		$('#observation-log').slideDown();
+		$("#observation-notes-switch-btn").fadeIn("slow");
 	});
 	$('.recorded-task-note-btn').click(function(e) {
 		e.preventDefault();
@@ -154,6 +166,7 @@ function addObservationNotesEventHandlers() {
 						.text("Note for " + taskName);
 		$("textarea[name='new-note']").attr("placeholder", "Write notes for " + taskName + " here");
 		$('#observation-log').slideDown();
+		$("#observation-notes-switch-btn").fadeIn("slow");
 	});
 	$("textarea[name='new-note']").keypress(function(e) {
 		if (e.keyCode == 13) {
