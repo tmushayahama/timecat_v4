@@ -20,8 +20,8 @@
 					<li class="">
 						<a href="help_gettingstarted">Get started</a>
 					</li>
-					<li class="active">
-						<a href="help_usingtimecat">Using TimeCat 4.0</a>
+					<li class="">
+						<a class="tc-active"href="help_usingtimecat">Using TimeCat 4.0</a>
 					</li>
 					<li class="">
 						<a href="help_components">Components</a>
@@ -54,90 +54,123 @@
 				<li><a href="#introduction-timecat">TimeCat 4.0 <i class="pull-right icon-chevron-right"></i></a></li>
 				<li><a href="#included">Features and Functions <i class="pull-right icon-chevron-right"></i></a></li>
 				<li><a href="#timecat-next">What's next <i class="pull-right icon-chevron-right"></i></a></li>
-
 			</ul>
 		</div>
-		<div id="content" class="span8">
+		<div id="content" class="span6">
 			<div class="row-fluid tc-help-header">
-				<h1>Getting Started</h1>
-				<p>An Overview of using Time Capture Tool (TimeCat) 4.0 and its Functions and Features.
-					A brief introduction of Time Motion Studies(TMS)
+				<h1>Using TimeCat 4.0</h1>
+				<p>Everything you need to know about using TimeCat 4.0 and its rich features.
 				</p>
-				<strong>If you are upgrading from TimeCat 3.0 <a>See Here</a> </strong>
+				<strong>If you are upgrading from TimeCat 3.0 <a>See Here</a> for some changes in TimeCat navigation.</strong>
 			</div>
 			<br>
+			<p class="definition"><span class="label label-info">Note</span> - For a background information about <a href="">Time Motion Studies </a>and <a> TimeCat 4.0 </a>, refer to the <a>Getting Started</a> section.
 			<section id="introduction-tms">
-				<h3>1. Brief Introduction to Time Motion Studies (TMS)</h3>
-				<hr>
-				<p class='definition'><b>Time Motion Studies</b> - The observation and analysis of tasks within an activity with an emphasis on the amount of time required to perform the task.
-				</p>
-				<p >Time Motion Studies (TMS) are the accepted gold standard to study and quantify
-					clinical workflow. Nevertheless methodological inconsistencies are rendering TMS results
-					questionable, which threatens the external validity of individual studies.
-					<br>
-					In an effort to standardize TMS and promote the adoption of validated methods, 
-					<a href="http://www.osu.edu/" >The Ohio State University </a> 
-					department of <a href='http://bmi.osu.edu/'>Biomedical Informatics</a> 
-					developed a free web-based tool to support data capture for TMS: <a>TimeCaT</a>.
-					TimeCaT has been successful in spreading our methods, being adopted by national and international TMS researchers.
-					<br>
-					This adoption and acceptance rate surpassed our initial expectations and endanger the fragile architecture of our initial prototype and beta versions.
-					This web based application (TimeCat 4.0) is an upgrade of TimeCaT to an enterprise level software that meet the security, stability and robustness requirement 
-					of TMS tool. 
-				</p>
-				<br>
-				<br>
-				<ul class="thumbnails">
-					<li class="span12">
-						<div class="thumbnail">
-							<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/help/getting_started/tms_linear.png" class="pull-left" alt="">
-							<h3>Linear TMS Type</h3>
-							<p>The simplest TMS capture method is a <a>linear</a> type </p>
-						</div>
-					</li>
-				</ul>
-				<br>
-				<ul class="thumbnails">
-					<li class="span12">
-						<div class="thumbnail">
-							<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/help/getting_started/tms_multitask.png" class="pull-left" alt="">
-							<h3>Multitask TMS Type</h3>
-							<p><b>Not</b> all TMS methods are linear, the most common <a>multitasking</a> data capturing type </p>
-						</div>
-					</li>
-				</ul>
-
-				<br>
-				<div class="definition">
-					<p>
-						<b>Supported TMS methods in <a href="">TimeCat 4.0</a>. 
-							<span class="label label-info">Heads Up! </span> These are also the 
-							<a href=""> study types </a> when creating a TimeCat 4.0 study. 
-						</b>
-					</p>
-					<ol>
-						<li><a href="">Linear (sequential) time  </a></li>
-						<li><a href="">Multitasking  </a></li>
-						<li><a href="">Multi-Actor </a></li>
-						<li><a href="">Multi-Observer Patient Flow. </a></li>
-					</ol>
+				<div class='section-heading'>
+					<span class='heading'>1. What's In This Guide </span>
 				</div>
+				<p>
+					We want you to get familiar with using TimeCat 4.0 and to do things with no time, while making use of 
+					all <a>components </a> and that are provided for you. One of the major changes in TimeCat 4.0 is the introduction of new User Interface.
+					Our main goal was for TimeCat 4.0 to have:<br>
+					1. Simplified navigation.<br>
+					2. Responsive grid. <a href=""><small><i>what's this?</i></small></a><br>
+					3. Fully cross-platform.
+				</p>
+				<br>
+				<p>
+					These tutorials describes the basics of using TimeCat 4.0 and getting started quickly.
+					These tutorials answers most of the following <a>questions</a>.
+				</p>
+				<ul class="nav nav-list">
+					<li><a>How do I create a TimeCat 4.0 account? </a></li>
+					<li><a>Do I need to log in to create a study? </a></li>
+					<li><a>What is contained inside a TimeCat 4.0 study? </a></li>
+					<li><a>How do I create a TimeCat 4.0 study? </a></li>
+					<li><a>Where and when can I define my task list?  </a></li>
+					<li><a>What do I need to start observing a subject? </a></li>
+					<li><a>What is the best way to do an observation?</a></li>
+					<li><a><h4>See more FAQs</h4></a></li>
+				</ul>
+				<br>
+				<p class='definition'><b>Do I need a TimeCat 4.0 account </b> - All the users ...
+				</p>
 			</section>
 			<section id="introduction-timecat">
-				<h3>2. Introduction to Time Cature Tool (TimeCat) 4.0 </h3>
-				<hr>
-				<p class='definition'><b>TimeCat 4.0 </b> - Is an improved web based application that implements the methods described in <a href="#introduction-tms">Time Motion Studies (TMS)</a>.
+				<div class='section-heading'>
+					<span class='heading'>2. Creating A New Account </span>
+				</div>
+				<p class='definition'><b>Before Signing Up. </b><br>
+
 				</p>
+				<div class="accordion" id="create-1-1">
+					<div class="accordion-group">
+						<div class="accordion-heading">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#create-1-1" href="#collapse-create-1-1">
+								Why did I get an invite email from TimeCat 4.0 or a TimeCat 4.0 user?
+							</a>
+						</div>
+						<div id="collapse-create-1-1" class="accordion-body collapse">
+							<div class="accordion-inner">
+								<p>You have received an invitation because someone on TimeCat 4.0 has created a <a>study</a>
+									and wants you to be part of his/her study either as a <a>study administrator</a> or a <a>study observer</a>.
+									In order to be part of the study you must have a TimeCat 4.0 Account.
+									<br>
+									<br>
+									If you already have a TimeCat 4.0 account, but you have registered with a different email address,
+									you can do one of the following:<br>
+									- Discard the email and provide the person who invited you with your existing email.<br>
+									- <a>Add this email to your account </a>so that when people invite you in the future, you will not receive email notifications in the future.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-group">
+						<div class="accordion-heading">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#create-1-1" href="#collapse-create-1-2">
+								Is it free to use TimeCat 4.0? If yes, will it always be free?
+							</a>
+						</div>
+						<div id="collapse-create-1-2" class="accordion-body collapse">
+							<div class="accordion-inner">
+								<p>
+									TimeCat 4.0 is free to use. .....
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-group">
+						<div class="accordion-heading">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#create-1-3" href="#collapse-create-1-3">
+								Can I use TimeCat 4.0 for other purposes outside Medical Use?
+							</a>
+						</div>
+						<div id="collapse-create-1-3" class="accordion-body collapse">
+							<div class="accordion-inner">
+								<p>Yes ...</p>
+							</div>
+						</div>
+					</div>
+				</div>
 				<br>
-				<p>This new release of TimeCaT facilitates the widespread adoption of our validated methods, further contributing to the end goal of the TimeCaT project: the standardization 
-					of TMS.
-					<br>
-					Due to the improved methods for capturing and visualizing interruptions, researchers focusing on patient safety and quality research can now benefit from TimeCaT 4.0.
-					<br>
-					The built-in quantitative and qualitative inter-observer reliability assessments included in this version contribute to the validation of the observers, and consequently to the results 
-					and overall acceptance of TMS.
-				</p>
+				<h4>Creating an Account </h4>
+				<p class='definition'>Signing up is easy in few steps. To have a new TimeCat 4.0 account,
+					enter your name, <a>institution</a>, choose a strong password and read our <a>terms and conditions</a> </p>
+				<ul class="thumbnails">
+					<h5>TimeCat 4.0 sign up page</h5>
+					<li class="span12">
+						<div class="thumbnail">
+							<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/help/using_timecat/create_account/sign_up.png" class="pull-left" alt="">
+						</div>
+					</li>
+				</ul>
 			</section>
+		</div>
+		<div class='span3 right-sidebar'>
+			<div class='section-heading'>
+				<span class='heading'>For the impatient: </span>
+			</div>
+			<p>Show me how to create a study</p>
 		</div>
 	</div>
 </div> <!-- /container -->

@@ -20,7 +20,7 @@ $(document).ready(function() {
  */
 jQuery.fn.flash = function(opacity, duration)
 {
-	var current = this.css('backgroundColor');
+	var current = this.css('background-color');
 	this.animate({backgroundColor: opacity}, duration / 2);
 	this.animate({backgroundColor: current}, duration / 2);
 };

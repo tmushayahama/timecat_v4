@@ -11,6 +11,41 @@ body {
 a {
 	cursor:pointer;
 }
+.section-heading {
+	margin-top:30px;
+	margin-bottom: 30px;
+	border-bottom: #195085 solid 3px;
+}
+.section-heading .heading{
+	padding:10px 10px 0px 5px;
+	margin:0 0 0 0;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	color:#FAFEFF;
+	background-color: #195085;
+	font-size:1.5em;
+	font-weight:bold;
+}
+.right-sidebar {
+	padding:5px;
+	height:100%;
+	background-color:#E9EFF8;
+	border-left: #195085 solid 1px;
+}
+.right-sidebar .section-heading {
+	margin-top:15px;
+	margin-bottom: 20px;
+	border-bottom: #195085 solid 1px;
+}
+.right-sidebar .section-heading .heading{
+	padding:5px 5px 2px 2px;
+	margin:0 0 0 0;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	color:#FAFEFF;
+	background-color: #195085;
+	font-size:0.9em;
+}
 .tc-logo-help {
 	height:43px;
 	width:60px;
@@ -33,6 +68,12 @@ a {
 .navbar .nav > li > a {
 	text-shadow: none;
 	color:  #fff;
+	font-weight:bold;
+}
+.navbar .nav > li > a.tc-active {
+	text-shadow: none;
+	background-color:#CCCCCC;
+	color:  #000;
 	font-weight:bold;
 }
 .navbar .nav > li > img {

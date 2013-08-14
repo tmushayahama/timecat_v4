@@ -2,6 +2,8 @@ $(document).ready(function() {
 	console.log("Loading tre_help.js...");
 	$('body').scrollspy();
  $("#help-sidebar").affix();
+ $(".right-sidebar").css('height', $("#content").css("height"));
+ 
   //equalHeight($(".thumbnail"));
 });
 function equalHeight(group) { 

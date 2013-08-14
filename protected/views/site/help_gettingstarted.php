@@ -124,7 +124,7 @@
 				</div>
 			</section>
 			<section id="introduction-timecat">
-				<h3>2. Introduction to Time Cature Tool (TimeCat) 4.0 </h3>
+				<h3>2. Introduction to Time Capture Tool (TimeCat) 4.0 </h3>
 				<hr>
 				<p class='definition'><b>TimeCat 4.0 </b> - Is an improved web based application that implements the methods described in <a href="#introduction-tms">Time Motion Studies (TMS)</a>.
 				</p>
