@@ -23,8 +23,8 @@
 					<li class="">
 						<a href="help_usingtimecat">Using TimeCat 4.0</a>
 					</li>
-					<li class="active">
-						<a href="help_components">Components</a>
+					<li>
+						<a class="tc-active" href="help_components">Components</a>
 					</li>
 					<li class="">
 						<a href="bug_report">Bug Report</a>
@@ -45,37 +45,35 @@
 		</div>
 	</div>
 </div>
-<div class="tc-help-container container-fluid">
-
-	<div class="row-fluid">
-		<div id="tc-help-sidebar" class="span3">
-			<ul id="help-sidebar" class="nav nav-list nav-pills nav-stacked affix">
-				<li><a href="#intro-components">Components Introduction <i class="pull-right icon-chevron-right"></i></a></li>
-				<li><a href="#recovery">Password Recovery <i class="pull-right icon-chevron-right"></i></a></li>
-				<li><a href="#profile">TimeCat Profile Management <i class="pull-right icon-chevron-right"></i></a></li>
-				<li><a href="#studies">TimeCat Studies <i class="pull-right icon-chevron-right"></i></a></li>
-				<li><a href="#tasks">TimeCat Tasks <i class="pull-right icon-chevron-right"></i></a></li>
-				<li><a href="#sites">TimeCat Sites <i class="pull-right icon-chevron-right"></i></a></li>
-				<li><a href="#observers">TimeCat Observers <i class="pull-right icon-chevron-right"></i></a></li>
-				<li><a href="#observations">TimeCat Observations <i class="pull-right icon-chevron-right"></i></a></li>
-				<li><a href="#notes">TimeCat Notes <i class="pull-right icon-chevron-right"></i></a></li>
-				<li><a href="#messages">TimeCat Messaging System <i class="pull-right icon-chevron-right"></i></a></li>
-				<li><a href="#reports">TimeCat Reports <i class="pull-right icon-chevron-right"></i></a></li>
-				<li><a href="#calendar">TimeCat Calendar <i class="pull-right icon-chevron-right"></i></a></li>
-				<li><a href="#exporter">TimeCat Data Exporter <i class="pull-right icon-chevron-right"></i></a></li>
-
-			</ul>
-		</div>
+<ul id="help-sidebar" class="nav nav-pills nav-stacked">
+	<li><a href="#intro-components">Components Introduction <i class="pull-right icon-chevron-right"></i></a></li>
+	<li><a href="#recovery">Password Recovery <i class="pull-right icon-chevron-right"></i></a></li>
+	<li><a href="#profile">TimeCat Profile Management <i class="pull-right icon-chevron-right"></i></a></li>
+	<li><a href="#studies">TimeCat Studies <i class="pull-right icon-chevron-right"></i></a></li>
+	<li><a href="#tasks">TimeCat Tasks <i class="pull-right icon-chevron-right"></i></a></li>
+	<li><a href="#sites">TimeCat Sites <i class="pull-right icon-chevron-right"></i></a></li>
+	<li><a href="#observers">TimeCat Observers <i class="pull-right icon-chevron-right"></i></a></li>
+	<li><a href="#observations">TimeCat Observations <i class="pull-right icon-chevron-right"></i></a></li>
+	<li><a href="#notes">TimeCat Notes <i class="pull-right icon-chevron-right"></i></a></li>
+	<li><a href="#messages">TimeCat Messaging System <i class="pull-right icon-chevron-right"></i></a></li>
+	<li><a href="#reports">TimeCat Reports <i class="pull-right icon-chevron-right"></i></a></li>
+	<li><a href="#calendar">TimeCat Calendar <i class="pull-right icon-chevron-right"></i></a></li>
+	<li><a href="#exporter">TimeCat Data Exporter <i class="pull-right icon-chevron-right"></i></a></li>
+</ul>
+<div id="main-container" class="tc-help-container container-fluid">
+	<div class="row-fluid">	
 		<div id="content" class="span8">
 			<div class="row-fluid tc-help-header">
-				<h1>TmeCat 4.0 Components</h1>
+				<h1>TimeCat 4.0 Components</h1>
 				<p>Make use of all the components included TimeCat 4.0. Explore how they work.
 				</p>
 				<strong>If you are upgrading from TimeCat 3.0 <a>See New Components Here</a> </strong>
 			</div>
 			<br>
 			<section id="intro-components">
-				<h3>1. TimeCat 4.0 Components</h3>
+				<div class='section-heading'>
+					<span class='heading'>1. TimeCat 4.0 Components</span>
+				</div>
 				<hr>
 				<p class='definition'><span class="label label-info">Heads Up!</span> If you are observing and not the study creator nor the 
 					administrator of a particular study, you might have less privileges in using some components.
@@ -177,13 +175,15 @@
 						</tr>
 					</tbody>
 				</table>
-				
+
 
 				<br>
-				
+
 			</section>
 			<section id="recovery">
-				<h3>2. TimeCat 4.0 Recovery System </h3>
+				<div class='section-heading'>
+					<span class='heading'>2. TimeCat 4.0 Recovery System </span>
+				</div>
 				<hr>
 				<p class='definition'> Not only
 				</p>
@@ -197,6 +197,11 @@
 					and overall acceptance of TMS.
 				</p>
 			</section>
+		</div>
+		<div id="right-sidebar" class='row-fluid span4 '>
+			<div class='section-heading'>
+				<span class='heading'>Something..: </span>
+			</div>
 		</div>
 	</div>
 </div> <!-- /container -->

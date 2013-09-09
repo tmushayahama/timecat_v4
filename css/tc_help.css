@@ -1,9 +1,9 @@
 /* 
     Document   : tc_help
     Created on : Aug 11, 2013, 10:43:40 PM
-    Author     : Tremayne
+    Author     : Tremayne Mushayahama
     Description:
-        Purpose of the stylesheet follows.
+        Documentation of the timecat 4.0 website 
 */
 body {
 	height:100%;
@@ -17,7 +17,7 @@ a {
 	border-bottom: #195085 solid 3px;
 }
 .section-heading .heading{
-	padding:10px 10px 0px 5px;
+	padding:5px 10px 0px 5px;
 	margin:0 0 0 0;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
@@ -26,18 +26,18 @@ a {
 	font-size:1.5em;
 	font-weight:bold;
 }
-.right-sidebar {
+#right-sidebar {
 	padding:5px;
 	height:100%;
 	background-color:#E9EFF8;
 	border-left: #195085 solid 1px;
 }
-.right-sidebar .section-heading {
+#right-sidebar .section-heading {
 	margin-top:15px;
 	margin-bottom: 20px;
-	border-bottom: #195085 solid 1px;
+	border-bottom: #195085 solid 2px;
 }
-.right-sidebar .section-heading .heading{
+#right-sidebar .section-heading .heading{
 	padding:5px 5px 2px 2px;
 	margin:0 0 0 0;
 	border-top-left-radius: 5px;
@@ -91,7 +91,7 @@ a {
 	margin-top:95px;
 }
 .tc-help-header {
-	background-image:url('../img/circuit.png');
+	background-image:url('../img/help/heading_background.png');
 	-webkit-background-size: cover; /*for webKit*/
 	-moz-background-size: cover; /*Mozilla*/
 	-o-background-size: cover; /*opera*/
@@ -101,14 +101,20 @@ a {
 	
 }
 #help-sidebar {
+	position: fixed;
+	left: 5px;
+	top: 100px;
+	width:240px;
 	border: #DDDDDD ridge 2px;
 }
 #help-sidebar li{
 	border-bottom: #DDDDDD solid 1px;
 }
-.affix { 
-	top: 100px;
-	min-width:240px;
+#main-container {
+	position:absolute;
+	left: 260px;
+	top: 10px;
+	border-left: #abcdef solid 1px;
 }
 section {
 	margin-bottom:50px;

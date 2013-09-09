@@ -17,8 +17,8 @@
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/logo_help.png" class="pull-left tc-logo-help" alt="">
-					<li class="active">
-						<a href="help_gettingstarted">Get started</a>
+					<li>
+						<a class="tc-active" href="help_gettingstarted">Get started</a>
 					</li>
 					<li>
 						<a href="help_usingtimecat">Using TimeCat 4.0</a>
@@ -45,18 +45,15 @@
 		</div>
 	</div>
 </div>
-<div class="tc-help-container container-fluid">
+<ul id="help-sidebar" class="nav nav-pills nav-stacked ">
+	<li><a href="#introduction-tms">Introduction to TMS <i class="pull-right icon-chevron-right"></i></a></li>
+	<li><a href="#introduction-timecat">TimeCat 4.0 <i class="pull-right icon-chevron-right"></i></a></li>
+	<li><a href="#included">Features and Functions <i class="pull-right icon-chevron-right"></i></a></li>
+	<li><a href="#timecat-next">What's next <i class="pull-right icon-chevron-right"></i></a></li>
+</ul>
+<div id="main-container" class="tc-help-container container-fluid">
 
 	<div class="row-fluid">
-		<div id="tc-help-sidebar" class="span3">
-			<ul id="help-sidebar" class="nav nav-list affix">
-				<li><a href="#introduction-tms">Introduction to TMS <i class="pull-right icon-chevron-right"></i></a></li>
-				<li><a href="#introduction-timecat">TimeCat 4.0 <i class="pull-right icon-chevron-right"></i></a></li>
-				<li><a href="#included">Features and Functions <i class="pull-right icon-chevron-right"></i></a></li>
-				<li><a href="#timecat-next">What's next <i class="pull-right icon-chevron-right"></i></a></li>
-
-			</ul>
-		</div>
 		<div id="content" class="span8">
 			<div class="row-fluid tc-help-header">
 				<h1>Getting Started</h1>
@@ -67,7 +64,9 @@
 			</div>
 			<br>
 			<section id="introduction-tms">
-				<h3>1. Brief Introduction to Time Motion Studies (TMS)</h3>
+				<div class='section-heading'>
+					<span class='heading'>1. Brief Introduction to Time Motion Studies (TMS) </span>
+				</div>
 				<hr>
 				<p class='definition'><b>Time Motion Studies</b> - The observation and analysis of tasks within an activity with an emphasis on the amount of time required to perform the task.
 				</p>
@@ -89,7 +88,7 @@
 				<br>
 				<ul class="thumbnails">
 					<li class="span12">
-						<div class="thumbnail">
+						<div class="thumbnail row-fluid">
 							<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/help/getting_started/tms_linear.png" class="pull-left" alt="">
 							<h3>Linear TMS Type</h3>
 							<p>The simplest TMS capture method is a <a>linear</a> type </p>
@@ -99,7 +98,7 @@
 				<br>
 				<ul class="thumbnails">
 					<li class="span12">
-						<div class="thumbnail">
+						<div class="thumbnail row-fluid">
 							<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/help/getting_started/tms_multitask.png" class="pull-left" alt="">
 							<h3>Multitask TMS Type</h3>
 							<p><b>Not</b> all TMS methods are linear, the most common <a>multitasking</a> data capturing type </p>
@@ -124,7 +123,9 @@
 				</div>
 			</section>
 			<section id="introduction-timecat">
-				<h3>2. Introduction to Time Capture Tool (TimeCat) 4.0 </h3>
+				<div class='section-heading'>
+					<span class='heading'>2. Introduction to Time Capture Tool (TimeCat) 4.0 </span>
+				</div>
 				<hr>
 				<p class='definition'><b>TimeCat 4.0 </b> - Is an improved web based application that implements the methods described in <a href="#introduction-tms">Time Motion Studies (TMS)</a>.
 				</p>
@@ -138,6 +139,11 @@
 					and overall acceptance of TMS.
 				</p>
 			</section>
+		</div>
+		<div id="right-sidebar" class='row-fluid span4 '>
+			<div class='section-heading'>
+				<span class='heading'>Quick Links: </span>
+			</div>
 		</div>
 	</div>
 </div> <!-- /container -->
